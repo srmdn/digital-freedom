@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Freedom</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=Source+Serif+4:wght@400;600;700&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0c0c;
+    --surface: #141414;
+    --border: #222;
+    --text: #d0d0d0;
+    --text-dim: #888;
+    --text-muted: #555;
+    --accent: #c0392b;
+    --accent-glow: rgba(192, 57, 43, 0.15);
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
+  a:hover { color: #fff; border-color: #fff; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-lead {
+    font-size: 1.25rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: #e74c3c; border-color: transparent; color: #fff; }
+
+  .btn-link {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    border-bottom: none;
+  }
+
+  .btn-link:hover { color: #fff; }
+
+  /* Sections */
+  section {
+    padding: 5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  section p {
+    margin-bottom: 1.25rem;
+    max-width: 600px;
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Philosophy pull-quote */
+  .pull-quote {
+    padding: 5rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .pull-quote blockquote {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: #e8e8e8;
+    border-left: 3px solid var(--accent);
+    padding-left: 2rem;
+    max-width: 650px;
+  }
+
+  /* Sequences */
+  .sequence-list {
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  .sequence-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sequence-item:last-child { border-bottom: none; }
+
+  .sequence-status {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .status-available { color: #27ae60; }
+  .status-planned { color: var(--text-muted); }
+
+  .sequence-name {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .sequence-name a { border-bottom: 1px solid transparent; }
+  .sequence-name a:hover { border-bottom-color: var(--accent); }
+
+  .sequence-desc {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  footer a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-bottom: none;
+  }
+
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1.5rem; }
+    section { padding: 3rem 1.5rem; }
+    .sequence-item { flex-direction: column; gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eyebrow">Digital Freedom Project</p>
+  <h1>Text, timing,<br>and tension.</h1>
+  <p class="hero-lead">A long-term project that tells the story of digital freedom through terminal-style interactive narratives. No voiceover. No talking heads. Just facts that land.</p>
+  <div class="hero-cta">
+    <a href="sequences/freedom-report.html" class="btn-primary">Read first sequence</a>
+    <a href="https://github.com/srmdn/digital-freedom" class="btn-link">src on GitHub →</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section id="about">
+  <p class="section-label">About</p>
+  <h2>The terminal is where digital freedom is fought</h2>
+  <p>Most content about digital freedom looks the same: talking head on camera, stock footage, AI-generated voiceover explaining why privacy matters. It's become background noise — easy to scroll past, easy to forget.</p>
+  <p>This project strips all of that away. What remains is the raw narrative. Each sequence is a self-contained HTML file that simulates a terminal session, revealing data, quotes, and documented arguments about the state of personal freedoms in the digital age.</p>
+  <p>All facts sourced from public records, speeches, and documented events. Nothing is fabricated. The format itself communicates the theme — the terminal is the canvas and the message.</p>
+</section>
+
+<hr class="divider">
+
+<div class="pull-quote">
+  <blockquote>"In encryption, in open source, in self-hosted infrastructure, in the choice of what tools we trust with our data."</blockquote>
+</div>
+
+<hr class="divider">
+
+<section id="sequences">
+  <p class="section-label">Sequences</p>
+  <h2>Standalone narratives</h2>
+  <p>Each sequence is a single HTML file. Open it in a browser, click start, and watch it play out. About 60 to 90 seconds each.</p>
+
+  <ul class="sequence-list">
+    <li class="sequence-item">
+      <span class="sequence-status status-available">Available</span>
+      <div>
+        <p class="sequence-name"><a href="sequences/freedom-report.html">Freedom Report</a></p>
+        <p class="sequence-desc">The state of personal freedoms — data, quotes, and a call to action.</p>
+      </div>
+    </li>
+    <li class="sequence-item">
+      <span class="sequence-status status-planned">Planned</span>
+      <div>
+        <p class="sequence-name">Pegasus</p>
+        <p class="sequence-desc">NSO Group, Pegasus spyware, and who gets watched.</p>
+      </div>
+    </li>
+    <li class="sequence-item">
+      <span class="sequence-status status-planned">Planned</span>
+      <div>
+        <p class="sequence-name">Encryption Wars</p>
+        <p class="sequence-desc">Five Eyes, EU chat control, and the backdoor debate.</p>
+      </div>
+    </li>
+    <li class="sequence-item">
+      <span class="sequence-status status-planned">Planned</span>
+      <div>
+        <p class="sequence-name">Snowden Timeline</p>
+        <p class="sequence-desc">Key disclosures, impact, and aftermath.</p>
+      </div>
+    </li>
+    <li class="sequence-item">
+      <span class="sequence-status status-planned">Planned</span>
+      <div>
+        <p class="sequence-name">Data Brokers</p>
+        <p class="sequence-desc">Who sells your data, how it's aggregated, and the opt-out illusion.</p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<footer>
+  <p>MIT License</p>
+  <a href="https://github.com/srmdn/digital-freedom">srmdn/digital-freedom</a>
+</footer>
+
+</body>
+</html>
