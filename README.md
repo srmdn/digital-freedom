@@ -12,21 +12,17 @@ This project documents it. Not as opinion pieces or hot takes, but as sourced na
 
 ## Format
 
-Each sequence is a self-contained HTML file that simulates a terminal session, revealing data, quotes, and documented arguments about the state of personal freedoms in the digital age.
+Each sequence opens with a terminal-style hook — a short, cinematic text animation that sets the tone. It then unfolds into a full editorial article: sourced, citable, and linkable per paragraph. A data section provides cross-source comparisons so readers can see the full picture without relying on a single index.
 
-No voiceover. No talking heads. No stock footage. Just text, timing, and tension. The terminal is the canvas. The medium is the message.
-
-Most content about digital freedom uses the same formula: talking head + stock footage + AI voiceover. This project strips all of that away. What remains is the raw narrative — the way a classified report might read if it were written in real time on a screen.
-
-All data and quotes are sourced from public records, speeches, and documented events. Nothing is fabricated. The facts do the heavy lifting.
+Most content about digital freedom uses the same formula: talking head + stock footage + AI voiceover. This project strips all of that away. What remains is the raw narrative. The facts do the heavy lifting.
 
 ## Global snapshot
 
-The landing page includes a cross-source comparison table ranking countries by digital freedom, sourced from three independent assessments: Freedom House (Freedom on the Net), V-Dem Institute (Digital Society Index), and Reporters Without Borders (Press Freedom Index). Scores are displayed on their original scales — not normalized — so methodological differences are visible at a glance.
+The landing page includes a cross-source comparison of countries by digital freedom, sourced from three independent assessments with different methodologies — Freedom House (Freedom on the Net), V-Dem Institute (Digital Society Index), and Reporters Without Borders (Press Freedom Index). Scores are displayed on their original scales so methodological differences are visible at a glance.
 
 ## Sequences
 
-Each sequence is a standalone narrative — open it in a browser, click start, and watch it play out. ~60-90 seconds each.
+Each sequence is a standalone narrative — read at your own pace, link to specific paragraphs, explore the data.
 
 | Sequence | Theme | Status |
 |----------|-------|--------|
@@ -37,12 +33,6 @@ Each sequence is a standalone narrative — open it in a browser, click start, a
 | data-brokers | Who sells your data, how it's aggregated, opt-out illusions | Planned |
 
 This is a living archive. New sequences will be added as the story develops.
-
-## Usage
-
-Open any `sequences/*.html` file in a browser. Click start. That's it.
-
-For video submissions: screen record the playback, add background audio, export.
 
 ## License
 
