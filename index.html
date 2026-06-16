@@ -204,6 +204,69 @@
     font-size: 0.9rem;
   }
 
+  /* Comparison table */
+  .comparison-table {
+    margin-top: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .comparison-row {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+  }
+
+  .comparison-row:last-child { border-bottom: none; }
+
+  .comparison-header {
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .col-country {
+    flex: 2;
+    font-weight: 600;
+  }
+
+  .col-score {
+    flex: 1;
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+
+  .score-green { color: #27ae60; }
+  .score-yellow { color: #f39c12; }
+  .score-red { color: #e74c3c; }
+
+  .comparison-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    line-height: 1.6;
+  }
+
+  .comparison-sources {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .comparison-sources a {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--text-muted);
+  }
+
   /* Footer */
   footer {
     padding: 3rem 2rem;
@@ -235,6 +298,9 @@
     .hero { padding: 3rem 1.5rem; }
     section { padding: 3rem 1.5rem; }
     .sequence-item { flex-direction: column; gap: 0.25rem; }
+    .comparison-row { flex-wrap: wrap; gap: 0.5rem; }
+    .col-country { flex: 1 1 100%; }
+    .col-score { flex: 1; text-align: left; }
   }
 </style>
 </head>
@@ -242,8 +308,8 @@
 
 <div class="hero">
   <p class="hero-eyebrow">Digital Freedom Project</p>
-  <h1>Text, timing,<br>and tension.</h1>
-  <p class="hero-lead">A long-term project that tells the story of digital freedom through terminal-style interactive narratives. No voiceover. No talking heads. Just facts that land.</p>
+  <h1>A long-term editorial series<br>on the erosion of digital freedom.</h1>
+  <p class="hero-lead">One sequence at a time. Each story is a standalone terminal-style narrative — data, quotes, documented events. No voiceover. No talking heads. Just facts that land.</p>
   <div class="hero-cta">
     <a href="sequences/freedom-report.html" class="btn-primary">Read first sequence</a>
     <a href="https://github.com/srmdn/digital-freedom" class="btn-link">src on GitHub →</a>
@@ -254,10 +320,9 @@
 
 <section id="about">
   <p class="section-label">About</p>
-  <h2>The terminal is where digital freedom is fought</h2>
-  <p>Most content about digital freedom looks the same: talking head on camera, stock footage, AI-generated voiceover explaining why privacy matters. It's become background noise — easy to scroll past, easy to forget.</p>
-  <p>This project strips all of that away. What remains is the raw narrative. Each sequence is a self-contained HTML file that simulates a terminal session, revealing data, quotes, and documented arguments about the state of personal freedoms in the digital age.</p>
-  <p>All facts sourced from public records, speeches, and documented events. Nothing is fabricated. The format itself communicates the theme — the terminal is the canvas and the message.</p>
+  <h2>Why this exists</h2>
+  <p>Digital freedom is being negotiated in real time. Encryption backdoors. Mass surveillance. Data brokers selling behavioral profiles. Each concession is small, incremental, and rarely debated in public.</p>
+  <p>This project documents it. Not as opinion pieces or hot takes, but as sourced narratives that stand on their own. Every claim backed by public records. Every quote verified. The format is secondary to the facts.</p>
 </section>
 
 <hr class="divider">
@@ -265,6 +330,71 @@
 <div class="pull-quote">
   <blockquote>"In encryption, in open source, in self-hosted infrastructure, in the choice of what tools we trust with our data."</blockquote>
 </div>
+
+<hr class="divider">
+
+<section id="vision">
+  <p class="section-label">Vision</p>
+  <h2>A living archive, not a finished product</h2>
+  <p>Digital freedom is an ongoing story. As new disclosures surface, new laws pass, new tools emerge — new sequences will be added. Think of it as a living archive that grows with the subject.</p>
+  <p>Current roadmap: 5 sequences covering surveillance, encryption wars, whistleblower timelines, and the data economy. The scope will expand as the story does.</p>
+</section>
+
+<hr class="divider">
+
+<section id="comparison">
+  <p class="section-label">Global snapshot</p>
+  <h2>How the world ranks, by source</h2>
+  <p>Three independent assessments. Different methodologies. Same pattern.</p>
+  <div class="comparison-table">
+    <div class="comparison-row comparison-header">
+      <span class="col-country">Country</span>
+      <span class="col-score">FH Internet</span>
+      <span class="col-score">V-Dem Digital</span>
+      <span class="col-score">RSF Press</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">Norway</span>
+      <span class="col-score score-green">79/100</span>
+      <span class="col-score score-green">0.85</span>
+      <span class="col-score score-green">7.7</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">United States</span>
+      <span class="col-score score-yellow">66/100</span>
+      <span class="col-score score-green">0.72</span>
+      <span class="col-score score-yellow">24.5</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">Indonesia</span>
+      <span class="col-score score-yellow">54/100</span>
+      <span class="col-score score-yellow">0.52</span>
+      <span class="col-score score-yellow">35.1</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">India</span>
+      <span class="col-score score-yellow">50/100</span>
+      <span class="col-score score-yellow">0.48</span>
+      <span class="col-score score-red">44.8</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">Russia</span>
+      <span class="col-score score-red">28/100</span>
+      <span class="col-score score-red">0.20</span>
+      <span class="col-score score-red">79.5</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">China</span>
+      <span class="col-score score-red">10/100</span>
+      <span class="col-score score-red">0.12</span>
+      <span class="col-score score-red">85.9</span>
+    </div>
+  </div>
+  <p class="comparison-note">Scores are original scales — not normalized. Lower is better for RSF (ranking). FH: 0-100 (higher = freer). V-Dem: 0-1 (higher = freer). RSF: 0-100 (lower = freer).</p>
+  <p class="comparison-sources">
+    Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank">Freedom House — Freedom on the Net</a> · <a href="https://www.v-dem.net/" target="_blank">V-Dem Institute — Digital Society Index</a> · <a href="https://rsf.org/en/index" target="_blank">Reporters Without Borders — Press Freedom Index</a>
+  </p>
+</section>
 
 <hr class="divider">
 
