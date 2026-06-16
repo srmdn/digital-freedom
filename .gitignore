@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build/output
+*.pyc
+__pycache__/
+
+# Private docs (local only)
+docs/PRODUCTION.md
+
+# Sensitive
+.env
+*.key
+*.pem

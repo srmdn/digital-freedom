@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Freedom</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #e0e0e0;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .terminal {
+    width: 90vw;
+    max-width: 900px;
+    height: 85vh;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(0, 255, 100, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .terminal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 100, 0.015) 2px,
+      rgba(0, 255, 100, 0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .titlebar {
+    background: #161b22;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #30363d;
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.red { background: #ff5f56; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green { background: #27c93f; }
+
+  .titlebar-text {
+    margin-left: 12px;
+    font-size: 13px;
+    color: #8b949e;
+  }
+
+  .content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 5;
+  }
+
+  .content::-webkit-scrollbar { width: 6px; }
+  .content::-webkit-scrollbar-track { background: transparent; }
+  .content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+
+  .line {
+    margin-bottom: 4px;
+    line-height: 1.6;
+    font-size: 15px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s, transform 0.3s;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .line.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .line.command { color: #39d353; font-weight: 700; }
+  .line.success { color: #39d353; }
+  .line.warning { color: #d29922; }
+  .line.alert { color: #f85149; font-weight: 700; }
+  .line.critical { color: #ff6b6b; font-weight: 700; font-size: 16px; }
+  .line.quote { color: #a5d6ff; font-style: italic; padding-left: 16px; border-left: 2px solid #1f6feb; }
+  .line.info { color: #8b949e; }
+  .line.header { color: #58a6ff; font-weight: 700; font-size: 16px; margin-top: 16px; }
+  .line.system { color: #6e7681; }
+  .line.check { color: #39d353; }
+  .line.fail { color: #f85149; }
+  .line.prompt { color: #d2a8ff; }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: #39d353;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .typing { overflow: hidden; white-space: nowrap; }
+
+  .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #238636, #39d353, #58a6ff);
+    width: 0%;
+    transition: width 0.5s ease;
+    z-index: 20;
+  }
+
+  .start-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    background: #0d1117;
+    transition: opacity 0.5s;
+  }
+
+  .start-btn.hidden { opacity: 0; pointer-events: none; }
+
+  .start-btn button {
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .start-btn button:hover { background: #2ea043; }
+
+  .start-btn p {
+    margin-top: 16px;
+    color: #8b949e;
+    font-size: 14px;
+  }
+
+  .glitch {
+    animation: glitch 0.3s ease-in-out;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+    100% { transform: translate(0); }
+  }
+
+  .fade-in {
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="terminal">
+  <div class="titlebar">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+    <span class="titlebar-text">freedom@oslo:~/digital-resistance</span>
+  </div>
+  <div class="content" id="content"></div>
+  <div class="progress-bar" id="progress"></div>
+  <div class="start-btn" id="startBtn">
+    <button onclick="startSequence()">▶ INITIALIZE SEQUENCE</button>
+    <p>Press to begin terminal recording</p>
+  </div>
+</div>
+
+<script>
+const content = document.getElementById('content');
+const progress = document.getElementById('progress');
+const startBtn = document.getElementById('startBtn');
+
+const lines = [
+  { text: '$ boot --freedom-check', type: 'command', delay: 400 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '[SYSTEM] Initializing personal freedom audit...', type: 'system', delay: 600 },
+  { text: '[SYSTEM] Scanning global freedom indices...', type: 'system', delay: 800 },
+  { text: '[SYSTEM] Cross-referencing with Durov speech — Oslo Freedom Forum 2026', type: 'system', delay: 800 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '╔══════════════════════════════════════════════════════════╗', type: 'header', delay: 300 },
+  { text: '║  FREEDOM STATUS REPORT — June 2026                     ║', type: 'header', delay: 300 },
+  { text: '╚══════════════════════════════════════════════════════════╝', type: 'header', delay: 300 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '[WARNING]  Personal freedoms eroding worldwide', type: 'warning', delay: 500 },
+  { text: '[ALERT]    UK: 3,000+ arrested/year for social media posts', type: 'alert', delay: 500 },
+  { text: '[ALERT]    Germany: Up to 3 years prison for "insulting politicians"', type: 'alert', delay: 500 },
+  { text: '[ALERT]    EU: Chat Control — encryption backdoor mandated', type: 'alert', delay: 500 },
+  { text: '[ALERT]    France: Mass surveillance approved by Senate', type: 'alert', delay: 500 },
+  { text: '[CRITICAL] AI era: Every message will be monitored. Every draft scored.', type: 'critical', delay: 800 },
+  { text: '', type: 'blank', delay: 300 },
+  { text: '$ query --durov --source "oslo-freedom-forum-2026"', type: 'command', delay: 400 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '"Our ship has already hit the iceberg."', type: 'quote', delay: 600 },
+  { text: '"Personal freedoms have been eroded everywhere, almost without exception."', type: 'quote', delay: 600 },
+  { text: '"They used protection of children as a pretext — in fact, they wanted more control over political speech."', type: 'quote', delay: 700 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '[EVIDENCE] Russian Telegram ban → 95% of teens still use it via VPN', type: 'info', delay: 600 },
+  { text: '[EVIDENCE] French tax official caught selling citizen data to criminals', type: 'info', delay: 600 },
+  { text: '[EVIDENCE] EC offered Musk secret deal: censor or face fines', type: 'info', delay: 600 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '"Those who are willing to give up their essential liberty for some temporary safety deserve neither liberty nor safety."', type: 'quote', delay: 800 },
+  { text: '                                              — Benjamin Franklin', type: 'system', delay: 400 },
+  { text: '', type: 'blank', delay: 300 },
+  { text: '$ deploy --countermeasures', type: 'command', delay: 400 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '[✓] VPN:           Bypassing censorship across borders', type: 'check', delay: 400 },
+  { text: '[✓] Encryption:    End-to-end. No backdoors. No compromises.', type: 'check', delay: 400 },
+  { text: '[✓] Self-hosted:   Your data, your server, your rules', type: 'check', delay: 400 },
+  { text: '[✓] Open source:   Transparency is the only trust model', type: 'check', delay: 400 },
+  { text: '[✓] Telegram:      Zero-knowledge. No data sharing. Ever.', type: 'check', delay: 400 },
+  { text: '', type: 'blank', delay: 300 },
+  { text: '$ status --future', type: 'command', delay: 400 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '"There is no second West. There is no backup civilization."', type: 'quote', delay: 700 },
+  { text: '"In the world of AI, every message will be monitored, every thought scored."', type: 'quote', delay: 700 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '[CRITICAL]  The passengers of Titanic didn\'t want to leave the ship.', type: 'critical', delay: 600 },
+  { text: '[CRITICAL]  By the time they panicked, it was too late.', type: 'critical', delay: 600 },
+  { text: '', type: 'blank', delay: 300 },
+  { text: '$ action --conclusion', type: 'command', delay: 400 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '"We cannot let this ship sink. The only way forward is to fix this ship."', type: 'quote', delay: 700 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '══════════════════════════════════════════════════════════', type: 'header', delay: 300 },
+  { text: '  DIGITAL FREEDOM CONTEST — $200,000 Prize Fund', type: 'header', delay: 400 },
+  { text: '  Create. Share. Resist.', type: 'header', delay: 400 },
+  { text: '  Deadline: July 15, 2026', type: 'header', delay: 400 },
+  { text: '══════════════════════════════════════════════════════════', type: 'header', delay: 300 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '$ echo "Fix this ship. Let\'s do that."', type: 'prompt', delay: 400 },
+  { text: 'Fix this ship. Let\'s do that.', type: 'success', delay: 600 },
+  { text: '', type: 'blank', delay: 200 },
+  { text: '$ _', type: 'command', delay: 0, cursor: true },
+];
+
+let currentLine = 0;
+let isRunning = false;
+
+function createLine(text, type, hasCursor = false) {
+  const div = document.createElement('div');
+  div.className = `line ${type}`;
+  div.textContent = text;
+  if (hasCursor) {
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    div.appendChild(cursor);
+  }
+  content.appendChild(div);
+  return div;
+}
+
+function scrollToEnd() {
+  content.scrollTop = content.scrollHeight;
+}
+
+async function typeLine(lineObj) {
+  if (lineObj.type === 'blank') {
+    const div = createLine('', 'blank');
+    div.classList.add('visible');
+    return;
+  }
+
+  const div = createLine(lineObj.text, lineObj.type, lineObj.cursor);
+  div.classList.add('visible');
+
+  if (lineObj.delay > 0) {
+    await sleep(lineObj.delay);
+  }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function startSequence() {
+  if (isRunning) return;
+  isRunning = true;
+
+  startBtn.classList.add('hidden');
+  content.innerHTML = '';
+
+  const totalLines = lines.length;
+
+  for (let i = 0; i < lines.length; i++) {
+    currentLine = i;
+    await typeLine(lines[i]);
+    scrollToEnd();
+
+    // Update progress
+    const pct = ((i + 1) / totalLines) * 100;
+    progress.style.width = pct + '%';
+
+    // Add glitch effect at critical moments
+    if (lines[i].type === 'critical') {
+      content.classList.add('glitch');
+      setTimeout(() => content.classList.remove('glitch'), 300);
+    }
+  }
+
+  // Final pause
+  await sleep(2000);
+}
+
+// Auto-start hint
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !isRunning) {
+    startSequence();
+  }
+});
+</script>
+
+</body>
+</html>
