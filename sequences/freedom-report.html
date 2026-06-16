@@ -3,39 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Freedom</title>
+<title>Freedom Report — Digital Freedom Project</title>
 <link rel="icon" href="/digital-freedom/favicon.svg" type="image/svg+xml">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0c0c;
+    --surface: #141414;
+    --border: #222;
+    --text: #d0d0d0;
+    --text-dim: #888;
+    --text-muted: #555;
+    --accent: #c0392b;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    background: #0a0a0a;
-    color: #e0e0e0;
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .terminal {
-    width: 90vw;
-    max-width: 900px;
-    height: 85vh;
+  a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
+  a:hover { color: #fff; border-color: #fff; }
+
+  /* === TERMINAL HOOK === */
+  .terminal-hook {
+    min-height: 100vh;
     background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    box-shadow: 0 0 40px rgba(0, 255, 100, 0.05);
+    border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
   }
 
-  .terminal::before {
+  .terminal-hook::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -47,7 +60,7 @@
       rgba(0, 255, 100, 0.015) 4px
     );
     pointer-events: none;
-    z-index: 10;
+    z-index: 2;
   }
 
   .titlebar {
@@ -57,35 +70,32 @@
     align-items: center;
     gap: 8px;
     border-bottom: 1px solid #30363d;
+    position: relative;
+    z-index: 5;
   }
 
   .dot { width: 12px; height: 12px; border-radius: 50%; }
   .dot.red { background: #ff5f56; }
   .dot.yellow { background: #ffbd2e; }
   .dot.green { background: #27c93f; }
+  .titlebar-text { margin-left: 12px; font-size: 13px; color: #8b949e; font-family: var(--mono); }
 
-  .titlebar-text {
-    margin-left: 12px;
-    font-size: 13px;
-    color: #8b949e;
-  }
-
-  .content {
+  .terminal-content {
     flex: 1;
-    padding: 24px;
+    padding: 2rem;
     overflow-y: auto;
     position: relative;
     z-index: 5;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
   }
 
-  .content::-webkit-scrollbar { width: 6px; }
-  .content::-webkit-scrollbar-track { background: transparent; }
-  .content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
-
-  .line {
+  .t-line {
     margin-bottom: 4px;
     line-height: 1.6;
     font-size: 15px;
+    font-family: var(--mono);
     opacity: 0;
     transform: translateY(4px);
     transition: opacity 0.3s, transform 0.3s;
@@ -93,53 +103,37 @@
     word-break: break-word;
   }
 
-  .line.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .t-line.visible { opacity: 1; transform: translateY(0); }
+  .t-line.command { color: #39d353; font-weight: 700; }
+  .t-line.warning { color: #d29922; }
+  .t-line.alert { color: #f85149; font-weight: 700; }
+  .t-line.critical { color: #ff6b6b; font-weight: 700; font-size: 16px; }
+  .t-line.quote { color: #a5d6ff; font-style: italic; padding-left: 16px; border-left: 2px solid #1f6feb; }
+  .t-line.system { color: #6e7681; }
 
-  .line.command { color: #39d353; font-weight: 700; }
-  .line.success { color: #39d353; }
-  .line.warning { color: #d29922; }
-  .line.alert { color: #f85149; font-weight: 700; }
-  .line.critical { color: #ff6b6b; font-weight: 700; font-size: 16px; }
-  .line.quote { color: #a5d6ff; font-style: italic; padding-left: 16px; border-left: 2px solid #1f6feb; }
-  .line.info { color: #8b949e; }
-  .line.header { color: #58a6ff; font-weight: 700; font-size: 16px; margin-top: 16px; }
-  .line.system { color: #6e7681; }
-  .line.check { color: #39d353; }
-  .line.fail { color: #f85149; }
-  .line.prompt { color: #d2a8ff; }
-
-  .cursor {
+  .t-cursor {
     display: inline-block;
     width: 10px;
     height: 18px;
     background: #39d353;
-    animation: blink 1s step-end infinite;
+    animation: t-blink 1s step-end infinite;
     vertical-align: text-bottom;
     margin-left: 2px;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+  @keyframes t-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .t-glitch { animation: t-glitch 0.3s ease-in-out; }
+  @keyframes t-glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+    100% { transform: translate(0); }
   }
 
-  .typing { overflow: hidden; white-space: nowrap; }
-
-  .progress-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #238636, #39d353, #58a6ff);
-    width: 0%;
-    transition: width 0.5s ease;
-    z-index: 20;
-  }
-
-  .start-btn {
+  .start-overlay {
     position: absolute;
     inset: 0;
     display: flex;
@@ -151,90 +145,417 @@
     transition: opacity 0.5s;
   }
 
-  .start-btn.hidden { opacity: 0; pointer-events: none; }
+  .start-overlay.hidden { opacity: 0; pointer-events: none; }
 
-  .start-btn button {
+  .start-overlay button {
     background: #238636;
     color: white;
     border: none;
     padding: 16px 40px;
     font-size: 18px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--mono);
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.2s;
   }
 
-  .start-btn button:hover { background: #2ea043; }
+  .start-overlay button:hover { background: #2ea043; }
+  .start-overlay p { margin-top: 16px; color: #8b949e; font-size: 14px; font-family: var(--mono); }
 
-  .start-btn p {
-    margin-top: 16px;
-    color: #8b949e;
-    font-size: 14px;
+  .t-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #238636, #39d353, #58a6ff);
+    width: 0%;
+    transition: width 0.5s ease;
+    z-index: 20;
   }
 
-  .glitch {
-    animation: glitch 0.3s ease-in-out;
+  .scroll-hint {
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    animation: pulse 2s ease-in-out infinite;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
   }
 
-  @keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(2px, -2px); }
-    60% { transform: translate(-1px, -1px); }
-    80% { transform: translate(1px, 1px); }
-    100% { transform: translate(0); }
+  .scroll-hint.hidden { display: none; }
+  @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* === ESSAY === */
+  .essay {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    position: relative;
+    z-index: 10;
   }
 
-  .fade-in {
-    animation: fadeIn 1s ease-in;
+  .essay h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #e8e8e8;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  .essay h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+  }
+
+  .essay p {
+    margin-bottom: 1.25rem;
+    max-width: 600px;
+  }
+
+  .essay blockquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #e8e8e8;
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    max-width: 560px;
+  }
+
+  .essay blockquote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.75rem;
+  }
+
+  .essay .source-ref {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    vertical-align: super;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .essay .source-ref:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* === DATA SECTION === */
+  .data-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .data-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .data-section > p {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: var(--text-dim);
+  }
+
+  .comparison-table {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .comparison-row {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+  }
+
+  .comparison-row:last-child { border-bottom: none; }
+
+  .comparison-header {
+    background: var(--surface);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .col-country { flex: 2; font-weight: 600; }
+  .col-score { flex: 1; text-align: right; font-family: var(--mono); font-size: 0.85rem; }
+
+  .score-green { color: #27ae60; }
+  .score-yellow { color: #f39c12; }
+  .score-red { color: #e74c3c; }
+
+  .data-sources {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .data-sources a {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--text-muted);
+  }
+
+  /* === CLOSING === */
+  .closing {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .closing blockquote {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-style: italic;
+    line-height: 1.5;
+    color: #e8e8e8;
+    border-left: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing .closing-line {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* === FOOTER === */
+  footer {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p, footer a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-bottom: none;
+  }
+
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    .terminal-content { padding: 1rem; }
+    .essay, .data-section { padding: 3rem 1.5rem; }
+    .comparison-row { flex-wrap: wrap; gap: 0.5rem; }
+    .col-country { flex: 1 1 100%; }
+    .col-score { flex: 1; text-align: left; }
   }
 </style>
 </head>
 <body>
 
-<div class="terminal">
+<!-- ========== TERMINAL HOOK ========== -->
+<div class="terminal-hook" id="terminalHook">
   <div class="titlebar">
     <div class="dot red"></div>
     <div class="dot yellow"></div>
     <div class="dot green"></div>
-    <span class="titlebar-text">freedom@oslo:~/digital-resistance</span>
+    <span class="titlebar-text">freedom@oslo:~/2026-06</span>
   </div>
-  <div class="content" id="content"></div>
-  <div class="progress-bar" id="progress"></div>
-  <div class="start-btn" id="startBtn">
-    <button onclick="startSequence()">▶ INITIALIZE SEQUENCE</button>
-    <p>Press to begin terminal recording</p>
+  <div class="terminal-content" id="tContent"></div>
+  <div class="t-progress" id="tProgress"></div>
+  <div class="start-overlay" id="startBtn">
+    <button onclick="startTerminal()">▶ INITIALIZE</button>
+    <p>Press to begin</p>
   </div>
 </div>
 
+<div class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+  ↓ Continue reading
+</div>
+
+<!-- ========== ESSAY ========== -->
+<section class="essay" id="essay">
+  <p class="section-label">Sequence I — Freedom Report</p>
+  <h2>The ship has already hit the iceberg</h2>
+
+  <p>On June 14, 2026, Pavel Durov stood on the Oslo Freedom Forum stage and said something most people in the room didn't want to hear: <em>"Our ship has already hit the iceberg."</em> Not "might hit." Not "is approaching." Already hit.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=149s" target="_blank">02:29</a></p>
+
+  <p>He wasn't talking about climate change or geopolitics. He was talking about personal freedom — the kind most people in Western democracies assumed was permanent, inherited, unassailable. The kind that erodes one law, one precedent, one emergency measure at a time, until one day you look up and realize it's gone.</p>
+
+  <h3>The pretext is always children</h3>
+
+  <p>Durov's most pointed observation wasn't about authoritarian regimes. It was about the West. "They used protection of children as a pretext — in fact, they wanted more control over political speech."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=540s" target="_blank">09:09</a></p>
+
+  <p>He was referring to the UK's Online Safety Act. Publicly, it was sold as child protection — age verification to access social media. But in a High Court submission, the British government stated that "the principal part of the Online Safety Act had nothing to do with protecting children" and was instead "aimed at capturing large platforms with significant influence over public discourse."<a class="source-ref" href="https://www.gov.uk/government/publications" target="_blank">HC 2025</a></p>
+
+  <p>This is not an isolated case. The European Commission has pushed Chat Control for five years — a mandate for messaging apps to install encryption backdoors. The official justification: child protection. The mechanism: automatic scanning of every private message, every photo, every draft.<a class="source-ref" href="https://digital-strategy.ec.europa.eu/en/policies/chat-control" target="_blank">EC 2021</a></p>
+
+  <blockquote>
+    "Those who are willing to give up their essential liberty for some temporary safety deserve neither liberty nor safety."
+    <cite>— Benjamin Franklin, echoed by Durov at Oslo<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=794s" target="_blank">13:14</a></cite>
+  </blockquote>
+
+  <h3>The enforcement trap</h3>
+
+  <p>What Durov called "selective enforcement of laws" is the most insidious mechanism he described. The pattern: flood an industry with contradictory regulations so compliance becomes impossible, then choose who to persecute based on political loyalty. Those who cooperate get ignored. Those who resist get hit with the full weight of the law.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1094s" target="_blank">18:14</a></p>
+
+  <p>He cited his own experience: criminal investigations in Russia, a secret deal offered by French intelligence during his 2024 detention in Paris, the European Commission's alleged offer to Elon Musk — censor inconvenient narratives or face fines. Musk refused. His company was hit with a €120 million fine on "seemingly unrelated issues."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1236s" target="_blank">20:36</a></p>
+
+  <p>The US Congress later published emails confirming EC pressure on Facebook, Instagram, TikTok, and YouTube to silence political narratives during the pandemic — narratives that, years later, turned out to be "at least partially true, and in any case worthy of public debate."<a class="source-ref" href="https://www.congress.gov" target="_blank">USC 2025</a></p>
+
+  <h3>There is no second West</h3>
+
+  <p>Durov closed with a warning that most people missed: "There is no second West. There is no backup civilization."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1743s" target="_blank">29:03</a> For decades, dissidents from authoritarian countries could flee west. But if the current trajectory continues, he said, "they will have a hard time trying to understand whether they have already left their repressive homeland or they're just entering another open-air prison."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1710s" target="_blank">28:30</a></p>
+
+  <p>In the age of AI, the human limits on surveillance no longer exist. "Every message will be monitored. Every thought scored. Every relationship mapped."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1654s" target="_blank">27:34</a> The KGB had finite resources. AI does not.</p>
+
+  <p>The passengers of the Titanic didn't want to leave the ship for almost two hours after it hit the iceberg. By the time they panicked, it was too late.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=108s" target="_blank">01:48</a></p>
+
+  <p>"The only way forward is to fix this ship."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1783s" target="_blank">29:43</a></p>
+</section>
+
+<hr class="divider">
+
+<!-- ========== DATA SECTION ========== -->
+<section class="data-section" id="data">
+  <p class="section-label">Global snapshot</p>
+  <h2>How the world ranks, by source</h2>
+  <p>Three independent assessments. Different methodologies. Same pattern.</p>
+
+  <div class="comparison-table">
+    <div class="comparison-row comparison-header">
+      <span class="col-country">Country</span>
+      <span class="col-score">FH Internet</span>
+      <span class="col-score">V-Dem Digital</span>
+      <span class="col-score">RSF Press</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">Norway</span>
+      <span class="col-score score-green">79/100</span>
+      <span class="col-score score-green">0.85</span>
+      <span class="col-score score-green">7.7</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">United States</span>
+      <span class="col-score score-yellow">66/100</span>
+      <span class="col-score score-green">0.72</span>
+      <span class="col-score score-yellow">24.5</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">Indonesia</span>
+      <span class="col-score score-yellow">54/100</span>
+      <span class="col-score score-yellow">0.52</span>
+      <span class="col-score score-yellow">35.1</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">India</span>
+      <span class="col-score score-yellow">50/100</span>
+      <span class="col-score score-yellow">0.48</span>
+      <span class="col-score score-red">44.8</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">Russia</span>
+      <span class="col-score score-red">28/100</span>
+      <span class="col-score score-red">0.20</span>
+      <span class="col-score score-red">79.5</span>
+    </div>
+    <div class="comparison-row">
+      <span class="col-country">China</span>
+      <span class="col-score score-red">10/100</span>
+      <span class="col-score score-red">0.12</span>
+      <span class="col-score score-red">85.9</span>
+    </div>
+  </div>
+
+  <p class="data-sources">
+    Scores are original scales — not normalized. FH: 0-100 (higher = freer). V-Dem: 0-1 (higher = freer). RSF: 0-100 (lower = freer).<br>
+    Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank">Freedom House</a> · <a href="https://www.v-dem.net/" target="_blank">V-Dem Institute</a> · <a href="https://rsf.org/en/index" target="_blank">Reporters Without Borders</a>
+  </p>
+</section>
+
+<hr class="divider">
+
+<!-- ========== CLOSING ========== -->
+<div class="closing">
+  <blockquote>"We cannot let this ship sink."</blockquote>
+  <p class="closing-line">Fix this ship. Let's do that.</p>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <p>MIT License</p>
+  <a href="https://github.com/srmdn/digital-freedom">srmdn/digital-freedom</a>
+</footer>
+
+<!-- ========== TERMINAL SCRIPT ========== -->
 <script>
-const content = document.getElementById('content');
-const progress = document.getElementById('progress');
+const tContent = document.getElementById('tContent');
+const tProgress = document.getElementById('tProgress');
 const startBtn = document.getElementById('startBtn');
+const scrollHint = document.getElementById('scrollHint');
 
 const lines = [
   { text: '$ boot --freedom-check', type: 'command', delay: 400 },
   { text: '', type: 'blank', delay: 200 },
   { text: '[SYSTEM] Initializing personal freedom audit...', type: 'system', delay: 600 },
   { text: '[SYSTEM] Scanning global freedom indices...', type: 'system', delay: 800 },
-  { text: '[SYSTEM] Cross-referencing with Durov speech — Oslo Freedom Forum 2026', type: 'system', delay: 800 },
-  { text: '', type: 'blank', delay: 200 },
-  { text: '╔══════════════════════════════════════════════════════════╗', type: 'header', delay: 300 },
-  { text: '║  FREEDOM STATUS REPORT — June 2026                     ║', type: 'header', delay: 300 },
-  { text: '╚══════════════════════════════════════════════════════════╝', type: 'header', delay: 300 },
   { text: '', type: 'blank', delay: 200 },
   { text: '[WARNING]  Personal freedoms eroding worldwide', type: 'warning', delay: 500 },
   { text: '[ALERT]    UK: 3,000+ arrested/year for social media posts', type: 'alert', delay: 500 },
-  { text: '[ALERT]    Germany: Up to 3 years prison for "insulting politicians"', type: 'alert', delay: 500 },
   { text: '[ALERT]    EU: Chat Control — encryption backdoor mandated', type: 'alert', delay: 500 },
-  { text: '[ALERT]    France: Mass surveillance approved by Senate', type: 'alert', delay: 500 },
-  { text: '[CRITICAL] AI era: Every message will be monitored. Every draft scored.', type: 'critical', delay: 800 },
   { text: '', type: 'blank', delay: 300 },
   { text: '$ query --durov --source "oslo-freedom-forum-2026"', type: 'command', delay: 400 },
   { text: '', type: 'blank', delay: 200 },
@@ -242,112 +563,59 @@ const lines = [
   { text: '"Personal freedoms have been eroded everywhere, almost without exception."', type: 'quote', delay: 600 },
   { text: '"They used protection of children as a pretext — in fact, they wanted more control over political speech."', type: 'quote', delay: 700 },
   { text: '', type: 'blank', delay: 200 },
-  { text: '[EVIDENCE] Russian Telegram ban → 95% of teens still use it via VPN', type: 'info', delay: 600 },
-  { text: '[EVIDENCE] French tax official caught selling citizen data to criminals', type: 'info', delay: 600 },
-  { text: '[EVIDENCE] EC offered Musk secret deal: censor or face fines', type: 'info', delay: 600 },
-  { text: '', type: 'blank', delay: 200 },
-  { text: '"Those who are willing to give up their essential liberty for some temporary safety deserve neither liberty nor safety."', type: 'quote', delay: 800 },
-  { text: '                                              — Benjamin Franklin', type: 'system', delay: 400 },
-  { text: '', type: 'blank', delay: 300 },
-  { text: '$ deploy --countermeasures', type: 'command', delay: 400 },
-  { text: '', type: 'blank', delay: 200 },
-  { text: '[✓] VPN:           Bypassing censorship across borders', type: 'check', delay: 400 },
-  { text: '[✓] Encryption:    End-to-end. No backdoors. No compromises.', type: 'check', delay: 400 },
-  { text: '[✓] Self-hosted:   Your data, your server, your rules', type: 'check', delay: 400 },
-  { text: '[✓] Open source:   Transparency is the only trust model', type: 'check', delay: 400 },
-  { text: '[✓] Telegram:      Zero-knowledge. No data sharing. Ever.', type: 'check', delay: 400 },
-  { text: '', type: 'blank', delay: 300 },
-  { text: '$ status --future', type: 'command', delay: 400 },
-  { text: '', type: 'blank', delay: 200 },
-  { text: '"There is no second West. There is no backup civilization."', type: 'quote', delay: 700 },
   { text: '"In the world of AI, every message will be monitored, every thought scored."', type: 'quote', delay: 700 },
-  { text: '', type: 'blank', delay: 200 },
-  { text: '[CRITICAL]  The passengers of Titanic didn\'t want to leave the ship.', type: 'critical', delay: 600 },
-  { text: '[CRITICAL]  By the time they panicked, it was too late.', type: 'critical', delay: 600 },
   { text: '', type: 'blank', delay: 300 },
-  { text: '$ action --conclusion', type: 'command', delay: 400 },
-  { text: '', type: 'blank', delay: 200 },
-  { text: '"We cannot let this ship sink. The only way forward is to fix this ship."', type: 'quote', delay: 700 },
+  { text: '[CRITICAL] The passengers of Titanic didn\'t want to leave the ship.', type: 'critical', delay: 600 },
+  { text: '[CRITICAL] By the time they panicked, it was too late.', type: 'critical', delay: 600 },
   { text: '', type: 'blank', delay: 300 },
-  { text: '$ echo "Fix this ship. Let\'s do that."', type: 'prompt', delay: 400 },
-  { text: 'Fix this ship. Let\'s do that.', type: 'success', delay: 600 },
-  { text: '', type: 'blank', delay: 200 },
   { text: '$ _', type: 'command', delay: 0, cursor: true },
 ];
 
-let currentLine = 0;
-let isRunning = false;
-
-function createLine(text, type, hasCursor = false) {
+function tLine(text, type, hasCursor = false) {
   const div = document.createElement('div');
-  div.className = `line ${type}`;
+  div.className = `t-line ${type}`;
   div.textContent = text;
   if (hasCursor) {
     const cursor = document.createElement('span');
-    cursor.className = 'cursor';
+    cursor.className = 't-cursor';
     div.appendChild(cursor);
   }
-  content.appendChild(div);
+  tContent.appendChild(div);
   return div;
 }
 
-function scrollToEnd() {
-  content.scrollTop = content.scrollHeight;
-}
+function tScroll() { tContent.scrollTop = tContent.scrollHeight; }
 
-async function typeLine(lineObj) {
-  if (lineObj.type === 'blank') {
-    const div = createLine('', 'blank');
+async function typeLine(obj) {
+  if (obj.type === 'blank') {
+    const div = tLine('', 'blank');
     div.classList.add('visible');
     return;
   }
-
-  const div = createLine(lineObj.text, lineObj.type, lineObj.cursor);
+  const div = tLine(obj.text, obj.type, obj.cursor);
   div.classList.add('visible');
-
-  if (lineObj.delay > 0) {
-    await sleep(lineObj.delay);
-  }
+  if (obj.delay > 0) await new Promise(r => setTimeout(r, obj.delay));
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function startSequence() {
-  if (isRunning) return;
-  isRunning = true;
-
+async function startTerminal() {
   startBtn.classList.add('hidden');
-  content.innerHTML = '';
-
-  const totalLines = lines.length;
-
+  tContent.innerHTML = '';
+  const total = lines.length;
   for (let i = 0; i < lines.length; i++) {
-    currentLine = i;
     await typeLine(lines[i]);
-    scrollToEnd();
-
-    // Update progress
-    const pct = ((i + 1) / totalLines) * 100;
-    progress.style.width = pct + '%';
-
-    // Add glitch effect at critical moments
+    tScroll();
+    tProgress.style.width = ((i + 1) / total) * 100 + '%';
     if (lines[i].type === 'critical') {
-      content.classList.add('glitch');
-      setTimeout(() => content.classList.remove('glitch'), 300);
+      tContent.classList.add('t-glitch');
+      setTimeout(() => tContent.classList.remove('t-glitch'), 300);
     }
   }
-
-  // Final pause
-  await sleep(2000);
+  await new Promise(r => setTimeout(r, 1500));
+  scrollHint.classList.remove('hidden');
 }
 
-// Auto-start hint
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !isRunning) {
-    startSequence();
-  }
+  if (e.key === 'Enter' && !startBtn.classList.contains('hidden')) startTerminal();
 });
 </script>
 
