@@ -191,6 +191,8 @@
     max-width: 720px;
     margin: 0 auto;
     padding: 5rem 2rem;
+    position: relative;
+    z-index: 10;
   }
 
   .essay h2 {
@@ -238,6 +240,7 @@
   }
 
   .essay .source-ref {
+    display: inline-block;
     font-family: var(--mono);
     font-size: 0.7rem;
     color: var(--accent);
@@ -248,6 +251,8 @@
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
     text-decoration: none;
+    position: relative;
+    z-index: 1;
   }
 
   .essay .source-ref:hover {
