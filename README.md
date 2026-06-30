@@ -27,7 +27,7 @@ Each sequence is a standalone narrative — read at your own pace, link to speci
 | Sequence | Theme | Status |
 |----------|-------|--------|
 | [freedom-report](sequences/freedom-report.html) | The state of personal freedoms — data, quotes, call to action | Available |
-| pegasus | NSO Group, Pegasus spyware, and who gets watched | Planned |
+| [pegasus-01-khashoggi](sequences/pegasus-01-khashoggi.html) | Case 1: The journalist, the spyware, and the surveillance of an entire family — before and after his death | Available |
 | encryption-wars | Five Eyes, EU chat control, the backdoor debate | Planned |
 | snowden-timeline | Key disclosures, impact, aftermath | Planned |
 | data-brokers | Who sells your data, how it's aggregated, opt-out illusions | Planned |
