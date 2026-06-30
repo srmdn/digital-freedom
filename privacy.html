@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — Digital Freedom</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Source+Sans+3:wght@300;400;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0c0c;
+    --surface: #141414;
+    --border: #222;
+    --text: #d0d0d0;
+    --text-dim: #888;
+    --text-muted: #555;
+    --accent: #c0392b;
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
+  a:hover { color: #fff; border-color: #fff; }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+    flex: 1;
+  }
+
+  .page h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: #e8e8e8;
+  }
+
+  .page h2 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: #e0e0e0;
+  }
+
+  .page p {
+    margin-bottom: 0.75rem;
+    max-width: 600px;
+  }
+
+  .page .updated {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  footer p, footer a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-bottom: none;
+  }
+
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    .page { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <h1>Privacy</h1>
+
+  <p>This site does not collect, store, process, or share any personal data.</p>
+
+  <h2>No Tracking</h2>
+  <p>There are no cookies, no analytics scripts, no fingerprinting, and no third-party tracking pixels on this site. You cannot be tracked because there is nothing to track you with.</p>
+
+  <h2>No Data Collection</h2>
+  <p>There are no contact forms, no newsletter signups, no user accounts, and no mechanism for submitting data. This is a static website — every page is a pre-built HTML file served directly.</p>
+
+  <h2>External Services</h2>
+  <p>The only external service used is the <strong>Google Fonts CDN</strong> for typography (JetBrains Mono, Source Serif 4, Source Sans 3, Special Elite, Cutive Mono). When your browser loads these fonts, Google may receive standard HTTP request data (IP address, user agent). This project has no control over Google's data handling. For details, see the <a href="https://developers.google.com/fonts/faq/privacy" target="_blank">Google Fonts Privacy FAQ</a>.</p>
+
+  <h2>Hosting</h2>
+  <p>This site is hosted on <strong>GitHub Pages</strong>. GitHub may collect technical information about page visits as part of their service. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub's Privacy Statement</a> for details.</p>
+
+  <p class="updated">Last updated: June 2026</p>
+</div>
+
+<footer>
+  <p><a href="/digital-freedom/">← Back to Digital Freedom</a></p>
+</footer>
+
+</body>
+</html>
