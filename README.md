@@ -28,6 +28,7 @@ Each sequence is a standalone narrative — read at your own pace, link to speci
 |----------|-------|--------|
 | [freedom-report](sequences/freedom-report.html) | The state of personal freedoms — data, quotes, call to action | Available |
 | [pegasus-01-khashoggi](sequences/pegasus-01-khashoggi.html) | Case 1: The journalist, the spyware, and the surveillance of an entire family — before and after his death | Available |
+| [pegasus-02-sanchez](sequences/pegasus-02-sanchez.html) | Case 2: The prime minister of Spain was infected with Pegasus. Then the investigation was buried. | Available |
 | encryption-wars | Five Eyes, EU chat control, the backdoor debate | Planned |
 | snowden-timeline | Key disclosures, impact, aftermath | Planned |
 | data-brokers | Who sells your data, how it's aggregated, opt-out illusions | Planned |
