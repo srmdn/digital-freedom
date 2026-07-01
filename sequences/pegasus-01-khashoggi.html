@@ -407,6 +407,44 @@
     margin: 0 auto;
   }
 
+  /* ============== 5W+1H SUMMARY ============== */
+  .five-w {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0 3rem;
+    background: var(--surface);
+    max-width: 600px;
+  }
+
+  .five-w .five-w-title {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .five-w p {
+    margin-bottom: 0.85rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    max-width: none;
+  }
+
+  .five-w p:last-child { margin-bottom: 0; }
+
+  .five-w strong {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-right: 0.35rem;
+  }
+
   /* ============== DATA SECTION ============== */
   .data-section {
     max-width: 800px;
@@ -560,6 +598,16 @@
   <p class="section-label">Episode II — Pegasus, Case I</p>
   <h2>A journalist walked into a building. His phone was already compromised.</h2>
 
+  <div class="five-w">
+    <p class="five-w-title">5W+1H — Case Summary</p>
+    <p><strong>WHO:</strong> Jamal Khashoggi — Saudi journalist, Washington Post columnist, US permanent resident, and prominent critic of Crown Prince Mohammed bin Salman. Also targeted or selected: wife Hanan Elatr, fiancée Hatice Cengiz, son Abdullah Khashoggi, and other close contacts.</p>
+    <p><strong>WHAT:</strong> Pegasus spyware was used against people around Khashoggi before and after his October 2018 murder. Forensic reporting confirmed infection of Cengiz's phone after the killing and targeting of other associates.</p>
+    <p><strong>WHEN:</strong> Elatr's phone showed Pegasus activity in April 2018. Khashoggi was killed on October 2, 2018. Cengiz's phone was infected on October 6, 9, and 12, 2018. The Pegasus Project published its findings in July 2021.</p>
+    <p><strong>WHERE:</strong> Istanbul, Turkey; Saudi and Emirati-linked surveillance operations; phones and contacts tied to Khashoggi's personal and political network.</p>
+    <p><strong>WHY:</strong> Khashoggi was a high-profile dissident whose writing and pro-democracy organizing threatened Saudi political leadership. Surveillance around him mapped his network before and after the killing.</p>
+    <p><strong>HOW:</strong> NSO Group's Pegasus gave government clients covert access to phones through exploit chains and phishing infrastructure. The leaked Pegasus Project data and forensic analysis connected spyware activity to Khashoggi's circle.</p>
+  </div>
+
   <h3>What is Pegasus?</h3>
 
   <p>Pegasus is military-grade spyware developed by NSO Group, an Israeli cyber-intelligence firm founded in 2010 by veterans of Unit 8200 — Israel's equivalent of the NSA. Once installed on a phone, Pegasus grants the operator complete access: messages (including WhatsApp, Signal, and Telegram), photos, passwords, GPS location, the microphone, the camera, and every keystroke. All without the user knowing.</p>
@@ -576,7 +624,7 @@
 
   <p>His wife Hanan Elatr's phone was targeted in the months leading up to the killing. After October 2, the targeting expanded: four days after the murder, Cengiz's phone was infected with Pegasus. Weeks later, Khashoggi's son Abdullah was added to the target list.</p>
 
-  <p>The operator deployed the exploit by impersonating The Washington Post — using fake Washington Post domains and links to trick targets into opening the infection vector. A press outlet was weaponized against the family of one of its own journalists.</p>
+  <p>Reporting also identified spoofed media and delivery-link infrastructure used in Pegasus campaigns against Saudi dissidents. In Khashoggi's case, the targets were not only the dissident himself but the people closest to him.</p>
 
   <blockquote>
     "We assess that Saudi Arabia's Crown Prince Muhammad bin Salman approved an operation in Istanbul, Turkey to capture or kill Saudi journalist Jamal Khashoggi."
@@ -587,11 +635,11 @@
 
   <h3>The global scale</h3>
 
-  <p>Khashoggi was not an isolated target. In July 2021, The Pegasus Project — an investigation coordinated by Forbidden Stories and Amnesty International involving 80+ journalists from 17 media organizations — obtained a leaked database of 50,000 phone numbers selected for Pegasus surveillance across more than 50 countries.</p>
+  <p>Khashoggi was not an isolated target. In July 2021, The Pegasus Project — an investigation coordinated by Forbidden Stories and Amnesty International involving 80+ journalists from 17 media organizations — obtained a leaked database of 50,000+ phone numbers selected as persons of interest by NSO clients across more than 50 countries.</p>
 
-  <p>At least 180 journalists across 20 countries appeared on the list. Morocco alone had 10,000+ numbers selected. Mexico: 15,000. Heads of state, including Spanish Prime Minister Pedro Sánchez and Defence Minister Margarita Robles, were infected.</p>
+  <p>At least 180 journalists across 20 countries appeared on the list. Morocco alone had 10,000+ numbers selected. Mexico: 15,000. Later investigations confirmed infections of high-level officials, including Spanish Prime Minister Pedro Sánchez and Defence Minister Margarita Robles.</p>
 
-  <p>Amnesty International's Security Lab examined 67 phones and confirmed 23 successful Pegasus infections with 14 additional signs of attempted penetration — an 85% confirmation rate on devices where forensic analysis was possible.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank">AI</a><a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank">CL</a></p>
+  <p>Amnesty International's Security Lab examined 67 phones and confirmed 23 successful Pegasus infections with 14 additional signs of attempted penetration; the remaining 30 tests were inconclusive, often because handsets had been replaced.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank">AI</a><a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank">CL</a></p>
 
   <h3>The arms race</h3>
 
@@ -600,7 +648,7 @@
   <p><strong>2019:</strong> WhatsApp calling exploit (CVE-2019-3568) — 1,400 phones targeted in two weeks.</p>
   <p><strong>2020:</strong> KISMET exploit against iOS 13.5.1 via iMessage.</p>
   <p><strong>2021:</strong> FORCEDENTRY — the most sophisticated. Sent via a malicious .gif that wasn't actually a .gif. It exploited the JBIG2 image codec to bypass Apple's Pointer Authentication Codes and disable ASLR. Apple responded with BlastDoor — a sandbox for iMessage data.</p>
-  <p><strong>2023:</strong> BLASTPASS/BLASTPAST — NSO bypassed BlastDoor using PassKit attachments with embedded WebP images. The exploit chained through libwebp (CVE-2023-4863).</p>
+  <p><strong>2023:</strong> BLASTPASS — NSO bypassed BlastDoor using PassKit attachments with embedded WebP images. The exploit chained through libwebp (CVE-2023-4863).</p>
 
   <p>Eight documented iOS exploit chains in four years. The phone in your pocket is a battlefield.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank">CL22</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank">PZ25</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank">ASL</a></p>
 
@@ -747,7 +795,7 @@ const lines = [
   { text: 'DATE:     02 OCT 2018 — ISTANBUL, TURKEY', type: 'text', delay: 400 },
   { text: 'TOOLING:  NSO GROUP "PEGASUS" — ZERO-CLICK IMESSAGE EXPLOIT', type: 'text', delay: 500 },
   { text: '', type: 'text', delay: 300 },
-  { text: '[THIS DOCUMENT CONTAINS HCS-P INTELLIGENCE. UNAUTHORIZED DISCLOSATION SUBJECT TO FEDERAL CRIMINAL SANCTIONS.]', type: 'critical', delay: 700 },
+  { text: '[THIS DOCUMENT CONTAINS HCS-P INTELLIGENCE. UNAUTHORIZED DISCLOSURE SUBJECT TO FEDERAL CRIMINAL SANCTIONS.]', type: 'critical', delay: 700 },
   { text: '', type: 'text', delay: 300 },
 
   { text: '1.  TARGET PROFILE', type: 'section', delay: 500 },

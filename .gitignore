@@ -17,6 +17,7 @@ __pycache__/
 docs/PRODUCTION.md
 AGENTS.md
 .local/
+.sisyphus/
 
 # Sensitive
 .env
