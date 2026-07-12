@@ -36,7 +36,7 @@ The information in this project is provided "as is" without warranty of any kind
 
 ## Privacy
 
-This site does not collect, store, or process any personal data. There are no cookies, no analytics, no trackers, and no third-party services beyond the Google Fonts CDN used for typography.
+This project does not use cookies, analytics scripts, fingerprinting code, or advertising trackers. Typography is self-hosted. The site is served through GitHub Pages, which necessarily handles normal web requests to deliver pages.
 
 ## License
 

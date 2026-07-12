@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Digital Freedom</title>
+<meta name="description" content="Page not found on the Digital Freedom project. Return to the archive home or continue to the published sequences.">
+<meta name="theme-color" content="#0c0c0c">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://srmdn.github.io/digital-freedom/404.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0c0c0c;
+    --surface: #141414;
+    --border: #222;
+    --text: #d0d0d0;
+    --text-dim: #888;
+    --accent: #c0392b;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, rgba(192, 57, 43, 0.12), transparent 40%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-dim);
+  }
+
+  a:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-bottom-color: transparent;
+  }
+
+  .panel {
+    width: min(100%, 720px);
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid var(--border);
+    padding: 3rem;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    max-width: 38rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .actions a:first-child {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .actions a:first-child:hover {
+    background: #e74c3c;
+  }
+
+  .hint {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    .panel { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<main class="panel">
+  <p class="eyebrow">404 / Missing Page</p>
+  <h1>Requested page not found.</h1>
+  <p>Link may be old, path may have changed, or page may not exist in published archive yet. Project is static and served through GitHub Pages, so broken URLs fail hard.</p>
+  <div class="actions">
+    <a href="index.html">Back to home</a>
+    <a href="sequences/freedom-report.html">Open first sequence</a>
+  </div>
+  <p class="hint">Digital Freedom project archive. Facts only. Static pages. No login. No app shell.</p>
+</main>
+</body>
+</html>
