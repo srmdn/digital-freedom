@@ -210,46 +210,103 @@
     max-width: 650px;
   }
 
-  /* Sequences */
-  .sequence-list {
-    list-style: none;
-    margin-top: 2rem;
+  .pull-quote blockquote cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    letter-spacing: 0.02em;
   }
 
-  .sequence-item {
+  /* Episodes */
+  .episode {
+    margin-top: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem 2rem 1.25rem;
+    background: var(--surface);
+  }
+
+  .episode-planned {
+    background: transparent;
+    opacity: 0.85;
+  }
+
+  .episode-head {
     display: flex;
     align-items: baseline;
     gap: 1.25rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
   }
 
-  .sequence-item:last-child { border-bottom: none; }
+  .episode-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+  }
 
-  .sequence-status {
+  .episode h3 {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #e8e8e8;
+  }
+
+  .episode-meta {
     font-family: var(--mono);
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    min-width: 80px;
+    color: var(--text-muted);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .episode-planned .episode-meta { color: var(--text-muted); }
+
+  .case-list {
+    list-style: none;
+  }
+
+  .case-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .case-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    min-width: 2.2rem;
     flex-shrink: 0;
   }
 
-  .status-available { color: #27ae60; }
-  .status-planned { color: var(--text-muted); }
-
-  .sequence-name {
-    font-family: var(--serif);
-    font-size: 1.15rem;
+  .case-name {
+    font-family: var(--sans);
+    font-size: 0.95rem;
     font-weight: 600;
   }
 
-  .sequence-name a { border-bottom: 1px solid transparent; }
-  .sequence-name a:hover { border-bottom-color: var(--accent); }
+  .case-name a { border-bottom: 1px solid transparent; }
+  .case-name a:hover { border-bottom-color: var(--accent); }
 
-  .sequence-desc {
+  .case-desc {
     color: var(--text-dim);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+    flex-basis: 100%;
+    margin-left: 3.2rem;
+    line-height: 1.5;
   }
 
   /* Comparison table */
@@ -351,7 +408,9 @@
   @media (max-width: 600px) {
     .hero { padding: 3rem 1.5rem; }
     section { padding: 3rem 1.5rem; }
-    .sequence-item { flex-direction: column; gap: 0.25rem; }
+    .episode { padding: 1.5rem 1.25rem 1rem; }
+    .episode-meta { margin-left: 0; flex-basis: 100%; }
+    .case-desc { margin-left: 0; }
     .comparison-table th,
     .comparison-table td { min-width: 110px; }
     .col-country { min-width: 160px; }
@@ -385,7 +444,7 @@
 <hr class="divider">
 
 <div class="pull-quote">
-  <blockquote>"In encryption, in open source, in self-hosted infrastructure, in the choice of what tools we trust with our data."</blockquote>
+  <blockquote>"In encryption, in open source, in self-hosted infrastructure, in the choice of what tools we trust with our data."<cite>— Pavel Durov, Oslo Freedom Forum, June 2026</cite></blockquote>
 </div>
 
 <hr class="divider">
@@ -394,124 +453,145 @@
   <p class="section-label">Vision</p>
   <h2>A living archive, not a finished product</h2>
   <p>Digital freedom is an ongoing story. As new disclosures surface, new laws pass, new tools emerge — new sequences will be added. Think of it as a living archive that grows with the subject.</p>
-  <p>Current roadmap: an expanding archive covering surveillance, encryption wars, whistleblower timelines, and the data economy. The scope will expand as the story does.</p>
+  <p>Current roadmap: Episode III — Encryption Wars. Episode IV — Mass Surveillance / Snowden. Episode V — Data Brokers. The scope will expand as the story does.</p>
 </section>
 
 <hr class="divider">
 
 <section id="comparison">
   <p class="section-label">Global snapshot</p>
-  <h2>How the world ranks, by source</h2>
-  <p>Three independent assessments. Different methodologies. Same pattern.</p>
+  <h2>Three lenses on digital and information freedom</h2>
+  <p>Different methodologies. Different scopes. Similar warning signs.</p>
   <div class="comparison-table-wrap">
     <table class="comparison-table">
-      <caption class="sr-only">Comparison of digital freedom indicators across six countries from Freedom House, V-Dem, and Reporters Without Borders.</caption>
+      <caption class="sr-only">Comparison of internet freedom scores from Freedom House Freedom on the Net 2025 and press freedom scores from Reporters Without Borders 2026 across six countries. Higher scores mean freer in both.</caption>
       <thead>
         <tr>
           <th scope="col" class="col-country">Country</th>
           <th scope="col" class="col-score">FH Internet</th>
-          <th scope="col" class="col-score">V-Dem Digital</th>
           <th scope="col" class="col-score">RSF Press</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row" class="col-country">Norway</th>
-          <td class="col-score score-green">79/100</td>
-          <td class="col-score score-green">0.85</td>
-          <td class="col-score score-green">7.7</td>
+          <td class="col-score score-green">Not covered</td>
+          <td class="col-score score-green">92.72</td>
         </tr>
         <tr>
           <th scope="row" class="col-country">United States</th>
-          <td class="col-score score-yellow">66/100</td>
-          <td class="col-score score-green">0.72</td>
-          <td class="col-score score-yellow">24.5</td>
+          <td class="col-score score-yellow">73/100</td>
+          <td class="col-score score-yellow">62.61</td>
         </tr>
         <tr>
           <th scope="row" class="col-country">Indonesia</th>
-          <td class="col-score score-yellow">54/100</td>
-          <td class="col-score score-yellow">0.52</td>
-          <td class="col-score score-yellow">35.1</td>
+          <td class="col-score score-yellow">48/100</td>
+          <td class="col-score score-yellow">43.02</td>
         </tr>
         <tr>
           <th scope="row" class="col-country">India</th>
-          <td class="col-score score-yellow">50/100</td>
-          <td class="col-score score-yellow">0.48</td>
-          <td class="col-score score-red">44.8</td>
+          <td class="col-score score-yellow">51/100</td>
+          <td class="col-score score-red">31.96</td>
         </tr>
         <tr>
           <th scope="row" class="col-country">Russia</th>
-          <td class="col-score score-red">28/100</td>
-          <td class="col-score score-red">0.20</td>
-          <td class="col-score score-red">79.5</td>
+          <td class="col-score score-red">17/100</td>
+          <td class="col-score score-red">23.15</td>
         </tr>
         <tr>
           <th scope="row" class="col-country">China</th>
-          <td class="col-score score-red">10/100</td>
-          <td class="col-score score-red">0.12</td>
-          <td class="col-score score-red">85.9</td>
+          <td class="col-score score-red">9/100</td>
+          <td class="col-score score-red">13.85</td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p class="comparison-note">Scores are original scales — not normalized. Lower is better for RSF (ranking). FH: 0-100 (higher = freer). V-Dem: 0-1 (higher = freer). RSF: 0-100 (lower = freer).</p>
+  <p class="comparison-note">Freedom House — Freedom on the Net 2025 (72 countries, 0-100, higher = freer). Reporters Without Borders — World Press Freedom Index 2026 (180 countries, 0-100, higher = freer). V-Dem — Digital Society Project v8 (March 2026): a 35-indicator expert survey rather than a single headline score. Scores are original scales, never normalized equivalents. Accessed 2026-08-17.</p>
   <p class="comparison-sources">
-    Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank" rel="noopener noreferrer">Freedom House — Freedom on the Net</a> · <a href="https://www.v-dem.net/" target="_blank" rel="noopener noreferrer">V-Dem Institute — Digital Society Index</a> · <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer">Reporters Without Borders — Press Freedom Index</a>
+    Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank" rel="noopener noreferrer">Freedom House — Freedom on the Net</a> · <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer">Reporters Without Borders — Press Freedom Index</a> · <a href="https://digitalsocietyproject.org/data/" target="_blank" rel="noopener noreferrer">V-Dem / Digital Society Project</a>
   </p>
 </section>
 
 <hr class="divider">
 
-<section id="sequences">
-  <p class="section-label">Sequences</p>
-  <h2>Standalone narratives</h2>
-  <p>Each sequence is a single HTML file. Open it in a browser, click start, and read at your own pace. Shorter cases move fast. Larger ones take longer.</p>
+<section id="episodes">
+  <p class="section-label">Episodes</p>
+  <h2>The archive</h2>
+  <p>Episodes contain cases. Each case is a single self-contained HTML file — open it, initialize the terminal, read at your own pace. Shorter cases move fast. Larger ones take longer.</p>
 
-  <ul class="sequence-list">
-    <li class="sequence-item">
-      <span class="sequence-status status-available">Available</span>
-      <div>
-        <p class="sequence-name"><a href="sequences/freedom-report.html">Freedom Report</a></p>
-        <p class="sequence-desc">The state of personal freedoms — data, quotes, and a call to action.</p>
-      </div>
-    </li>
-    <li class="sequence-item">
-      <span class="sequence-status status-available">Available</span>
-      <div>
-        <p class="sequence-name"><a href="sequences/pegasus-01-khashoggi.html">Pegasus — Case 1: Khashoggi</a></p>
-        <p class="sequence-desc">The journalist, the consulate, and the spyware that mapped his circle — before and after his death.</p>
-        <p class="sequence-name" style="margin-top:0.5rem"><a href="sequences/pegasus-02-sanchez.html">Pegasus — Case 2: Sánchez</a></p>
-        <p class="sequence-desc">The prime minister of Spain was infected. The investigation hit silence. Executives were placed under investigation.</p>
-        <p class="sequence-name" style="margin-top:0.5rem"><a href="sequences/pegasus-03-50k-list.html">Pegasus — Case 3: The 50K List</a></p>
-        <p class="sequence-desc">The leak did not prove 50,000 hacks. It exposed the global watchlist behind Pegasus.</p>
-        <p class="sequence-name" style="margin-top:0.5rem"><a href="sequences/pegasus-04-zero-click.html">Pegasus — Case 4: The Zero-Click Arms Race</a></p>
-        <p class="sequence-desc">KISMET, FORCEDENTRY, BLASTPASS — the exploit chains, the patches, and the race that never stops.</p>
-        <p class="sequence-name" style="margin-top:0.5rem"><a href="sequences/pegasus-05-rehabilitation.html">Pegasus — Case 5: The Rehabilitation Tour</a></p>
-        <p class="sequence-desc">Sanctioned, sued, bought by American investors — the rehabilitation that changed everything but the product.</p>
-      </div>
-    </li>
-    <li class="sequence-item">
-      <span class="sequence-status status-planned">Planned</span>
-      <div>
-        <p class="sequence-name">Encryption Wars</p>
-        <p class="sequence-desc">Five Eyes, EU chat control, and the backdoor debate.</p>
-      </div>
-    </li>
-    <li class="sequence-item">
-      <span class="sequence-status status-planned">Planned</span>
-      <div>
-        <p class="sequence-name">Snowden Timeline</p>
-        <p class="sequence-desc">Key disclosures, impact, and aftermath.</p>
-      </div>
-    </li>
-    <li class="sequence-item">
-      <span class="sequence-status status-planned">Planned</span>
-      <div>
-        <p class="sequence-name">Data Brokers</p>
-        <p class="sequence-desc">Who sells your data, how it's aggregated, and the opt-out illusion.</p>
-      </div>
-    </li>
-  </ul>
+  <div class="episode" id="episode-i">
+    <div class="episode-head">
+      <span class="episode-num">Episode I</span>
+      <h3>State of Digital Freedom</h3>
+      <span class="episode-meta">1 sequence · Published</span>
+    </div>
+    <ul class="case-list">
+      <li class="case-item">
+        <span class="case-num">SEQ</span>
+        <span class="case-name"><a href="sequences/freedom-report.html">Freedom Report — The Ship Has Already Hit the Iceberg</a></span>
+        <span class="case-desc">The opening thesis: one speech as a hook, then the independently sourced state of digital freedom.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="episode" id="episode-ii">
+    <div class="episode-head">
+      <span class="episode-num">Episode II</span>
+      <h3>Pegasus</h3>
+      <span class="episode-meta">5 cases published · Living archive</span>
+    </div>
+    <ul class="case-list">
+      <li class="case-item">
+        <span class="case-num">01</span>
+        <span class="case-name"><a href="sequences/pegasus-01-khashoggi.html">Khashoggi</a></span>
+        <span class="case-desc">The journalist, the consulate, and the phones around him that were already on a list.</span>
+      </li>
+      <li class="case-item">
+        <span class="case-num">02</span>
+        <span class="case-name"><a href="sequences/pegasus-02-sanchez.html">Sánchez</a></span>
+        <span class="case-desc">The prime minister of Spain was infected. The investigation hit silence.</span>
+      </li>
+      <li class="case-item">
+        <span class="case-num">03</span>
+        <span class="case-name"><a href="sequences/pegasus-03-50k-list.html">The 50K List</a></span>
+        <span class="case-desc">The leak did not prove 50,000 hacks. It exposed the global watchlist behind Pegasus.</span>
+      </li>
+      <li class="case-item">
+        <span class="case-num">04</span>
+        <span class="case-name"><a href="sequences/pegasus-04-zero-click.html">Zero-Click Arms Race</a></span>
+        <span class="case-desc">KISMET, FORCEDENTRY, BLASTPASS — the exploit chains, the patches, and the race that never stops.</span>
+      </li>
+      <li class="case-item">
+        <span class="case-num">05</span>
+        <span class="case-name"><a href="sequences/pegasus-05-rehabilitation.html">The Rehabilitation Tour</a></span>
+        <span class="case-desc">Sanctioned, sued, bought by American investors — the rehabilitation that changed everything but the product.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="episode episode-planned" id="episode-iii">
+    <div class="episode-head">
+      <span class="episode-num">Episode III</span>
+      <h3>Encryption Wars</h3>
+      <span class="episode-meta">Planned</span>
+    </div>
+  </div>
+
+  <div class="episode episode-planned" id="episode-iv">
+    <div class="episode-head">
+      <span class="episode-num">Episode IV</span>
+      <h3>Mass Surveillance / Snowden</h3>
+      <span class="episode-meta">Planned</span>
+    </div>
+  </div>
+
+  <div class="episode episode-planned" id="episode-v">
+    <div class="episode-head">
+      <span class="episode-num">Episode V</span>
+      <h3>Data Brokers</h3>
+      <span class="episode-meta">Planned</span>
+    </div>
+  </div>
 </section>
 
 <hr class="divider">
