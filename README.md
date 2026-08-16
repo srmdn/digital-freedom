@@ -31,6 +31,7 @@ Each sequence is a standalone narrative — read at your own pace, link to speci
 | [pegasus-02-sanchez](sequences/pegasus-02-sanchez.html) | Case 2: The prime minister of Spain was infected with Pegasus. Then the investigation was buried. | Available |
 | [pegasus-03-50k-list](sequences/pegasus-03-50k-list.html) | Case 3: The leak did not prove 50,000 infections. It exposed a global surveillance selection pipeline. | Available |
 | [pegasus-04-zero-click](sequences/pegasus-04-zero-click.html) | Case 4: The zero-click arms race — KISMET, FORCEDENTRY, BLASTPASS — and Apple's defenses that never held. | Available |
+| [pegasus-05-rehabilitation](sequences/pegasus-05-rehabilitation.html) | Case 5: Sanctioned, sued, then bought by American investors. The rehabilitation tour that changed everything but the product. | Available |
 | encryption-wars | Five Eyes, EU chat control, the backdoor debate | Planned |
 | snowden-timeline | Key disclosures, impact, aftermath | Planned |
 | data-brokers | Who sells your data, how it's aggregated, opt-out illusions | Planned |
