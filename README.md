@@ -1,6 +1,6 @@
 # Digital Freedom
 
-A long-term editorial series on the erosion of personal liberties in the digital age.
+A long-term editorial archive documenting digital freedom, privacy erosion, surveillance, censorship, and related technologies through unconventional interactive narratives.
 
 [**Read it now**](https://srmdn.github.io/digital-freedom/) — no install required.
 
@@ -12,32 +12,38 @@ This project documents it. Not as opinion pieces or hot takes, but as sourced na
 
 ## Format
 
-Each sequence opens with a terminal-style hook — a short, cinematic text animation that sets the tone. It then unfolds into a full editorial article: sourced, citable, and linkable per paragraph. A data section provides cross-source comparisons so readers can see the full picture without relying on a single index.
+Each sequence opens with a terminal-style hook — a short, cinematic text animation that sets the tone. It then unfolds into a full editorial article: sourced, citable, and linkable per paragraph. Data sections provide cross-source comparisons so readers can see the full picture without relying on a single index.
 
-Most content about digital freedom uses the same formula: talking head + stock footage + AI voiceover. This project strips all of that away. What remains is the raw narrative. The facts do the heavy lifting.
+The site has **zero third-party runtime dependencies** — self-hosted fonts, no analytics, no trackers. It practices the privacy principles it advocates.
 
-## Global snapshot
+## Episodes
 
-The landing page includes a cross-source comparison of countries by digital freedom, sourced from three independent assessments with different methodologies — Freedom House (Freedom on the Net), V-Dem Institute (Digital Society Index), and Reporters Without Borders (Press Freedom Index). Scores are displayed on their original scales so methodological differences are visible at a glance.
+Episodes contain cases. Each case is one self-contained sequence file.
 
-## Sequences
+| Episode | Cases | Status |
+|---------|-------|--------|
+| **Episode I — State of Digital Freedom** | [The Ship Has Already Hit the Iceberg](sequences/freedom-report.html) | Published |
+| **Episode II — Pegasus** | [01 Khashoggi](sequences/pegasus-01-khashoggi.html) · [02 Sánchez](sequences/pegasus-02-sanchez.html) · [03 The 50K List](sequences/pegasus-03-50k-list.html) · [04 Zero-Click Arms Race](sequences/pegasus-04-zero-click.html) · [05 The Rehabilitation Tour](sequences/pegasus-05-rehabilitation.html) | 5 cases published — living archive |
+| **Episode III — Encryption Wars** | Five Eyes, EU chat control, the backdoor debate | Planned |
+| **Episode IV — Mass Surveillance / Snowden** | Key disclosures, impact, aftermath | Planned |
+| **Episode V — Data Brokers** | Who sells your data, how it's aggregated, opt-out illusions | Planned |
 
-Each sequence is a standalone narrative — read at your own pace, link to specific paragraphs, explore the data.
+This is a living archive. New sequences are added as the story develops.
 
-| Sequence | Theme | Status |
-|----------|-------|--------|
-| [freedom-report](sequences/freedom-report.html) | The state of personal freedoms — data, quotes, call to action | Available |
-| [pegasus-01-khashoggi](sequences/pegasus-01-khashoggi.html) | Case 1: The journalist, the spyware, and the surveillance of an entire family — before and after his death | Available |
-| [pegasus-02-sanchez](sequences/pegasus-02-sanchez.html) | Case 2: The prime minister of Spain was infected with Pegasus. Then the investigation was buried. | Available |
-| [pegasus-03-50k-list](sequences/pegasus-03-50k-list.html) | Case 3: The leak did not prove 50,000 infections. It exposed a global surveillance selection pipeline. | Available |
-| [pegasus-04-zero-click](sequences/pegasus-04-zero-click.html) | Case 4: The zero-click arms race — KISMET, FORCEDENTRY, BLASTPASS — and Apple's defenses that never held. | Available |
-| [pegasus-05-rehabilitation](sequences/pegasus-05-rehabilitation.html) | Case 5: Sanctioned, sued, then bought by American investors. The rehabilitation tour that changed everything but the product. | Available |
-| encryption-wars | Five Eyes, EU chat control, the backdoor debate | Planned |
-| snowden-timeline | Key disclosures, impact, aftermath | Planned |
-| data-brokers | Who sells your data, how it's aggregated, opt-out illusions | Planned |
+## Roadmap
 
-This is a living archive. New sequences will be added as the story develops.
+1. Foundation hardening — audit existing sequences, standardize evidence discipline, improve source provenance
+2. Information architecture — episode and case navigation, publication and review metadata
+3. Editorial expansion — Episodes III–V (see above)
+4. Interactive improvements — richer terminal interaction only where useful; accessibility
+5. Community — public editorial methodology, contribution standards, corrections policy
+
+Deployment stays on GitHub Pages; the project has no paid-hosting migration planned.
+
+## Editorial discipline
+
+See [EDITORIAL.md](EDITORIAL.md) for the full sourcing and evidence methodology, and [CONTRIBUTING.md](CONTRIBUTING.md) to contribute. Corrections are made transparently; git history serves as the audit trail.
 
 ## License
 
-MIT
+[MIT](LICENSE)
