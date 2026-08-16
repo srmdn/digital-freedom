@@ -6,7 +6,7 @@ The Digital Freedom project is an educational resource documenting the history o
 
 ## Sources
 
-Every factual claim, quote, date, statistic, and event referenced in this project is sourced from public records, including but not limited to:
+Facts, quotations, dates, legal claims, technical findings, and other factual assertions are sourced from public records and reputable reporting, including but not limited to:
 
 - Government reports and declassified documents
 - Court filings and legal proceedings
@@ -14,7 +14,13 @@ Every factual claim, quote, date, statistic, and event referenced in this projec
 - Research published by academic institutions and NGOs
 - Publicly available speeches and recorded events
 
+Interpretive and editorial conclusions are Digital Freedom's own unless explicitly attributed.
+
 No classified, proprietary, or illegally obtained information is used or published in this project.
+
+## Presentation devices
+
+Classified-document, intelligence-file, terminal, and dossier interfaces are editorial presentation devices. They are not leaked government documents. The underlying material is based on publicly available sources, and the project does not publish classified material.
 
 ## Fair Use
 
@@ -24,7 +30,7 @@ If you believe any content infringes your rights, contact the project maintainer
 
 ## No Affiliation
 
-This project is not affiliated with, endorsed by, or connected to any government, intelligence agency, political organization, or corporate entity. All views expressed are those of the publicly cited sources.
+This project is not affiliated with, endorsed by, or connected to any government, intelligence agency, political organization, or corporate entity.
 
 ## No Incitement
 
@@ -37,6 +43,10 @@ The information in this project is provided "as is" without warranty of any kind
 ## Privacy
 
 This project does not use cookies, analytics scripts, fingerprinting code, or advertising trackers. Typography is self-hosted. The site is served through GitHub Pages, which necessarily handles normal web requests to deliver pages.
+
+## Corrections
+
+Material factual errors are corrected transparently. See [EDITORIAL.md](EDITORIAL.md). To report an error, open an issue at the repository issues page below.
 
 ## License
 

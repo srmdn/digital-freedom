@@ -1,6 +1,6 @@
 # Privacy
 
-This project does not collect, store, process, or share personal data.
+This project does not collect, store, process, or share personal data. The site has **zero third-party runtime dependencies**: no remote scripts, no remote fonts, no remote assets beyond what the pages themselves link to as cited sources.
 
 - **No cookies** — no session cookies, no tracking cookies, no analytics cookies
 - **No analytics** — no Google Analytics, no Plausible, no self-hosted analytics
