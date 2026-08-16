@@ -38,6 +38,7 @@ Every factual claim in a contribution must include:
 2. The source must be primary or reputable secondary (no aggregation sites, no social media posts as sole source)
 3. Quotations must be exact transcriptions from the recorded or published source
 4. Statistics must link to the original dataset or report, not a news article about the report
+5. Use the latest trusted sources whenever possible — prefer current reports, updated datasets, and recent reporting over older materials when both exist
 
 ## How to Contribute
 
