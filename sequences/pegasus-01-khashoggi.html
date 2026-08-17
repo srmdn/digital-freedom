@@ -13,9 +13,21 @@
 <meta property="og:title" content="Pegasus — Khashoggi | Digital Freedom">
 <meta property="og:description" content="Case 1 of the Pegasus series: Jamal Khashoggi, spyware targeting, and surveillance that extended across his circle.">
 <meta property="og:url" content="https://srmdn.github.io/digital-freedom/sequences/pegasus-01-khashoggi.html">
+<meta property="article:modified_time" content="2026-08-17">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pegasus — Khashoggi | Digital Freedom">
 <meta name="twitter:description" content="Case 1 of the Pegasus series: Jamal Khashoggi, spyware targeting, and surveillance that extended across his circle.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Pegasus — Khashoggi",
+  "description": "Case 01 of the Pegasus episode: the phones around Jamal Khashoggi were selected and infected before and after his death.",
+  "mainEntityOfPage": "https://srmdn.github.io/digital-freedom/sequences/pegasus-01-khashoggi.html",
+  "dateModified": "2026-08-17",
+  "isAccessibleForFree": "True"
+}
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/fonts.css">
 <style>
@@ -47,6 +59,47 @@
 
   a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
   a:hover { color: #fff; border-color: #fff; }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-bottom-color: transparent;
+  }
+
+  button:focus-visible {
+    outline: 2px solid #b00020;
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    transform: translateY(-200%);
+    padding: 0.65rem 0.9rem;
+    background: #b00020;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   /* ============== CLASSIFIED-INTEL TERMINAL HOOK ============== */
   .document {
@@ -316,6 +369,8 @@
 
   /* ============== SCROLL HINT ============== */
   .scroll-hint {
+    display: block;
+    width: 100%;
     text-align: center;
     padding: 2rem;
     font-family: var(--mono);
@@ -323,6 +378,7 @@
     color: var(--text-muted);
     animation: pulse 2s ease-in-out infinite;
     cursor: pointer;
+    border: none;
     border-bottom: 1px solid var(--border);
     background: var(--bg);
   }
@@ -408,6 +464,60 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
+  }
+
+  /* === CASE NAV + METADATA === */
+  .case-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-nav a {
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--text-muted);
+  }
+
+  .case-nav a:hover { color: #fff; border-bottom-color: #fff; }
+  .case-nav .case-nav-context { color: var(--accent); letter-spacing: 0.06em; }
+
+  .pub-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .pub-meta span { color: var(--text-dim); }
+
+  .sim-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin: 2rem 0;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .evidence-legend {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
   }
 
   .divider {
@@ -581,16 +691,29 @@
     .col-country { flex: 1 1 100%; }
     .col-status, .col-score { flex: 1; text-align: left; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .line { transition: none; }
+    .cursor { animation: none; }
+    .glitch { animation: none; }
+    .fade-in { animation: none; }
+    .progress-bar { transition: none; }
+    .scroll-hint { animation: none; }
+    .start-btn { transition: none; }
+  }
 </style>
 </head>
 <body>
+
+<a href="#essay" class="skip-link">Skip to article</a>
 
 <!-- ========== CLASSIFIED-INTEL TERMINAL HOOK ========== -->
 <div class="document" id="terminalHook">
   <div class="watermark">CLASSIFIED</div>
   <div class="doc-header">
     <span>CENTRAL INTELLIGENCE AGENCY — DIRECTORATE OF OPERATIONS</span>
-    <span class="file-id">FILE: 2018-IST-0937 / PEGASUS</span>
+    <span class="file-id">FILE: 2018-IST-0937 / PEGASUS — EDITORIAL RECONSTRUCTION</span>
   </div>
   <div class="content" id="content"></div>
   <div class="progress-bar" id="progress"></div>
@@ -600,19 +723,28 @@
   </div>
 </div>
 
-<div class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
   ↓ Continue reading
-</div>
+</button>
 
 <!-- ========== ESSAY ========== -->
 <section class="essay" id="essay">
+
+  <nav class="case-nav" aria-label="Case navigation">
+    <a href="freedom-report.html">← Episode I — Freedom Report</a>
+    <a href="../index.html#episode-ii" class="case-nav-context">Episode II — Pegasus</a>
+    <a href="pegasus-02-sanchez.html">Case 02 — Sánchez →</a>
+  </nav>
+
+  <p class="pub-meta">Episode II / Pegasus / Case 01 of 05<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
+
   <p class="section-label">Episode II — Pegasus, Case I</p>
-  <h2>A journalist walked into a building. His phone was already compromised.</h2>
+  <h2>A journalist walked into a consulate. The phones around him had already been targeted.</h2>
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
     <p><strong>WHO:</strong> Jamal Khashoggi — Saudi journalist, Washington Post columnist, US permanent resident, and prominent critic of Crown Prince Mohammed bin Salman. Also targeted or selected: wife Hanan Elatr, fiancée Hatice Cengiz, son Abdullah Khashoggi, and other close contacts.</p>
-    <p><strong>WHAT:</strong> Pegasus spyware was used against people around Khashoggi before and after his October 2018 murder. Forensic reporting confirmed infection of Cengiz's phone after the killing and targeting of other associates.</p>
+    <p><strong>WHAT:</strong> Pegasus spyware was deployed against people around Khashoggi before and after his October 2018 murder. Forensic analysis published by the Pegasus Project found Pegasus infection on the phone of his fiancée Hatice Cengiz after the killing, Pegasus activity on his wife Hanan Elatr's phone dating to April 2018, and selection of other associates in the leaked dataset. Khashoggi's own phone was never forensically confirmed as compromised in published reporting.</p>
     <p><strong>WHEN:</strong> Elatr's phone showed Pegasus activity in April 2018. Khashoggi was killed on October 2, 2018. Cengiz's phone was infected on October 6, 9, and 12, 2018. The Pegasus Project published its findings in July 2021.</p>
     <p><strong>WHERE:</strong> Istanbul, Turkey; Saudi and Emirati-linked surveillance operations; phones and contacts tied to Khashoggi's personal and political network.</p>
     <p><strong>WHY:</strong> Khashoggi was a high-profile dissident whose writing and pro-democracy organizing threatened Saudi political leadership. Surveillance around him mapped his network before and after the killing.</p>
@@ -621,9 +753,9 @@
 
   <h3>What is Pegasus?</h3>
 
-  <p>Pegasus is military-grade spyware developed by NSO Group, an Israeli cyber-intelligence firm founded in 2010 by veterans of Unit 8200 — Israel's equivalent of the NSA. Once installed on a phone, Pegasus grants the operator complete access: messages (including WhatsApp, Signal, and Telegram), photos, passwords, GPS location, the microphone, the camera, and every keystroke. All without the user knowing.</p>
+  <p>Pegasus is military-grade spyware developed by NSO Group, an Israeli cyber-intelligence firm founded in 2010 by veterans of Unit 8200 — Israel's equivalent of the NSA. Once installed on a phone, Pegasus grants the operator complete access: messages (including WhatsApp, Signal, and Telegram), photos, passwords, GPS location, the microphone, the camera, and every keystroke — with no visible indication to the target.</p>
 
-  <p>It is deployed via zero-click exploits — no link to tap, no attachment to open. A missed iMessage or WhatsApp call is enough to compromise the device. The user takes no action. The infection is invisible.</p>
+  <p>It is deployed via zero-click exploits — no link to tap, no attachment to open. A missed iMessage or WhatsApp call is enough to compromise the device. The user takes no action, and typically sees nothing. "Invisible" describes the target's experience, not the forensic record: analysis of a device can still reveal traces of infection — that is precisely how the infections in this case were documented.</p>
 
   <p>NSO Group sells Pegasus exclusively to government agencies. A single license costs millions. But the company has repeatedly sold to regimes with documented records of targeting journalists, activists, and political opponents — Saudi Arabia, UAE, India, Hungary, Morocco, Mexico, Azerbaijan, and others.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
 
@@ -633,16 +765,16 @@
 
   <p>But Khashoggi had been under surveillance long before he walked through that door. Pegasus had already been deployed against his inner circle months earlier.</p>
 
-  <p>His wife Hanan Elatr's phone was targeted in the months leading up to the killing. After October 2, the targeting expanded: four days after the murder, Cengiz's phone was infected with Pegasus. Weeks later, Khashoggi's son Abdullah was added to the target list.</p>
+  <p>His wife Hanan Elatr's phone showed Pegasus activity dating to April 2018, according to forensic analysis published by the Pegasus Project. After October 2, the targeting expanded: four days after the murder, Cengiz's phone was infected with Pegasus — on October 6, 9, and 12, 2018. Weeks later, Khashoggi's son Abdullah was added to the target list.</p>
 
-  <p>Reporting also identified spoofed media and delivery-link infrastructure used in Pegasus campaigns against Saudi dissidents. In Khashoggi's case, the targets were not only the dissident himself but the people closest to him.</p>
+  <p>Reporting also identified spoofed media and delivery-link infrastructure used in Pegasus campaigns against Saudi dissidents. In Khashoggi's case, the targets were not only the dissident himself but the people closest to him. What published forensics have not established is that Khashoggi's own device was ever compromised — the evidence runs through the phones around him.</p>
 
   <blockquote>
     "We assess that Saudi Arabia's Crown Prince Muhammad bin Salman approved an operation in Istanbul, Turkey to capture or kill Saudi journalist Jamal Khashoggi."
     <cite>— US Office of the Director of National Intelligence, February 26, 2021<a class="source-ref" href="https://www.odni.gov/" target="_blank" rel="noopener noreferrer">ODNI</a></cite>
   </blockquote>
 
-  <p><a class="source-ref" href="https://www.washingtonpost.com/investigations/interactive/2021/nso-spyware-pegasus-cellphones/" target="_blank" rel="noopener noreferrer">WaPo</a><a class="source-ref" href="https://forbiddenstories.org/pegasus-the-new-global-weapon-for-silencing-journalists/" target="_blank" rel="noopener noreferrer">FS</a></p>
+  <p class="evidence-legend">Reporting: <a class="source-ref" href="https://www.washingtonpost.com/investigations/interactive/2021/nso-spyware-pegasus-cellphones/" target="_blank" rel="noopener noreferrer">WaPo</a><a class="source-ref" href="https://forbiddenstories.org/pegasus-the-new-global-weapon-for-silencing-journalists/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a></p>
 
   <h3>The global scale</h3>
 
@@ -661,19 +793,23 @@
   <p><strong>2021:</strong> FORCEDENTRY — the most sophisticated. Sent via a malicious .gif that wasn't actually a .gif. It exploited the JBIG2 image codec to bypass Apple's Pointer Authentication Codes and disable ASLR. Apple responded with BlastDoor — a sandbox for iMessage data.</p>
   <p><strong>2023:</strong> BLASTPASS — NSO bypassed BlastDoor using PassKit attachments with embedded WebP images. The exploit chained through libwebp (CVE-2023-4863).</p>
 
-  <p>Eight documented iOS exploit chains in four years. The phone in your pocket is a battlefield.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer">ASL</a></p>
+  <p>Multiple documented exploit chains in four years — KISMET (2020), FORCEDENTRY (2021), BLASTPASS (2023) — each answered by a patch, each followed by the next chain. The phone in your pocket is a battlefield.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer">ASL</a></p>
 
   <h3>The company that kept selling</h3>
 
   <p>In November 2021, the US Commerce Department placed NSO Group on the Entity List — banning American companies from selling technology to the firm. The stated reason: "Developed and supplied spyware to foreign governments that used these tools to maliciously target government officials, journalists, businesspeople, activists, academics, and embassy workers."<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer">BIS</a></p>
 
-  <p>Yet NSO continued to operate. In court filings, the company admitted that Pegasus represented "100 percent of NSO's sales in 2025." One product. One purpose.</p>
+  <p>Yet NSO continued to operate. In court filings, the company admitted that Pegasus represented "100 percent of NSO's sales in 2025." One product. One purpose.<a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer">CT</a></p>
 
   <p>In October 2025, NSO Group was acquired by US investors led by Hollywood producer Robert Simonds. The restructuring shed approximately $600 million in debt. All three co-founders — Niv Karmi, Shalev Hulio, and Omri Lavie — lost their shares.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
 
   <p>In November 2025, David Friedman was appointed Chairman. Friedman is the former US Ambassador to Israel under the Trump administration. NSO court filings now state that "it is reasonably foreseeable that a law enforcement or intelligence agency of the United States will use Pegasus."<a class="source-ref" href="https://www.timesofisrael.com/seeking-to-get-off-us-blacklist-spyware-firm-nso-taps-ex-envoy-friedman-as-chairman/" target="_blank" rel="noopener noreferrer">TOI</a></p>
 
   <p>In June 2026 — just weeks ago — Meta filed a contempt motion, accusing NSO of violating a permanent injunction by launching new spear-phishing attempts and test accounts on WhatsApp. The spyware kept flying.<a class="source-ref" href="https://arstechnica.com/tech-policy/2026/06/meta-alleges-nso-violated-spyware-injunction-with-new-whatsapp-attacks/" target="_blank" rel="noopener noreferrer">Ars</a><a class="source-ref" href="https://about.fb.com/news/2026/06/fighting-spyware-an-update-from-whatsapp/" target="_blank" rel="noopener noreferrer">Meta</a></p>
+
+  <div class="sim-note">
+    NOTE — PRESENTATION: The classified-file interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and forensic findings are sourced from public records cited throughout this page.
+  </div>
 </section>
 
 <hr class="divider">
@@ -681,99 +817,103 @@
 <!-- ========== DATA SECTION ========== -->
 <section class="data-section" id="data">
   <p class="section-label">Client roster</p>
-  <h2>Documented Pegasus Client States</h2>
-  <p>Countries confirmed to have deployed Pegasus against journalists, activists, and political opponents. Not exhaustive.</p>
+  <h2>Documented Pegasus client states</h2>
+  <p>Countries tied to Pegasus use against journalists, activists, and political opponents. Not exhaustive. Each row states what the record establishes — selection and infection are kept separate on purpose.</p>
 
   <div class="comparison-table">
     <div class="comparison-row comparison-header">
       <span class="col-country">Country</span>
-      <span class="col-status">Status</span>
-      <span class="col-score">Notable Targets</span>
+      <span class="col-status">Evidentiary basis</span>
+      <span class="col-score">Notable targets</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Azerbaijan</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Journalists, activists</span>
+      <span class="col-status score-red">Selected in leaked dataset; forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
+      <span class="col-score">40+ journalists, incl. Khadija Ismayilova</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Bahrain</span>
-      <span class="col-status score-red">Confirmed</span>
+      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
       <span class="col-score">Activists, dissidents</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">El Salvador</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">El Faro journalists (42+ infections)</span>
+      <span class="col-status score-red">Forensic infections documented (Citizen Lab, 2022) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">El Faro journalists and civil society</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Hungary</span>
-      <span class="col-status score-red">Confirmed</span>
+      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
       <span class="col-score">Journalists, opposition figures</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">India</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Journalists, opposition, activists</span>
+      <span class="col-status score-red">Selected in leaked dataset; forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
+      <span class="col-score">40+ journalists, opposition figures, activists</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Jordan</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Civil society, journalists (large-scale, 2024)</span>
+      <span class="col-status score-red">Forensic infections documented (Citizen Lab, 2024) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">Civil society, journalists</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Mexico</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">15,000+ numbers, journalists, activists</span>
+      <span class="col-status score-red">15,000+ numbers selected in leaked dataset; forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
+      <span class="col-score">Journalists, activists</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Morocco</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">10,000+ numbers, journalists, French officials</span>
+      <span class="col-status score-red">10,000+ numbers selected in leaked dataset; forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
+      <span class="col-score">Journalists; French officials</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Poland</span>
-      <span class="col-status score-yellow">Confirmed (prior government)</span>
-      <span class="col-score">Opposition, prosecutors</span>
+      <span class="col-status score-yellow">Forensic infections documented (prior government) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">Opposition figures, prosecutors</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Rwanda</span>
-      <span class="col-status score-red">Confirmed</span>
+      <span class="col-status score-red">Forensic infections documented (Citizen Lab) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
       <span class="col-score">Activists, political opponents</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Saudi Arabia</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Khashoggi, dissidents, journalists</span>
+      <span class="col-status score-red">Forensic infections documented (Khashoggi circle) <a class="source-ref" href="https://www.washingtonpost.com/investigations/interactive/2021/nso-spyware-pegasus-cellphones/" target="_blank" rel="noopener noreferrer">WaPo</a><a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></span>
+      <span class="col-score">Hanan Elatr, Hatice Cengiz, Abdullah Khashoggi, dissidents</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Serbia</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Journalists, activists (ongoing 2023-2025)</span>
+      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
+      <span class="col-score">Journalists, activists</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Spain</span>
-      <span class="col-status score-yellow">Confirmed (Catalonia)</span>
+      <span class="col-status score-yellow">Government-confirmed infections (ministers); Citizen Lab forensic findings (Catalonia) <a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer">CL</a></span>
       <span class="col-score">PM Sánchez, Defence Minister, Catalan leaders</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Thailand</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">30+ activists, lawyers</span>
+      <span class="col-status score-red">Forensic infections documented (Citizen Lab) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">Pro-democracy activists, lawyers</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Togo</span>
-      <span class="col-status score-red">Confirmed</span>
+      <span class="col-status score-yellow">Numbers selected in leaked dataset <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></span>
       <span class="col-score">Political opponents</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">UAE</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Princess Haya, Khashoggi circle, activists</span>
+      <span class="col-status score-red">Forensic infections documented (Princess Haya circle) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></span>
+      <span class="col-score">Princess Haya's circle, Khashoggi circle, activists</span>
     </div>
   </div>
 
+  <p class="evidence-legend" style="margin-top:1.25rem">
+    Reading the basis column: "Selected in leaked dataset" means the 2021 Pegasus Project records listed the numbers — selection, not proven infection. "Forensic infections documented" means published device analysis (Citizen Lab, Amnesty Security Lab, or equivalent) found Pegasus. "Government-confirmed infections" means the state itself confirmed the compromise. Attribution to a specific operator is a separate, stronger claim — and is stated only where a named investigator made it.
+  </p>
+
   <p class="data-sources">
-    Sources: The Pegasus Project (2021), Citizen Lab, Amnesty International, HRW. Not exhaustive.
+    Sources: The Pegasus Project (Forbidden Stories + Amnesty International, 2021), Citizen Lab, Amnesty Security Lab. Not exhaustive. Hub links: <a href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">Forbidden Stories</a> · <a href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">Citizen Lab</a> · <a href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">Amnesty Security Lab</a>
   </p>
 </section>
 
@@ -840,7 +980,7 @@ const lines = [
   { text: '', type: 'text', delay: 400 },
 
   { text: '3.  SURVEILLANCE TIMELINE', type: 'section', delay: 500 },
-  { text: 'MONTHS PRIOR — phone of wife HANAN ELATR targeted.', type: 'text', delay: 500 },
+  { text: 'MONTHS PRIOR — wife HANAN ELATR\'s phone showed Pegasus activity.', type: 'text', delay: 500 },
   { text: '02 OCT 2018, 13:14 — Khashoggi enters consulate.', type: 'text', delay: 500 },
   { text: 'Cengiz waits outside. Growing silence.', type: 'text', delay: 500 },
   { text: '', type: 'text', delay: 300 },
@@ -854,10 +994,13 @@ const lines = [
   { text: '', type: 'text', delay: 400 },
 
   { text: '4.  POST-MURDER TARGETING', type: 'section', delay: 500 },
-  { text: 'FOUR DAYS after the killing — Pegasus deployed against', type: 'text', delay: 500 },
-  { text: 'fiancee HATICE CENGIZ\'s phone.', type: 'text', delay: 400 },
-  { text: 'WEEKS LATER — son ABDULLAH KHASHOGGI targeted.', type: 'text', delay: 500 },
+  { text: 'FOUR DAYS after the killing — fiancee HATICE CENGIZ\'s phone', type: 'text', delay: 500 },
+  { text: 'INFECTED (forensic findings, Oct 6 / 9 / 12).', type: 'text', delay: 500 },
+  { text: 'WEEKS LATER — son ABDULLAH KHASHOGGI added to target list.', type: 'text', delay: 500 },
   { text: 'The bereaved were now the subjects.', type: 'critical', delay: 700 },
+  { text: '', type: 'text', delay: 300 },
+  { text: 'Khashoggi\'s own phone: no published forensic confirmation', type: 'text', delay: 500 },
+  { text: 'of compromise. The record runs through the phones around him.', type: 'critical', delay: 700 },
   { text: '', type: 'text', delay: 300 },
   { text: 'Operator impersonated The Washington Post to deliver the', type: 'text', delay: 500 },
   { text: 'exploit. A press outlet was spoofed to hack a journalist\'s', type: 'text', delay: 500 },
@@ -906,11 +1049,15 @@ const lines = [
   { text: '  [6] TechCrunch, Oct 2025; Times of Israel, Nov 2025; Ars Technica, Jun 2026', type: 'footer', delay: 350 },
   { text: '  [7] U.S. Dept. of Commerce, Bureau of Industry & Security, Nov 2021', type: 'footer', delay: 500 },
   { text: '', type: 'text', delay: 300 },
+  { text: '[NOTE] SIMULATED DOSSIER INTERFACE — EDITORIAL RECONSTRUCTION.', type: 'footer', delay: 400 },
+  { text: '       NOT A GOVERNMENT DOCUMENT. EVENTS AND EVIDENCE FROM PUBLIC RECORDS.', type: 'footer', delay: 500 },
+  { text: '', type: 'text', delay: 300 },
   { text: 'END OF FILE.', type: 'text', delay: 0, cursor: true },
 ];
 
 let currentLine = 0;
 let isRunning = false;
+let skipRequested = false;
 
 function createLine(text, type, hasCursor = false) {
   const div = document.createElement('div');
@@ -957,6 +1104,7 @@ async function startSequence() {
   for (let i = 0; i < lines.length; i++) {
     currentLine = i;
     await typeLine(lines[i]);
+    if (skipRequested) break;
     scrollToEnd();
 
     const pct = ((i + 1) / totalLines) * 100;
@@ -968,13 +1116,18 @@ async function startSequence() {
     }
   }
 
-  await sleep(2500);
+  if (!skipRequested) await sleep(2500);
+  skipRequested = false;
+  progress.style.width = '100%';
   scrollHint.classList.remove('hidden');
 }
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !isRunning) {
     startSequence();
+  }
+  if (e.key === 'Escape' && isRunning) {
+    skipRequested = true;
   }
 });
 </script>
