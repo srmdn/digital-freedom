@@ -3,19 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freedom Report — Digital Freedom Project</title>
-<meta name="description" content="A terminal-style editorial on digital freedom, surveillance expansion, and the global erosion of personal liberties.">
+<title>Freedom Report — The Ship Has Already Hit the Iceberg | Digital Freedom</title>
+<meta name="description" content="Episode I of the Digital Freedom archive: Pavel Durov's warning as a hook, then the independently sourced state of digital freedom — EU Chat Control, the UK Online Safety Act, and three data lenses on digital and information freedom.">
 <meta name="theme-color" content="#0c0c0c">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://srmdn.github.io/digital-freedom/sequences/freedom-report.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Digital Freedom">
-<meta property="og:title" content="Freedom Report — Digital Freedom Project">
-<meta property="og:description" content="A terminal-style editorial on digital freedom, surveillance expansion, and the global erosion of personal liberties.">
+<meta property="og:title" content="Freedom Report — The Ship Has Already Hit the Iceberg | Digital Freedom">
+<meta property="og:description" content="Pavel Durov's warning as a hook, then the independently sourced state of digital freedom — EU Chat Control, the UK Online Safety Act, and three data lenses on digital and information freedom.">
 <meta property="og:url" content="https://srmdn.github.io/digital-freedom/sequences/freedom-report.html">
+<meta property="article:modified_time" content="2026-08-17">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Freedom Report — Digital Freedom Project">
-<meta name="twitter:description" content="A terminal-style editorial on digital freedom, surveillance expansion, and the global erosion of personal liberties.">
+<meta name="twitter:title" content="Freedom Report — The Ship Has Already Hit the Iceberg | Digital Freedom">
+<meta name="twitter:description" content="Pavel Durov's warning as a hook, then the independently sourced state of digital freedom — EU Chat Control, the UK Online Safety Act, and three data lenses on digital and information freedom.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Ship Has Already Hit the Iceberg",
+  "description": "Episode I of the Digital Freedom archive: the state of digital freedom, sourced from public records.",
+  "mainEntityOfPage": "https://srmdn.github.io/digital-freedom/sequences/freedom-report.html",
+  "dateModified": "2026-08-17",
+  "isAccessibleForFree": "True"
+}
+</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../assets/fonts.css">
 <style>
@@ -47,6 +59,47 @@
 
   a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
   a:hover { color: #fff; border-color: #fff; }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-bottom-color: transparent;
+  }
+
+  button:focus-visible {
+    outline: 2px solid #39d353;
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    transform: translateY(-200%);
+    padding: 0.65rem 0.9rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   /* === TERMINAL HOOK === */
   .terminal-hook {
@@ -172,6 +225,8 @@
 
   .start-overlay button:hover { background: #2ea043; }
   .start-overlay p { margin-top: 16px; color: #8b949e; font-size: 14px; font-family: var(--mono); }
+  .start-overlay p a { color: #8b949e; border-bottom: 1px solid #8b949e; }
+  .start-overlay p a:hover { color: #fff; border-bottom-color: #fff; }
 
   .t-progress {
     position: absolute;
@@ -185,6 +240,8 @@
   }
 
   .scroll-hint {
+    display: block;
+    width: 100%;
     text-align: center;
     padding: 2rem;
     font-family: var(--mono);
@@ -192,7 +249,9 @@
     color: var(--text-muted);
     animation: pulse 2s ease-in-out infinite;
     cursor: pointer;
+    border: none;
     border-bottom: 1px solid var(--border);
+    background: var(--bg);
   }
 
   .scroll-hint.hidden { display: none; }
@@ -279,6 +338,51 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
+  }
+
+  /* === EPISODE NAV + METADATA === */
+  .case-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-nav a {
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--text-muted);
+  }
+
+  .case-nav a:hover { color: #fff; border-bottom-color: #fff; }
+  .case-nav .case-nav-context { color: var(--accent); letter-spacing: 0.06em; }
+
+  .pub-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .pub-meta span { color: var(--text-dim); }
+
+  .sim-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin: 2rem 0;
+    line-height: 1.6;
+    max-width: 600px;
   }
 
   .divider {
@@ -413,9 +517,21 @@
     .col-country { flex: 1 1 100%; }
     .col-score { flex: 1; text-align: left; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .t-line { transition: none; }
+    .t-cursor { animation: none; }
+    .t-glitch { animation: none; }
+    .t-progress { transition: none; }
+    .scroll-hint { animation: none; }
+    .start-overlay { transition: none; }
+  }
 </style>
 </head>
 <body>
+
+<a href="#essay" class="skip-link">Skip to article</a>
 
 <!-- ========== TERMINAL HOOK ========== -->
 <div class="terminal-hook" id="terminalHook">
@@ -430,29 +546,42 @@
   <div class="start-overlay" id="startBtn">
     <button onclick="startTerminal()">▶ INITIALIZE</button>
     <p>Press to begin</p>
+    <p><a href="#essay">Skip intro — read the article</a></p>
+    <noscript><p style="margin-top:24px; max-width:420px">JavaScript is disabled, so the interactive intro cannot play. The full article below is readable without it.</p></noscript>
   </div>
 </div>
 
-<div class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
   ↓ Continue reading
-</div>
+</button>
 
 <!-- ========== ESSAY ========== -->
 <section class="essay" id="essay">
-  <p class="section-label">Sequence I — Freedom Report</p>
+
+  <nav class="case-nav" aria-label="Episode navigation">
+    <a href="../index.html#episodes">← Episode index</a>
+    <span class="case-nav-context">Episode I — State of Digital Freedom</span>
+    <a href="pegasus-01-khashoggi.html">Next: Episode II · Case 01 — Khashoggi →</a>
+  </nav>
+
+  <p class="pub-meta">Episode I / State of Digital Freedom<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
+
+  <p class="section-label">Episode I — State of Digital Freedom</p>
   <h2>The ship has already hit the iceberg</h2>
 
   <p>On June 14, 2026, Pavel Durov stood on the Oslo Freedom Forum stage and said something most people in the room didn't want to hear: <em>"Our ship has already hit the iceberg."</em> Not "might hit." Not "is approaching." Already hit.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=149s" target="_blank" rel="noopener noreferrer">02:29</a></p>
 
   <p>He wasn't talking about climate change or geopolitics. He was talking about personal freedom — the kind most people in Western democracies assumed was permanent, inherited, unassailable. The kind that erodes one law, one precedent, one emergency measure at a time, until one day you look up and realize it's gone.</p>
 
+  <p>This sequence uses Durov's speech as a hook — not as its authority. The speech raises the questions. The evidence that follows stands on its own sourcing.</p>
+
   <h3>The pretext is always children</h3>
 
-  <p>Durov's most pointed observation wasn't about authoritarian regimes. It was about the West. "They used protection of children as a pretext — in fact, they wanted more control over political speech."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=540s" target="_blank" rel="noopener noreferrer">09:09</a></p>
+  <p>Durov's most pointed observation wasn't about authoritarian regimes. It was about the West. "They used protection of children as a pretext — in fact, they wanted more control over political speech."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=540s" target="_blank" rel="noopener noreferrer">09:09</a> That framing is Durov's rhetoric, and it stays attributed to him. The underlying policy disputes are a matter of public record.</p>
 
-  <p>He was referring to the UK's Online Safety Act. Publicly, it was sold as child protection — age verification to access social media. But in a High Court submission, the British government stated that "the principal part of the Online Safety Act had nothing to do with protecting children" and was instead "aimed at capturing large platforms with significant influence over public discourse."<a class="source-ref" href="https://www.gov.uk/government/publications" target="_blank" rel="noopener noreferrer">HC 2025</a></p>
+  <p>He was referring to the UK's Online Safety Act — legislation that received royal assent on October 26, 2023, and whose illegal-content duties for large platforms became enforceable in March 2025.<a class="source-ref" href="https://www.legislation.gov.uk/ukpga/2023/50" target="_blank" rel="noopener noreferrer">OSA 2023</a> In his speech, Durov cited what he described as a UK government submission in a High Court case, quoting it as saying "the principal part of the Online Safety Act had nothing to do with protecting children" and was instead "aimed at capturing large platforms with significant influence over public discourse." The quote is reproduced as Durov presented it; whether the act lives up to that characterization is contested, and the act itself is public law readers can inspect.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=540s" target="_blank" rel="noopener noreferrer">09:09</a></p>
 
-  <p>This is not an isolated case. The European Commission has pushed Chat Control for five years — a mandate for messaging apps to install encryption backdoors. The official justification: child protection. The mechanism: automatic scanning of every private message, every photo, every draft.<a class="source-ref" href="https://digital-strategy.ec.europa.eu/en/policies/chat-control" target="_blank" rel="noopener noreferrer">EC 2021</a></p>
+  <p>He applied the same lens to Brussels. The European Commission has pursued what critics call "Chat Control" since 2022 — formally, the proposed Regulation to Prevent and Combat Child Sexual Abuse.<a class="source-ref" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52022PC0209" target="_blank" rel="noopener noreferrer">COM 2022/209</a><a class="source-ref" href="https://oeil.secure.europarl.europa.eu/oeil/popups/ficheprocedure.do?reference=2022/0155(COD)&l=en" target="_blank" rel="noopener noreferrer">EP</a> The official justification: child protection. The contested mechanism: scanning. The most expansive versions would have required messaging apps to run detection software on users' devices, inspecting messages, photos, and videos before they are encrypted — client-side scanning, which critics describe as undermining end-to-end encryption without formally "breaking" it. The proposal is not law. The Council dropped mandatory detection orders in November 2025, and trilogue negotiations continue with detection still unresolved — as of this review, no scanning mandate has been enacted.<a class="source-ref" href="https://oeil.secure.europarl.europa.eu/oeil/popups/ficheprocedure.do?reference=2022/0155(COD)&l=en" target="_blank" rel="noopener noreferrer">EP</a></p>
 
   <blockquote>
     "Those who are willing to give up their essential liberty for some temporary safety deserve neither liberty nor safety."
@@ -461,21 +590,25 @@
 
   <h3>The enforcement trap</h3>
 
-  <p>What Durov called "selective enforcement of laws" is the most insidious mechanism he described. The pattern: flood an industry with contradictory regulations so compliance becomes impossible, then choose who to persecute based on political loyalty. Those who cooperate get ignored. Those who resist get hit with the full weight of the law.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1094s" target="_blank" rel="noopener noreferrer">18:14</a></p>
+  <p>What Durov called "selective enforcement of laws" is the mechanism he described at greatest length. The pattern, as he told it: flood an industry with contradictory regulations so compliance becomes impossible, then choose who to persecute based on political loyalty. Those who cooperate get ignored. Those who resist get hit with the full weight of the law. This is his account — a description of the speech, not a proven system.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1094s" target="_blank" rel="noopener noreferrer">18:14</a></p>
 
-  <p>He cited his own experience: criminal investigations in Russia, a secret deal offered by French intelligence during his 2024 detention in Paris, the European Commission's alleged offer to Elon Musk — censor inconvenient narratives or face fines. Musk refused. His company was hit with a €120 million fine on "seemingly unrelated issues."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1236s" target="_blank" rel="noopener noreferrer">20:36</a></p>
+  <p>He cited his own experience: criminal investigations in Russia, what he described as a secret deal offered by French intelligence during his 2024 detention in Paris, and what he called the European Commission's alleged offer to Elon Musk — censor inconvenient narratives or face fines. According to Durov, Musk refused and his company was later fined €120 million on "seemingly unrelated issues." All of this is Durov's account of events, delivered from a stage, and is reproduced here as allegation and rhetoric — not as established fact.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1236s" target="_blank" rel="noopener noreferrer">20:36</a></p>
 
-  <p>The US Congress later published emails confirming EC pressure on Facebook, Instagram, TikTok, and YouTube to silence political narratives during the pandemic — narratives that, years later, turned out to be "at least partially true, and in any case worthy of public debate."<a class="source-ref" href="https://www.congress.gov" target="_blank" rel="noopener noreferrer">USC 2025</a></p>
+  <p>Durov also claimed the US Congress has published emails documenting European Commission pressure on Facebook, Instagram, TikTok, and YouTube to silence political narratives during the pandemic — narratives that, he said, turned out to be "at least partially true, and in any case worthy of public debate." That is his characterization of congressional material, presented as such.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1236s" target="_blank" rel="noopener noreferrer">20:36</a></p>
 
   <h3>There is no second West</h3>
 
   <p>Durov closed with a warning that most people missed: "There is no second West. There is no backup civilization."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1743s" target="_blank" rel="noopener noreferrer">29:03</a> For decades, dissidents from authoritarian countries could flee west. But if the current trajectory continues, he said, "they will have a hard time trying to understand whether they have already left their repressive homeland or they're just entering another open-air prison."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1710s" target="_blank" rel="noopener noreferrer">28:30</a></p>
 
-  <p>In the age of AI, the human limits on surveillance no longer exist. "Every message will be monitored. Every thought scored. Every relationship mapped."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1654s" target="_blank" rel="noopener noreferrer">27:34</a> The KGB had finite resources. AI does not.</p>
+  <p>His projection of the AI age was blunt: "Every message will be monitored. Every thought scored. Every relationship mapped."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1654s" target="_blank" rel="noopener noreferrer">27:34</a> As Durov put it, the KGB had finite resources. AI does not. That is his argument — not a measured statement of current capability.</p>
 
-  <p>The passengers of the Titanic didn't want to leave the ship for almost two hours after it hit the iceberg. By the time they panicked, it was too late.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=108s" target="_blank" rel="noopener noreferrer">01:48</a></p>
+  <p>He returned to the ship. The passengers of the Titanic, he said, didn't want to leave the ship for almost two hours after it hit the iceberg. By the time they panicked, it was too late.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=108s" target="_blank" rel="noopener noreferrer">01:48</a></p>
 
   <p>"The only way forward is to fix this ship."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1783s" target="_blank" rel="noopener noreferrer">29:43</a></p>
+
+  <div class="sim-note">
+    NOTE — PRESENTATION: The terminal interface at the top of this page is an editorial presentation device, not a leaked document or live system. The speech excerpts are from a public recording; the analysis below is sourced from public datasets.
+  </div>
 </section>
 
 <hr class="divider">
@@ -483,57 +616,52 @@
 <!-- ========== DATA SECTION ========== -->
 <section class="data-section" id="data">
   <p class="section-label">Global snapshot</p>
-  <h2>How the world ranks, by source</h2>
-  <p>Three independent assessments. Different methodologies. Same pattern.</p>
+  <h2>Three lenses on digital and information freedom</h2>
+  <p>Different methodologies. Different scopes. Similar warning signs.</p>
 
   <div class="comparison-table">
     <div class="comparison-row comparison-header">
       <span class="col-country">Country</span>
       <span class="col-score">FH Internet</span>
-      <span class="col-score">V-Dem Digital</span>
       <span class="col-score">RSF Press</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Norway</span>
-      <span class="col-score score-green">79/100</span>
-      <span class="col-score score-green">0.85</span>
-      <span class="col-score score-green">7.7</span>
+      <span class="col-score score-green">Not covered</span>
+      <span class="col-score score-green">92.72</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">United States</span>
-      <span class="col-score score-yellow">66/100</span>
-      <span class="col-score score-green">0.72</span>
-      <span class="col-score score-yellow">24.5</span>
+      <span class="col-score score-yellow">73/100</span>
+      <span class="col-score score-yellow">62.61</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Indonesia</span>
-      <span class="col-score score-yellow">54/100</span>
-      <span class="col-score score-yellow">0.52</span>
-      <span class="col-score score-yellow">35.1</span>
+      <span class="col-score score-yellow">48/100</span>
+      <span class="col-score score-yellow">43.02</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">India</span>
-      <span class="col-score score-yellow">50/100</span>
-      <span class="col-score score-yellow">0.48</span>
-      <span class="col-score score-red">44.8</span>
+      <span class="col-score score-yellow">51/100</span>
+      <span class="col-score score-red">31.96</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Russia</span>
-      <span class="col-score score-red">28/100</span>
-      <span class="col-score score-red">0.20</span>
-      <span class="col-score score-red">79.5</span>
+      <span class="col-score score-red">17/100</span>
+      <span class="col-score score-red">23.15</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">China</span>
-      <span class="col-score score-red">10/100</span>
-      <span class="col-score score-red">0.12</span>
-      <span class="col-score score-red">85.9</span>
+      <span class="col-score score-red">9/100</span>
+      <span class="col-score score-red">13.85</span>
     </div>
   </div>
 
   <p class="data-sources">
-    Scores are original scales — not normalized. FH: 0-100 (higher = freer). V-Dem: 0-1 (higher = freer). RSF: 0-100 (lower = freer).<br>
-    Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank" rel="noopener noreferrer">Freedom House</a> · <a href="https://www.v-dem.net/" target="_blank" rel="noopener noreferrer">V-Dem Institute</a> · <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer">Reporters Without Borders</a>
+    <strong style="color:var(--text-dim)">Freedom House — Freedom on the Net 2025</strong>: measures internet freedom across 72 countries; 0-100, higher = freer; subcategories: obstacles to access, limits on content, violations of user rights. <a href="https://freedomhouse.org/report/freedom-net" target="_blank" rel="noopener noreferrer">report page</a>. Accessed 2026-08-17.<br><br>
+    <strong style="color:var(--text-dim)">Reporters Without Borders — World Press Freedom Index 2026</strong>: measures press freedom across 180 countries; 0-100, higher = freer. <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer">index page</a>. Accessed 2026-08-17.<br><br>
+    <strong style="color:var(--text-dim)">V-Dem / Digital Society Project — dataset v8 (released March 2026)</strong>: an expert-survey dataset of 35 indicators covering online censorship, social-media monitoring, polarization, and information operations across 179 countries, 2000-2025. It has no single headline score, so no single number from it appears in the table above — unlike the two indices, it is a toolkit rather than a ranking. <a href="https://digitalsocietyproject.org/data/" target="_blank" rel="noopener noreferrer">dataset page</a>. Accessed 2026-08-17.<br><br>
+    These scores are not normalized equivalents. They measure different things on different scales. What they share is direction: in every lens, the same countries keep appearing near the bottom.
   </p>
 </section>
 
@@ -564,17 +692,17 @@ const lines = [
   { text: '[SYSTEM] Initializing personal freedom audit...', type: 'system', delay: 600 },
   { text: '[SYSTEM] Scanning global freedom indices...', type: 'system', delay: 800 },
   { text: '', type: 'blank', delay: 200 },
-  { text: '[WARNING]  Personal freedoms eroding worldwide', type: 'warning', delay: 500 },
-  { text: '[ALERT]    UK: 3,000+ arrested/year for social media posts', type: 'alert', delay: 500 },
-  { text: '[ALERT]    EU: Chat Control — encryption backdoor mandated', type: 'alert', delay: 500 },
+  { text: '[WARNING]  Personal freedoms eroding worldwide — see data below', type: 'warning', delay: 500 },
+  { text: '[ALERT]    UK: Online Safety Act duties enforceable since 2025', type: 'alert', delay: 500 },
+  { text: '[ALERT]    EU: Chat Control scanning proposal — still not enacted', type: 'alert', delay: 500 },
   { text: '', type: 'blank', delay: 300 },
   { text: '$ query --durov --source "oslo-freedom-forum-2026"', type: 'command', delay: 400 },
   { text: '', type: 'blank', delay: 200 },
-  { text: '"Our ship has already hit the iceberg."', type: 'quote', delay: 600 },
-  { text: '"Personal freedoms have been eroded everywhere, almost without exception."', type: 'quote', delay: 600 },
-  { text: '"They used protection of children as a pretext — in fact, they wanted more control over political speech."', type: 'quote', delay: 700 },
+  { text: 'DUROV: "Our ship has already hit the iceberg."', type: 'quote', delay: 600 },
+  { text: 'DUROV: "Personal freedoms have been eroded everywhere, almost without exception."', type: 'quote', delay: 600 },
+  { text: 'DUROV: "They used protection of children as a pretext — in fact, they wanted more control over political speech."', type: 'quote', delay: 700 },
   { text: '', type: 'blank', delay: 200 },
-  { text: '"In the world of AI, every message will be monitored, every thought scored."', type: 'quote', delay: 700 },
+  { text: 'DUROV: "In the world of AI, every message will be monitored, every thought scored."', type: 'quote', delay: 700 },
   { text: '', type: 'blank', delay: 300 },
   { text: '[CRITICAL] The passengers of Titanic didn\'t want to leave the ship.', type: 'critical', delay: 600 },
   { text: '[CRITICAL] By the time they panicked, it was too late.', type: 'critical', delay: 600 },
@@ -608,12 +736,18 @@ async function typeLine(obj) {
   if (obj.delay > 0) await new Promise(r => setTimeout(r, obj.delay));
 }
 
+let running = false;
+let skipRequested = false;
+
 async function startTerminal() {
+  if (running) return;
+  running = true;
   startBtn.classList.add('hidden');
   tContent.innerHTML = '';
   const total = lines.length;
   for (let i = 0; i < lines.length; i++) {
     await typeLine(lines[i]);
+    if (skipRequested) break;
     tScroll();
     tProgress.style.width = ((i + 1) / total) * 100 + '%';
     if (lines[i].type === 'critical') {
@@ -621,12 +755,16 @@ async function startTerminal() {
       setTimeout(() => tContent.classList.remove('t-glitch'), 300);
     }
   }
-  await new Promise(r => setTimeout(r, 1500));
+  if (!skipRequested) await new Promise(r => setTimeout(r, 1500));
+  skipRequested = false;
+  tProgress.style.width = '100%';
   scrollHint.classList.remove('hidden');
+  running = false;
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !startBtn.classList.contains('hidden')) startTerminal();
+  if (e.key === 'Enter' && !running && !startBtn.classList.contains('hidden')) startTerminal();
+  if (e.key === 'Escape' && running) skipRequested = true;
 });
 </script>
 
