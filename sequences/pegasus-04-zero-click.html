@@ -13,6 +13,7 @@
 <meta property="og:title" content="Pegasus — Zero-Click Arms Race | Digital Freedom">
 <meta property="og:description" content="Case 4 of the Pegasus series: the race between NSO Group's zero-click exploits — KISMET, FORCEDENTRY, the 2022 Find My and HomeKit chains, BLASTPASS — and Apple's defenses.">
 <meta property="og:url" content="https://srmdn.github.io/digital-freedom/sequences/pegasus-04-zero-click.html">
+<meta property="article:modified_time" content="2026-08-17">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pegasus — Zero-Click Arms Race | Digital Freedom">
 <meta name="twitter:description" content="Case 4 of the Pegasus series: the race between NSO Group's zero-click exploits — KISMET, FORCEDENTRY, the 2022 Find My and HomeKit chains, BLASTPASS — and Apple's defenses.">
@@ -47,6 +48,48 @@
 
   a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
   a:hover { color: #fff; border-color: #fff; }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-bottom-color: transparent;
+  }
+
+  button:focus-visible {
+    outline: 2px solid #b00020;
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    transform: translateY(-200%);
+    padding: 0.65rem 0.9rem;
+    background: #b00020;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   /* ============== EXPLOIT-ANALYSIS TERMINAL HOOK ============== */
   .document {
@@ -316,6 +359,8 @@
 
   /* ============== SCROLL HINT ============== */
   .scroll-hint {
+    display: block;
+    width: 100%;
     text-align: center;
     padding: 2rem;
     font-family: var(--mono);
@@ -323,6 +368,7 @@
     color: var(--text-muted);
     animation: pulse 2s ease-in-out infinite;
     cursor: pointer;
+    border: none;
     border-bottom: 1px solid var(--border);
     background: var(--bg);
   }
@@ -408,6 +454,51 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
+  }
+
+  /* === CASE NAV + METADATA === */
+  .case-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-nav a {
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--text-muted);
+  }
+
+  .case-nav a:hover { color: #fff; border-bottom-color: #fff; }
+  .case-nav .case-nav-context { color: var(--accent); letter-spacing: 0.06em; }
+
+  .pub-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .pub-meta span { color: var(--text-dim); }
+
+  .sim-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin: 2rem 0;
+    line-height: 1.6;
+    max-width: 600px;
   }
 
   .divider {
@@ -581,16 +672,29 @@
     .col-country { flex: 1 1 100%; }
     .col-status, .col-score { flex: 1; text-align: left; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .line { transition: none; }
+    .cursor { animation: none; }
+    .glitch { animation: none; }
+    .fade-in { animation: none; }
+    .progress-bar { transition: none; }
+    .scroll-hint { animation: none; }
+    .start-btn { transition: none; }
+  }
 </style>
 </head>
 <body>
+
+<a href="#essay" class="skip-link">Skip to article</a>
 
 <!-- ========== EXPLOIT-ANALYSIS TERMINAL HOOK ========== -->
 <div class="document" id="terminalHook">
   <div class="watermark">CLASSIFIED</div>
   <div class="doc-header">
     <span>CYBER THREAT INTELLIGENCE — EXPLOIT ANALYSIS DIVISION</span>
-    <span class="file-id">FILE: 2023-EXPL-0913 / ZERO-CLICK</span>
+    <span class="file-id">FILE: 2023-EXPL-0913 / ZERO-CLICK — EDITORIAL RECONSTRUCTION</span>
   </div>
   <div class="content" id="content"></div>
   <div class="progress-bar" id="progress"></div>
@@ -600,12 +704,21 @@
   </div>
 </div>
 
-<div class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
   &darr; Continue reading
-</div>
+</button>
 
 <!-- ========== ESSAY ========== -->
 <section class="essay" id="essay">
+
+  <nav class="case-nav" aria-label="Case navigation">
+    <a href="pegasus-03-50k-list.html">← Case 03 — The 50K List</a>
+    <a href="../index.html#episode-ii" class="case-nav-context">Episode II — Pegasus</a>
+    <a href="pegasus-05-rehabilitation.html">Case 05 — The Rehabilitation Tour →</a>
+  </nav>
+
+  <p class="pub-meta">Episode II / Pegasus / Case IV of 05<br><span>Published: 2026-08-16 · Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
+
   <p class="section-label">Episode II — Pegasus, Case IV</p>
   <h2>They keep finding a way in. Apple keeps building a door. Neither stops.</h2>
 
@@ -693,6 +806,10 @@
   <p>The pattern is structural, not incidental. Again and again, Apple closes one vector while NSO develops or deploys another. Each new sandbox has been treated as a design constraint for the next exploit. The phone in your pocket is not a platform for spyware to occasionally use — it is the battlefield the product is built around.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer">ASL26</a></p>
 
   <p>This is what an arms race looks like when one side is a company selling access, and the other side is everyone else's phone.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
+
+  <div class="sim-note">
+    NOTE — PRESENTATION: The classified exploit-analysis interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and forensic findings are sourced from public records cited throughout this page.
+  </div>
 </section>
 
 <hr class="divider">
@@ -881,11 +998,15 @@ const lines = [
   { text: '  [8] WhatsApp / Meta — CVE-2019-3568 advisory, May 2019', type: 'footer', delay: 500 },
   { text: '  [9] Citizen Lab — "Triple Threat", Apr 2023 (LATENTIMAGE / FINDMYPWN / PWNYOURHOME)', type: 'footer', delay: 500 },
   { text: '', type: 'text', delay: 300 },
+  { text: '[NOTE] SIMULATED DOSSIER INTERFACE — EDITORIAL RECONSTRUCTION.', type: 'footer', delay: 400 },
+  { text: '       NOT A GOVERNMENT DOCUMENT. EVENTS AND EVIDENCE FROM PUBLIC RECORDS.', type: 'footer', delay: 500 },
+  { text: '', type: 'text', delay: 300 },
   { text: 'END OF FILE.', type: 'text', delay: 0, cursor: true },
 ];
 
 let currentLine = 0;
 let isRunning = false;
+let skipRequested = false;
 
 function createLine(text, type, hasCursor = false) {
   const div = document.createElement('div');
@@ -932,6 +1053,7 @@ async function startSequence() {
   for (let i = 0; i < lines.length; i++) {
     currentLine = i;
     await typeLine(lines[i]);
+    if (skipRequested) break;
     scrollToEnd();
 
     const pct = ((i + 1) / totalLines) * 100;
@@ -943,13 +1065,18 @@ async function startSequence() {
     }
   }
 
-  await sleep(2500);
+  if (!skipRequested) await sleep(2500);
+  skipRequested = false;
+  progress.style.width = '100%';
   scrollHint.classList.remove('hidden');
 }
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !isRunning) {
     startSequence();
+  }
+  if (e.key === 'Escape' && isRunning) {
+    skipRequested = true;
   }
 });
 </script>
