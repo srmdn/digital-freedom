@@ -13,6 +13,7 @@
 <meta property="og:title" content="Pegasus — Sánchez | Digital Freedom">
 <meta property="og:description" content="Case 2 of the Pegasus series: Spain's prime minister, Pegasus infection, Catalonia, and the stalled investigation.">
 <meta property="og:url" content="https://srmdn.github.io/digital-freedom/sequences/pegasus-02-sanchez.html">
+<meta property="article:modified_time" content="2026-08-17">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pegasus — Sánchez | Digital Freedom">
 <meta name="twitter:description" content="Case 2 of the Pegasus series: Spain's prime minister, Pegasus infection, Catalonia, and the stalled investigation.">
@@ -47,6 +48,48 @@
 
   a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
   a:hover { color: #fff; border-color: #fff; }
+
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-bottom-color: transparent;
+  }
+
+  button:focus-visible {
+    outline: 2px solid #b00020;
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    transform: translateY(-200%);
+    padding: 0.65rem 0.9rem;
+    background: #b00020;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   /* ============== CLASSIFIED-INTEL TERMINAL HOOK ============== */
   .document {
@@ -316,6 +359,8 @@
 
   /* ============== SCROLL HINT ============== */
   .scroll-hint {
+    display: block;
+    width: 100%;
     text-align: center;
     padding: 2rem;
     font-family: var(--mono);
@@ -323,6 +368,7 @@
     color: var(--text-muted);
     animation: pulse 2s ease-in-out infinite;
     cursor: pointer;
+    border: none;
     border-bottom: 1px solid var(--border);
     background: var(--bg);
   }
@@ -408,6 +454,60 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
+  }
+
+  /* === CASE NAV + METADATA === */
+  .case-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .case-nav a {
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--text-muted);
+  }
+
+  .case-nav a:hover { color: #fff; border-bottom-color: #fff; }
+  .case-nav .case-nav-context { color: var(--accent); letter-spacing: 0.06em; }
+
+  .pub-meta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .pub-meta span { color: var(--text-dim); }
+
+  .sim-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin: 2rem 0;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .evidence-legend {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
   }
 
   .divider {
@@ -581,16 +681,29 @@
     .col-country { flex: 1 1 100%; }
     .col-status, .col-score { flex: 1; text-align: left; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .line { transition: none; }
+    .cursor { animation: none; }
+    .glitch { animation: none; }
+    .fade-in { animation: none; }
+    .progress-bar { transition: none; }
+    .scroll-hint { animation: none; }
+    .start-btn { transition: none; }
+  }
 </style>
 </head>
 <body>
+
+<a href="#essay" class="skip-link">Skip to article</a>
 
 <!-- ========== CLASSIFIED-INTEL TERMINAL HOOK ========== -->
 <div class="document" id="terminalHook">
   <div class="watermark">CLASSIFIED</div>
   <div class="doc-header">
     <span>CENTRAL INTELLIGENCE AGENCY — DIRECTORATE OF OPERATIONS</span>
-    <span class="file-id">FILE: 2022-MAD-0517 / PEGASUS</span>
+    <span class="file-id">FILE: 2022-MAD-0517 / PEGASUS — EDITORIAL RECONSTRUCTION</span>
   </div>
   <div class="content" id="content"></div>
   <div class="progress-bar" id="progress"></div>
@@ -600,14 +713,23 @@
   </div>
 </div>
 
-<div class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
   &darr; Continue reading
-</div>
+</button>
 
 <!-- ========== ESSAY ========== -->
 <section class="essay" id="essay">
+
+  <nav class="case-nav" aria-label="Case navigation">
+    <a href="pegasus-01-khashoggi.html">← Case 01 — Khashoggi</a>
+    <a href="../index.html#episode-ii" class="case-nav-context">Episode II — Pegasus</a>
+    <a href="pegasus-03-50k-list.html">Case 03 — The 50K List →</a>
+  </nav>
+
+  <p class="pub-meta">Episode II / Pegasus / Case 02 of 05<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
+
   <p class="section-label">Episode II — Pegasus, Case II</p>
-  <h2>They infected a prime minister. Then tried to bury it.</h2>
+  <h2>A prime minister was infected. Then the investigation hit silence.</h2>
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
@@ -658,6 +780,10 @@
   <p>The normalization is the deeper problem. Spyware is no longer exceptional. It is procured, budgeted, deployed, and renewed as a line item in intelligence operations across democratic governments. The PEGA findings, the Catalan cases, and the Barcelona proceedings all point to the same reality: mercenary spyware has become standard infrastructure, and the legal and democratic controls meant to restrain it have been outpaced by the market that sells it.</p>
 
   <p>The line between legitimate intelligence and political surveillance is a procedural one — it depends on warrants, oversight, proportionality, judicial review. In Spain, that line became the central question. It has become the same question in Hungary, Poland, Greece, and Serbia: who has mercenary spyware, who authorizes it, and what can courts actually prove when vendors and states refuse to cooperate?<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer">CL</a></p>
+
+  <div class="sim-note">
+    NOTE — PRESENTATION: The classified-file interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and forensic findings are sourced from public records cited throughout this page.
+  </div>
 </section>
 
 <hr class="divider">
@@ -665,44 +791,48 @@
 <!-- ========== DATA SECTION ========== -->
 <section class="data-section" id="data">
   <p class="section-label">European cases</p>
-  <h2>Confirmed European Spyware Cases</h2>
-  <p>European states where mercenary spyware — Pegasus and equivalents — has been confirmed deployed against officials, journalists, and civil society. Not exhaustive.</p>
+  <h2>Documented European spyware cases</h2>
+  <p>European states where mercenary spyware — Pegasus and equivalents — has been documented against officials, journalists, and civil society. Each row states what the record establishes. Not exhaustive.</p>
 
   <div class="comparison-table">
     <div class="comparison-row comparison-header">
       <span class="col-country">Country</span>
-      <span class="col-status">Status</span>
-      <span class="col-score">Notable Targets</span>
+      <span class="col-status">Evidentiary basis</span>
+      <span class="col-score">Notable targets</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Spain</span>
-      <span class="col-status score-red">Confirmed</span>
+      <span class="col-status score-red">Government-confirmed infections (PM &amp; Defence Minister); Citizen Lab forensic findings (Catalonia) <a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer">CL</a></span>
       <span class="col-score">PM Sánchez, Defence Minister, Catalan leaders</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Hungary</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Journalists, opposition figures (ECHR case)</span>
+      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">Journalists, opposition figures</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Poland</span>
-      <span class="col-status score-yellow">Confirmed (prior government)</span>
-      <span class="col-score">Opposition, prosecutors</span>
+      <span class="col-status score-yellow">Forensic infections documented (prior government) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">Opposition figures, prosecutors</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Serbia</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Journalists, activists (ongoing 2023-2025)</span>
+      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
+      <span class="col-score">Journalists, activists</span>
     </div>
     <div class="comparison-row">
       <span class="col-country">Greece</span>
-      <span class="col-status score-red">Confirmed</span>
-      <span class="col-score">Opposition leader, journalists, ministers (Predator spyware, Intellexa executives convicted Feb 2026)</span>
+      <span class="col-status score-red">Forensic findings documented (Predator spyware); vendor executives convicted (reported Feb 2026) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
+      <span class="col-score">Opposition leader, journalists, ministers</span>
     </div>
   </div>
 
+  <p class="evidence-legend" style="margin-top:1.25rem">
+    Reading the basis column: "Government-confirmed infections" means the state itself confirmed the compromise. "Forensic infections documented" means published device analysis (Citizen Lab, Amnesty Security Lab, or equivalent) found the spyware. Attribution to a specific operator is a separate, stronger claim — and is stated only where a named investigator made it.
+  </p>
+
   <p class="data-sources">
-    Sources: Citizen Lab, Amnesty International, European Parliament PEGA Committee. Not exhaustive.
+    Sources: Citizen Lab, Amnesty Security Lab, European Parliament PEGA Committee, The Pegasus Project. Not exhaustive. Hub links: <a href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">Citizen Lab</a> · <a href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">Amnesty Security Lab</a> · <a href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">Forbidden Stories</a>
   </p>
 </section>
 
@@ -749,7 +879,7 @@ const lines = [
   { text: 'Catalan independence leaders and activists.', type: 'text', delay: 400 },
   { text: 'Members of the Catalan regional government.', type: 'text', delay: 400 },
   { text: '', type: 'text', delay: 300 },
-  { text: 'They never suspected. None of them did.', type: 'critical', delay: 700 },
+  { text: 'The phones gave no visible indication to their owners.', type: 'critical', delay: 700 },
   { text: '', type: 'text', delay: 300 },
   { text: '[SOURCE] Spanish government public announcement, May 2022.', type: 'evidence', delay: 400 },
   { text: '[SOURCE] Citizen Lab Spyware Litigation Tracker.', type: 'evidence', delay: 500 },
@@ -828,11 +958,15 @@ const lines = [
   { text: '  [4] European Parliament PEGA Committee, 2023', type: 'footer', delay: 350 },
   { text: '  [5] Audiencia Nacional, Jan 2026; Barcelona court, 2025', type: 'footer', delay: 500 },
   { text: '', type: 'text', delay: 300 },
+  { text: '[NOTE] SIMULATED DOSSIER INTERFACE — EDITORIAL RECONSTRUCTION.', type: 'footer', delay: 400 },
+  { text: '       NOT A GOVERNMENT DOCUMENT. EVENTS AND EVIDENCE FROM PUBLIC RECORDS.', type: 'footer', delay: 500 },
+  { text: '', type: 'text', delay: 300 },
   { text: 'END OF FILE.', type: 'text', delay: 0, cursor: true },
 ];
 
 let currentLine = 0;
 let isRunning = false;
+let skipRequested = false;
 
 function createLine(text, type, hasCursor = false) {
   const div = document.createElement('div');
@@ -879,6 +1013,7 @@ async function startSequence() {
   for (let i = 0; i < lines.length; i++) {
     currentLine = i;
     await typeLine(lines[i]);
+    if (skipRequested) break;
     scrollToEnd();
 
     const pct = ((i + 1) / totalLines) * 100;
@@ -890,13 +1025,18 @@ async function startSequence() {
     }
   }
 
-  await sleep(2500);
+  if (!skipRequested) await sleep(2500);
+  skipRequested = false;
+  progress.style.width = '100%';
   scrollHint.classList.remove('hidden');
 }
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !isRunning) {
     startSequence();
+  }
+  if (e.key === 'Escape' && isRunning) {
+    skipRequested = true;
   }
 });
 </script>
