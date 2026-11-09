@@ -583,31 +583,18 @@
   .comparison-table {
     border: 1px solid var(--border);
     border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .comparison-row {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    gap: 1rem;
-  }
-
-  .comparison-row:last-child { border-bottom: none; }
-
-  .comparison-header {
-    background: var(--surface);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    overflow-x: auto;
   }
 
   .col-country { flex: 2; font-weight: 600; }
   .col-score { flex: 1; text-align: left; font-family: var(--mono); font-size: 0.85rem; }
   .col-status { flex: 1.5; font-family: var(--mono); font-size: 0.8rem; }
+
+  .comparison-table table { width: 100%; min-width: 640px; border-collapse: collapse; text-align: left; }
+  .comparison-table th, .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .comparison-table thead th { background: var(--surface); font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .comparison-table tbody th { text-align: left; }
+  .comparison-table tbody tr:last-child > * { border-bottom: 0; }
 
   .score-green { color: #27ae60; }
   .score-yellow { color: #f39c12; }
@@ -680,9 +667,6 @@
   @media (max-width: 600px) {
     .content { padding: 1rem 1.25rem; }
     .essay, .data-section { padding: 3rem 1.5rem; }
-    .comparison-row { flex-wrap: wrap; gap: 0.5rem; }
-    .col-country { flex: 1 1 100%; }
-    .col-status, .col-score { flex: 1; text-align: left; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -718,7 +702,7 @@
   </div>
 </div>
 
-<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
   &darr; Continue reading
 </button>
 
@@ -748,7 +732,7 @@
 
   <h2>A breach at the highest level</h2>
 
-  <p>In May 2022, the Spanish government made an announcement that had no precedent in European history: the phone of a sitting prime minister had been infected with commercial spyware. Pedro Sánchez, head of the government of Spain — a NATO ally, an EU member state, the fifth-largest economy in the bloc — had been carrying a compromised device. So had his Defence Minister, Margarita Robles.<a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>In May 2022, the Spanish government made an announcement that had no precedent in European history: the phone of a sitting prime minister had been infected with commercial spyware. Pedro Sánchez, head of the government of Spain — a NATO ally, an EU member state, the fifth-largest economy in the bloc — had been carrying a compromised device. So had his Defence Minister, Margarita Robles.<a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
   <p>This was not the targeting of a dissident in a faraway autocracy. This was the head of a Western government, inside his own country, infected by a product sold to governments — and the investigation could not even definitively say which government pulled the trigger.</p>
 
@@ -756,7 +740,7 @@
 
   <h2>The Catalan connection</h2>
 
-  <p>The Sánchez case cannot be separated from Catalonia. Alongside the prime minister and defence minister disclosures, Citizen Lab documented at least 65 Catalan figures targeted or infected with Pegasus and Candiru, including elected officials, lawyers, activists, and family members.<a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>The Sánchez case cannot be separated from Catalonia. Alongside the prime minister and defence minister disclosures, Citizen Lab documented at least 65 Catalan figures targeted or infected with Pegasus and Candiru, including elected officials, lawyers, activists, and family members.<a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
   <p>The dual-use nature of the spyware was laid bare. Tools acquired under the banner of counterterrorism — to protect the state from violent threats — were allegedly turned against elected officials, civil society organizers, and political opponents whose activity centered on independence politics. The line between national security and political surveillance did not blur. It was contested in court.</p>
 
@@ -766,13 +750,13 @@
 
   <p>Spain's attempt to investigate the infections ran into a wall almost immediately. Israel — whose Ministry of Defense regulates NSO Group's export licenses — refused to cooperate with the Spanish inquiry. By July 2023, the investigation was shelved, with officials citing, in reported terms, the complete lack of cooperation from Israeli authorities.</p>
 
-  <p>The shelving was not the end. In April 2024, under sustained public and political pressure, the case was reopened. In January 2026, Spain's Audiencia Nacional dropped the Sánchez/Robles investigation again, citing continued non-cooperation from Israel. The European Parliament's PEGA Committee had already documented systemic abuse across multiple member states and called for binding restrictions on mercenary spyware.<a class="source-ref" href="https://www.theguardian.com/world/2026/jan/23/spanish-court-drops-pegasus-spyware-case-again-israel-spain-nso" target="_blank" rel="noopener noreferrer">GDN</a><a class="source-ref" href="https://www.europarl.europa.eu/topics/en/article/20230515STO98704/pegasus-spyware-european-parliament-wants-stronger-safeguards" target="_blank" rel="noopener noreferrer">EP</a></p>
+  <p>The shelving was not the end. In April 2024, under sustained public and political pressure, the case was reopened. In January 2026, Spain's Audiencia Nacional dropped the Sánchez/Robles investigation again, citing continued non-cooperation from Israel. The European Parliament's PEGA Committee had already documented systemic abuse across multiple member states and called for binding restrictions on mercenary spyware.<a class="source-ref" href="https://www.theguardian.com/world/2026/jan/23/spanish-court-drops-pegasus-spyware-case-again-israel-spain-nso" target="_blank" rel="noopener noreferrer" aria-label="Source GDN — www.theguardian.com">GDN</a><a class="source-ref" href="https://www.europarl.europa.eu/topics/en/article/20230515STO98704/pegasus-spyware-european-parliament-wants-stronger-safeguards" target="_blank" rel="noopener noreferrer" aria-label="Source EP — www.europarl.europa.eu">EP</a></p>
 
   <p>What the PEGA Committee made clear was that Spain was not an outlier. It was a data point in a continental pattern: spyware acquired for legitimate security purposes, deployed against the very people the state is supposed to protect.</p>
 
   <h2>The Barcelona proceedings</h2>
 
-  <p>In 2025, the case took a turn no previous Pegasus investigation had reached in Spain. Three NSO-linked executives — Shalev Hulio, Omri Lavie, and Yuval Somekh — were placed under formal criminal investigation by a Barcelona court over the alleged spying on lawyer Andreu Van den Eynde. It was a rare move from investigating companies to investigating named individuals behind them.<a class="source-ref" href="https://elpais.com/espana/catalunya/2025-03-03/imputados-tres-directivos-de-la-empresa-propietaria-de-pegasus-por-espionaje-al-abogado-del-proces-andreu-van-den-eynde.html" target="_blank" rel="noopener noreferrer">EPais</a></p>
+  <p>In 2025, the case took a turn no previous Pegasus investigation had reached in Spain. Three NSO-linked executives — Shalev Hulio, Omri Lavie, and Yuval Somekh — were placed under formal criminal investigation by a Barcelona court over the alleged spying on lawyer Andreu Van den Eynde. It was a rare move from investigating companies to investigating named individuals behind them.<a class="source-ref" href="https://elpais.com/espana/catalunya/2025-03-03/imputados-tres-directivos-de-la-empresa-propietaria-de-pegasus-por-espionaje-al-abogado-del-proces-andreu-van-den-eynde.html" target="_blank" rel="noopener noreferrer" aria-label="Source EPais — elpais.com">EPais</a></p>
 
   <p>The Barcelona proceedings arose from Pegasus allegations involving Catalan civil society, not directly from the Sánchez phone infection. But together, the cases showed the same accountability gap: the state could confirm infections and courts could open files, yet the vendor, export regulator, and operators remained difficult to compel.</p>
 
@@ -784,7 +768,7 @@
 
   <p>The normalization is the deeper problem. Spyware is no longer exceptional. It is procured, budgeted, deployed, and renewed as a line item in intelligence operations across democratic governments. The PEGA findings, the Catalan cases, and the Barcelona proceedings all point to the same reality: mercenary spyware has become standard infrastructure, and the legal and democratic controls meant to restrain it have been outpaced by the market that sells it.</p>
 
-  <p>The line between legitimate intelligence and political surveillance is a procedural one — it depends on warrants, oversight, proportionality, judicial review. In Spain, that line became the central question. It has become the same question in Hungary, Poland, Greece, and Serbia: who has mercenary spyware, who authorizes it, and what can courts actually prove when vendors and states refuse to cooperate?<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>The line between legitimate intelligence and political surveillance is a procedural one — it depends on warrants, oversight, proportionality, judicial review. In Spain, that line became the central question. It has become the same question in Hungary, Poland, Greece, and Serbia: who has mercenary spyware, who authorizes it, and what can courts actually prove when vendors and states refuse to cooperate?<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
   <div class="sim-note">
     NOTE — PRESENTATION: The classified-file interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and forensic findings are sourced from public records cited throughout this page.
@@ -799,37 +783,44 @@
   <h2>Documented European spyware cases</h2>
   <p>European states where mercenary spyware — Pegasus and equivalents — has been documented against officials, journalists, and civil society. Each row states what the record establishes. Not exhaustive.</p>
 
-  <div class="comparison-table">
-    <div class="comparison-row comparison-header">
-      <span class="col-country">Country</span>
-      <span class="col-status">Evidentiary basis</span>
-      <span class="col-score">Notable targets</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Spain</span>
-      <span class="col-status score-red">Government-confirmed infections (PM &amp; Defence Minister); Citizen Lab forensic findings (Catalonia) <a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer">CL</a></span>
-      <span class="col-score">PM Sánchez, Defence Minister, Catalan leaders</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Hungary</span>
-      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
-      <span class="col-score">Journalists, opposition figures</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Poland</span>
-      <span class="col-status score-yellow">Forensic infections documented (prior government) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
-      <span class="col-score">Opposition figures, prosecutors</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Serbia</span>
-      <span class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer">ASL</a></span>
-      <span class="col-score">Journalists, activists</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Greece</span>
-      <span class="col-status score-red">Forensic findings documented (Predator spyware); vendor executives convicted (reported Feb 2026) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer">CL</a></span>
-      <span class="col-score">Opposition leader, journalists, ministers</span>
-    </div>
+  <div class="comparison-table" tabindex="0" role="region" aria-label="Scrollable table: Documented European spyware cases">
+    <table>
+      <caption class="sr-only">Documented European spyware cases</caption>
+      <thead>
+      <tr>
+        <th scope="col" class="col-country">Country</th>
+        <th scope="col" class="col-status">Evidentiary basis</th>
+        <th scope="col" class="col-score">Notable targets</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row" class="col-country">Spain</th>
+        <td class="col-status score-red">Government-confirmed infections (PM &amp; Defence Minister); Citizen Lab forensic findings (Catalonia) <a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></td>
+        <td class="col-score">PM Sánchez, Defence Minister, Catalan leaders</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Hungary</th>
+        <td class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></td>
+        <td class="col-score">Journalists, opposition figures</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Poland</th>
+        <td class="col-status score-yellow">Forensic infections documented (prior government) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></td>
+        <td class="col-score">Opposition figures, prosecutors</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Serbia</th>
+        <td class="col-status score-red">Forensic infections documented <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></td>
+        <td class="col-score">Journalists, activists</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Greece</th>
+        <td class="col-status score-red">Forensic findings documented (Predator spyware); vendor executives convicted (reported Feb 2026) <a class="source-ref" href="https://citizenlab.ca/publications/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></td>
+        <td class="col-score">Opposition leader, journalists, ministers</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
   <p class="evidence-legend" style="margin-top:1.25rem">

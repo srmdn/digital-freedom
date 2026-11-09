@@ -583,31 +583,18 @@
   .comparison-table {
     border: 1px solid var(--border);
     border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .comparison-row {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    gap: 1rem;
-  }
-
-  .comparison-row:last-child { border-bottom: none; }
-
-  .comparison-header {
-    background: var(--surface);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    overflow-x: auto;
   }
 
   .col-country { flex: 2; font-weight: 600; }
   .col-score { flex: 1; text-align: left; font-family: var(--mono); font-size: 0.85rem; }
   .col-status { flex: 1.5; font-family: var(--mono); font-size: 0.8rem; }
+
+  .comparison-table table { width: 100%; min-width: 640px; border-collapse: collapse; text-align: left; }
+  .comparison-table th, .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .comparison-table thead th { background: var(--surface); font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .comparison-table tbody th { text-align: left; }
+  .comparison-table tbody tr:last-child > * { border-bottom: 0; }
 
   .score-green { color: #27ae60; }
   .score-yellow { color: #f39c12; }
@@ -680,9 +667,6 @@
   @media (max-width: 600px) {
     .content { padding: 1rem 1.25rem; }
     .essay, .data-section { padding: 3rem 1.5rem; }
-    .comparison-row { flex-wrap: wrap; gap: 0.5rem; }
-    .col-country { flex: 1 1 100%; }
-    .col-status, .col-score { flex: 1; text-align: left; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -718,7 +702,7 @@
   </div>
 </div>
 
-<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
   &darr; Continue reading
 </button>
 
@@ -738,53 +722,53 @@
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
-    <p><strong>WHO:</strong> More than 50,000 phone numbers selected by customers of NSO Group's Pegasus system. The records included journalists, human rights defenders, lawyers, diplomats, politicians, businesspeople, and several heads of state.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
-    <p><strong>WHAT:</strong> A leaked database of selection records tied to Pegasus customers, paired with forensic work showing that some phones linked to the data had in fact been infected or faced attempted infection.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
-    <p><strong>WHEN:</strong> The records covered selections dating back to 2016. The Pegasus Project findings were published on July 18-19, 2021.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
-    <p><strong>WHERE:</strong> More than 50 countries appeared in the records. Amnesty and media partners identified potential NSO clients in 11 countries.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
-    <p><strong>WHY:</strong> Pegasus had been marketed as a narrowly used tool for crime and terrorism investigations. The leaked selections suggested a far broader surveillance appetite aimed at civil society, media, and politics.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
-    <p><strong>HOW:</strong> Forbidden Stories and partner newsrooms analyzed the leak. Amnesty Security Lab conducted forensic examinations, published a methodology report, released an open-source tool, and disclosed more than 700 Pegasus-related domains.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
+    <p><strong>WHO:</strong> More than 50,000 phone numbers selected by customers of NSO Group's Pegasus system. The records included journalists, human rights defenders, lawyers, diplomats, politicians, businesspeople, and several heads of state.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
+    <p><strong>WHAT:</strong> A leaked database of selection records tied to Pegasus customers, paired with forensic work showing that some phones linked to the data had in fact been infected or faced attempted infection.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
+    <p><strong>WHEN:</strong> The records covered selections dating back to 2016. The Pegasus Project findings were published on July 18-19, 2021.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
+    <p><strong>WHERE:</strong> More than 50 countries appeared in the records. Amnesty and media partners identified potential NSO clients in 11 countries.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
+    <p><strong>WHY:</strong> Pegasus had been marketed as a narrowly used tool for crime and terrorism investigations. The leaked selections suggested a far broader surveillance appetite aimed at civil society, media, and politics.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
+    <p><strong>HOW:</strong> Forbidden Stories and partner newsrooms analyzed the leak. Amnesty Security Lab conducted forensic examinations, published a methodology report, released an open-source tool, and disclosed more than 700 Pegasus-related domains.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
   </div>
 
   <h2>What leaked</h2>
 
-  <p>The Pegasus Project did not begin with a court filing or a company disclosure. It began with leaked records: more than 50,000 phone numbers selected for surveillance by NSO clients, spanning more than 50 countries and dating back to 2016.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
+  <p>The Pegasus Project did not begin with a court filing or a company disclosure. It began with leaked records: more than 50,000 phone numbers selected for surveillance by NSO clients, spanning more than 50 countries and dating back to 2016.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
 
-  <p>That distinction matters. The leak was not a list of 50,000 confirmed infections. It was a record of numbers selected inside a surveillance workflow. That made it evidence of intent, scale, and targeting patterns before a forensic lab ever touched a device.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer">GDN</a></p>
+  <p>That distinction matters. The leak was not a list of 50,000 confirmed infections. It was a record of numbers selected inside a surveillance workflow. That made it evidence of intent, scale, and targeting patterns before a forensic lab ever touched a device.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer" aria-label="Source GDN — www.theguardian.com">GDN</a></p>
 
-  <p>What made the records explosive was not only their size, but their consistency with later forensic findings. The leak showed a selection layer that looked industrial rather than exceptional: a queue, not a one-off target package.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
+  <p>What made the records explosive was not only their size, but their consistency with later forensic findings. The leak showed a selection layer that looked industrial rather than exceptional: a queue, not a one-off target package.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
 
   <h2>Selection is not infection</h2>
 
-  <p>Presence on the list did not prove a successful Pegasus compromise. Some selected numbers may never have been infected. Some may have been unreachable. Some may have been associated with failed attempts. That caution is essential if the story is going to remain factual.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer">GDN</a></p>
+  <p>Presence on the list did not prove a successful Pegasus compromise. Some selected numbers may never have been infected. Some may have been unreachable. Some may have been associated with failed attempts. That caution is essential if the story is going to remain factual.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer" aria-label="Source GDN — www.theguardian.com">GDN</a></p>
 
-  <p>But the leak did not stand alone. Amnesty Security Lab's forensic analyses confirmed Pegasus infection or attempted infection on 37 smartphones tied to the wider project, and published the technical methodology behind those findings along with an open-source verification tool.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
+  <p>But the leak did not stand alone. Amnesty Security Lab's forensic analyses confirmed Pegasus infection or attempted infection on 37 smartphones tied to the wider project, and published the technical methodology behind those findings along with an open-source verification tool.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
 
-  <p>The methodology release mattered almost as much as the findings. Amnesty published indicators and more than 700 Pegasus-related domains, making the investigation reproducible instead of rhetorical.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
+  <p>The methodology release mattered almost as much as the findings. Amnesty published indicators and more than 700 Pegasus-related domains, making the investigation reproducible instead of rhetorical.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
 
   <h2>Who appeared on the list</h2>
 
-  <p>Amnesty said the records included at least 180 journalists in 20 countries. Its reporting cited specific examples: the Mexican journalist Cecilio Pineda Birto, more than 40 Azerbaijani journalists, at least 40 Indian journalists, and staff linked to the Associated Press, CNN, The New York Times, Reuters, and the Financial Times.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
+  <p>Amnesty said the records included at least 180 journalists in 20 countries. Its reporting cited specific examples: the Mexican journalist Cecilio Pineda Birto, more than 40 Azerbaijani journalists, at least 40 Indian journalists, and staff linked to the Associated Press, CNN, The New York Times, Reuters, and the Financial Times.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
 
-  <p>Forbidden Stories described the target pool even more broadly: human rights defenders, academics, businesspeople, lawyers, doctors, diplomats, union leaders, politicians, and several heads of state. The leak did not point to one abusive customer. It pointed to a category of abuse spanning multiple regimes and institutions.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
+  <p>Forbidden Stories described the target pool even more broadly: human rights defenders, academics, businesspeople, lawyers, doctors, diplomats, union leaders, politicians, and several heads of state. The leak did not point to one abusive customer. It pointed to a category of abuse spanning multiple regimes and institutions.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
 
-  <p>This is where the marketing line around Pegasus began to collapse. A tool sold as precise and exceptional kept reappearing around reporters, dissidents, lawyers, and political actors whose relevance was democratic, not criminal.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
+  <p>This is where the marketing line around Pegasus began to collapse. A tool sold as precise and exceptional kept reappearing around reporters, dissidents, lawyers, and political actors whose relevance was democratic, not criminal.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
 
   <h2>The scale broke the sales pitch</h2>
 
-  <p>One number in the reporting became impossible to ignore: more than 10,000 phone numbers were selected over two years by one Pegasus client in Morocco alone. Even if selection and infection are kept separate, that is not the profile of rare, surgical use.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
+  <p>One number in the reporting became impossible to ignore: more than 10,000 phone numbers were selected over two years by one Pegasus client in Morocco alone. Even if selection and infection are kept separate, that is not the profile of rare, surgical use.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
 
-  <p>Amnesty and its partners said they identified potential NSO clients in 11 countries. That did not establish that every listed number was hacked. It did establish that the targeting ecosystem around Pegasus was multinational, routinized, and much larger than any single scandal.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
+  <p>Amnesty and its partners said they identified potential NSO clients in 11 countries. That did not establish that every listed number was hacked. It did establish that the targeting ecosystem around Pegasus was multinational, routinized, and much larger than any single scandal.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
 
-  <p>The 50K list was damaging precisely because it shifted the argument. The question was no longer only what Pegasus could do once installed. The question became how many people were being queued for possible surveillance before the public ever heard their names.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer">GDN</a></p>
+  <p>The 50K list was damaging precisely because it shifted the argument. The question was no longer only what Pegasus could do once installed. The question became how many people were being queued for possible surveillance before the public ever heard their names.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a><a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer" aria-label="Source GDN — www.theguardian.com">GDN</a></p>
 
   <h2>Before the exploit, there is the list</h2>
 
-  <p>Exploit chains make headlines because they are technical, cinematic, and easy to dramatize. The 50K list exposed something more administrative and therefore more unsettling: surveillance as process. Numbers were gathered, sorted, selected, and queued long before a forensic report could confirm what happened next.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
+  <p>Exploit chains make headlines because they are technical, cinematic, and easy to dramatize. The 50K list exposed something more administrative and therefore more unsettling: surveillance as process. Numbers were gathered, sorted, selected, and queued long before a forensic report could confirm what happened next.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source FS — forbiddenstories.org">FS</a></p>
 
-  <p>The list did not prove 50,000 infections. It proved something else: that a commercial spyware market had matured into a repeatable system for choosing people first and compromising some of them later. That is why the leak mattered beyond Pegasus itself.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer">GDN</a><a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
+  <p>The list did not prove 50,000 infections. It proved something else: that a commercial spyware market had matured into a repeatable system for choosing people first and compromising some of them later. That is why the leak mattered beyond Pegasus itself.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer" aria-label="Source GDN — www.theguardian.com">GDN</a><a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
 
-  <p>That pattern is the real warning. By the time a device is forensically verified, the political decision has already been made. First comes the list. Then, if the system works, the rest becomes technical detail.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
+  <p>That pattern is the real warning. By the time a device is forensically verified, the political decision has already been made. First comes the list. Then, if the system works, the rest becomes technical detail.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
 
   <div class="sim-note">
     NOTE — PRESENTATION: The classified-file interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and forensic findings are sourced from public records cited throughout this page.
@@ -799,47 +783,54 @@
   <h2>What the list established</h2>
   <p>Public, open-access claims only. Selection and infection are kept separate on purpose.</p>
 
-  <div class="comparison-table">
-    <div class="comparison-row comparison-header">
-      <span class="col-country">Claim</span>
-      <span class="col-status">Finding</span>
-      <span class="col-score">Why it matters</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Leaked records</span>
-      <span class="col-status score-red">50,000+ selected phone numbers</span>
-      <span class="col-score">Shows a surveillance selection layer, not an isolated case</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Geographic scope</span>
-      <span class="col-status score-red">50+ countries</span>
-      <span class="col-score">Global reach, not one regional abuse story</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Journalists</span>
-      <span class="col-status score-red">180+ in 20 countries</span>
-      <span class="col-score">Press freedom was central, not incidental</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Forensic confirmations</span>
-      <span class="col-status score-yellow">37 phones showed infection or attempted infection</span>
-      <span class="col-score">The selection data matched real Pegasus activity</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Potential clients</span>
-      <span class="col-status score-yellow">11 countries identified</span>
-      <span class="col-score">Abuse was tied to named state customers</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Country-scale example</span>
-      <span class="col-status score-red">10,000+ Moroccan selections in two years</span>
-      <span class="col-score">Undercuts the claim of rare, surgical use</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Infrastructure disclosed</span>
-      <span class="col-status score-yellow">700+ Pegasus-related domains</span>
-      <span class="col-score">The technical ecosystem became publicly inspectable</span>
-    </div>
+  <div class="comparison-table" tabindex="0" role="region" aria-label="Scrollable table: What the list established">
+    <table>
+      <caption class="sr-only">What the list established</caption>
+      <thead>
+      <tr>
+        <th scope="col" class="col-country">Claim</th>
+        <th scope="col" class="col-status">Finding</th>
+        <th scope="col" class="col-score">Why it matters</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row" class="col-country">Leaked records</th>
+        <td class="col-status score-red">50,000+ selected phone numbers</td>
+        <td class="col-score">Shows a surveillance selection layer, not an isolated case</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Geographic scope</th>
+        <td class="col-status score-red">50+ countries</td>
+        <td class="col-score">Global reach, not one regional abuse story</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Journalists</th>
+        <td class="col-status score-red">180+ in 20 countries</td>
+        <td class="col-score">Press freedom was central, not incidental</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Forensic confirmations</th>
+        <td class="col-status score-yellow">37 phones showed infection or attempted infection</td>
+        <td class="col-score">The selection data matched real Pegasus activity</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Potential clients</th>
+        <td class="col-status score-yellow">11 countries identified</td>
+        <td class="col-score">Abuse was tied to named state customers</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Country-scale example</th>
+        <td class="col-status score-red">10,000+ Moroccan selections in two years</td>
+        <td class="col-score">Undercuts the claim of rare, surgical use</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Infrastructure disclosed</th>
+        <td class="col-status score-yellow">700+ Pegasus-related domains</td>
+        <td class="col-score">The technical ecosystem became publicly inspectable</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
   <p class="data-sources">

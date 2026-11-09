@@ -574,31 +574,18 @@
   .comparison-table {
     border: 1px solid var(--border);
     border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .comparison-row {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    gap: 1rem;
-  }
-
-  .comparison-row:last-child { border-bottom: none; }
-
-  .comparison-header {
-    background: var(--surface);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    overflow-x: auto;
   }
 
   .col-country { flex: 2; font-weight: 600; }
   .col-score { flex: 1; text-align: left; font-family: var(--mono); font-size: 0.85rem; }
   .col-status { flex: 1.5; font-family: var(--mono); font-size: 0.8rem; }
+
+  .comparison-table table { width: 100%; min-width: 640px; border-collapse: collapse; text-align: left; }
+  .comparison-table th, .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .comparison-table thead th { background: var(--surface); font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .comparison-table tbody th { text-align: left; }
+  .comparison-table tbody tr:last-child > * { border-bottom: 0; }
 
   .score-green { color: #27ae60; }
   .score-yellow { color: #f39c12; }
@@ -671,9 +658,6 @@
   @media (max-width: 600px) {
     .content { padding: 1rem 1.25rem; }
     .essay, .data-section { padding: 3rem 1.5rem; }
-    .comparison-row { flex-wrap: wrap; gap: 0.5rem; }
-    .col-country { flex: 1 1 100%; }
-    .col-status, .col-score { flex: 1; text-align: left; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -709,7 +693,7 @@
   </div>
 </div>
 
-<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
   &darr; Continue reading
 </button>
 
@@ -729,88 +713,88 @@
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
-    <p><strong>WHO:</strong> NSO Group — an Israeli spyware firm — and its government customers, against journalists, activists, and civil-society workers. Named targets: Al Jazeera staff (2020), a Saudi activist (2021), two named human rights defenders at Centro PRODH in Mexico (2022), an employee of a Washington DC-based civil-society organization (2023), and Indian journalists Anand Mangnale and Siddharth Varadarajan (2023).<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a><a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a><a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL23</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer">ASL</a></p>
-    <p><strong>WHAT:</strong> A sequence of zero-click exploits — attacks that require no action from the target — delivered over WhatsApp, iMessage, and other Apple services: a WhatsApp calling exploit (2019), KISMET (2020), FORCEDENTRY (2021), the LATENTIMAGE, FINDMYPWN, and PWNYOURHOME chains (2022), and BLASTPASS (2023).<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a></p>
-    <p><strong>WHEN:</strong> WhatsApp call exploit fixed May 2019. KISMET used July&ndash;August 2020, disclosed December 2020. FORCEDENTRY in use since at least February 2021, disclosed September 13, 2021. LATENTIMAGE deployed January 2022, FINDMYPWN from June 2022, PWNYOURHOME from October 2022 — all three disclosed April 2023. BLASTPASS found September 2023. The full vector catalogue was confirmed from NSO's own documents in July 2026.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer">ASL26</a></p>
-    <p><strong>WHERE:</strong> Devices belonging to Al Jazeera staff and a journalist at London-based Al Araby TV (2020), a Saudi activist (2021), members of Mexico's civil society (2022), an employee of a Washington DC-based civil-society organization (2023), and journalists in India (2023). Vectors rode Apple's iMessage, Find My, HomeKit, and PassKit services, and WhatsApp. Delivery infrastructure was anonymized across cloud providers in Germany, France, the UK, and Italy.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a></p>
-    <p><strong>WHY:</strong> Zero-click means no action from the target. The target never clicks, never opens a file. The infection often arrives without any obvious or visible indication to the person being targeted — surveillance without consent, without interaction, and without warning.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
-    <p><strong>HOW:</strong> Memory-corruption bugs inside the parsers that phones run on received data: WhatsApp calling (CVE-2019-3568), the JBIG2 image codec in iMessage (CVE-2021-30860), and the WebP image decoder in Apple's ImageIO (CVE-2023-41064, the same WebP flaw tracked upstream as CVE-2023-4863). Each was built to defeat Apple's latest defense.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a></p>
+    <p><strong>WHO:</strong> NSO Group — an Israeli spyware firm — and its government customers, against journalists, activists, and civil-society workers. Named targets: Al Jazeera staff (2020), a Saudi activist (2021), two named human rights defenders at Centro PRODH in Mexico (2022), an employee of a Washington DC-based civil-society organization (2023), and Indian journalists Anand Mangnale and Siddharth Varadarajan (2023).<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a><a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a><a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL23 — citizenlab.ca">CL23</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
+    <p><strong>WHAT:</strong> A sequence of zero-click exploits — attacks that require no action from the target — delivered over WhatsApp, iMessage, and other Apple services: a WhatsApp calling exploit (2019), KISMET (2020), FORCEDENTRY (2021), the LATENTIMAGE, FINDMYPWN, and PWNYOURHOME chains (2022), and BLASTPASS (2023).<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a></p>
+    <p><strong>WHEN:</strong> WhatsApp call exploit fixed May 2019. KISMET used July&ndash;August 2020, disclosed December 2020. FORCEDENTRY in use since at least February 2021, disclosed September 13, 2021. LATENTIMAGE deployed January 2022, FINDMYPWN from June 2022, PWNYOURHOME from October 2022 — all three disclosed April 2023. BLASTPASS found September 2023. The full vector catalogue was confirmed from NSO's own documents in July 2026.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL26 — securitylab.amnesty.org">ASL26</a></p>
+    <p><strong>WHERE:</strong> Devices belonging to Al Jazeera staff and a journalist at London-based Al Araby TV (2020), a Saudi activist (2021), members of Mexico's civil society (2022), an employee of a Washington DC-based civil-society organization (2023), and journalists in India (2023). Vectors rode Apple's iMessage, Find My, HomeKit, and PassKit services, and WhatsApp. Delivery infrastructure was anonymized across cloud providers in Germany, France, the UK, and Italy.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a></p>
+    <p><strong>WHY:</strong> Zero-click means no action from the target. The target never clicks, never opens a file. The infection often arrives without any obvious or visible indication to the person being targeted — surveillance without consent, without interaction, and without warning.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></p>
+    <p><strong>HOW:</strong> Memory-corruption bugs inside the parsers that phones run on received data: WhatsApp calling (CVE-2019-3568), the JBIG2 image codec in iMessage (CVE-2021-30860), and the WebP image decoder in Apple's ImageIO (CVE-2023-41064, the same WebP flaw tracked upstream as CVE-2023-4863). Each was built to defeat Apple's latest defense.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ25 — projectzero.google">PZ25</a></p>
   </div>
 
   <h2>Zero-click is a different kind of weapon</h2>
 
-  <p>For years, spyware needed a click. A malicious link in an SMS, a poisoned attachment — the target had to do something. That left traces: a strange message in the inbox, a suspicious URL. Investigators could find them.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a></p>
+  <p>For years, spyware needed a click. A malicious link in an SMS, a poisoned attachment — the target had to do something. That left traces: a strange message in the inbox, a suspicious URL. Investigators could find them.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a></p>
 
-  <p>Zero-click removed the click. The exploit fires while the phone is idle, inside the code that processes an incoming notification or image. No phishing message, no target action, often no visible sign at all. Google's Project Zero, which analyzed NSO's 2021 exploit in depth, put it plainly: "Short of not using a device, there is no way to prevent exploitation by a zero-click exploit; it's a weapon against which there is no defense."<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
+  <p>Zero-click removed the click. The exploit fires while the phone is idle, inside the code that processes an incoming notification or image. No phishing message, no target action, often no visible sign at all. Google's Project Zero, which analyzed NSO's 2021 exploit in depth, put it plainly: "Short of not using a device, there is no way to prevent exploitation by a zero-click exploit; it's a weapon against which there is no defense."<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></p>
 
   <h2>2019: the missed call that hacked the phone</h2>
 
-  <p>The first widely documented NSO zero-click attack ran over WhatsApp, not iMessage. WhatsApp fixed a vulnerability in its calling feature in May 2019 — CVE-2019-3568 — a flaw that could be triggered by a missed voice call alone. NSO Group used it to target more than 1,400 WhatsApp users in a two-week period.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://www.facebook.com/security/advisories/cve-2019-3568" target="_blank" rel="noopener noreferrer">FB</a></p>
+  <p>The first widely documented NSO zero-click attack ran over WhatsApp, not iMessage. WhatsApp fixed a vulnerability in its calling feature in May 2019 — CVE-2019-3568 — a flaw that could be triggered by a missed voice call alone. NSO Group used it to target more than 1,400 WhatsApp users in a two-week period.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://www.facebook.com/security/advisories/cve-2019-3568" target="_blank" rel="noopener noreferrer" aria-label="Source FB — www.facebook.com">FB</a></p>
 
-  <p>The attack was notable for more than its size. It proved that a commercial spyware vendor could silently compromise phones at scale through an encrypted messaging app — the same apps people use precisely because they believe them private.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a></p>
+  <p>The attack was notable for more than its size. It proved that a commercial spyware vendor could silently compromise phones at scale through an encrypted messaging app — the same apps people use precisely because they believe them private.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a></p>
 
   <h2>2020: KISMET — iMessage goes dark</h2>
 
-  <p>In July and August 2020, government operatives hacked 36 personal phones belonging to journalists, producers, anchors, and executives at Al Jazeera, plus the phone of a journalist at London-based Al Araby TV. The exploit chain — named KISMET by Citizen Lab — was an invisible zero-click vulnerability in iMessage, a zero-day effective against at least iOS 13.5.1, including Apple's then-latest iPhone 11.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a></p>
+  <p>In July and August 2020, government operatives hacked 36 personal phones belonging to journalists, producers, anchors, and executives at Al Jazeera, plus the phone of a journalist at London-based Al Araby TV. The exploit chain — named KISMET by Citizen Lab — was an invisible zero-click vulnerability in iMessage, a zero-day effective against at least iOS 13.5.1, including Apple's then-latest iPhone 11.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a></p>
 
-  <p>Four Pegasus operators were identified in the attack. Citizen Lab attributed one, MONARCHY, to Saudi Arabia, and another, SNEAKY KESTREL, to the United Arab Emirates. The target list reads like a newsroom roster, not a criminal investigation.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a></p>
+  <p>Four Pegasus operators were identified in the attack. Citizen Lab attributed one, MONARCHY, to Saudi Arabia, and another, SNEAKY KESTREL, to the United Arab Emirates. The target list reads like a newsroom roster, not a criminal investigation.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a></p>
 
   <h2>Apple builds BlastDoor</h2>
 
-  <p>Apple's answer arrived in iOS 14: a hardened sandbox called BlastDoor, designed to isolate iMessage's data parsing so that a compromised parser could not reach the rest of the phone. Citizen Lab found no evidence that KISMET still worked against iOS 14.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer">CL20</a></p>
+  <p>Apple's answer arrived in iOS 14: a hardened sandbox called BlastDoor, designed to isolate iMessage's data parsing so that a compromised parser could not reach the rest of the phone. Citizen Lab found no evidence that KISMET still worked against iOS 14.<a class="source-ref" href="https://citizenlab.ca/research/the-great-ipwn-journalists-hacked-with-suspected-nso-group-imessage-zero-click-exploit/" target="_blank" rel="noopener noreferrer" aria-label="Source CL20 — citizenlab.ca">CL20</a></p>
 
-  <p>It was a genuine defensive advance. And it lasted about as long as the race required. Citizen Lab's own assessment: "We suspect that NSO Group developed FORCEDENTRY, which circumvents BlastDoor, in response to this mitigation."<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>It was a genuine defensive advance. And it lasted about as long as the race required. Citizen Lab's own assessment: "We suspect that NSO Group developed FORCEDENTRY, which circumvents BlastDoor, in response to this mitigation."<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
   <h2>2021: FORCEDENTRY — the GIF that wasn't a GIF</h2>
 
-  <p>While analyzing the phone of a Saudi activist infected with Pegasus, Citizen Lab recovered a zero-day zero-click exploit against iMessage. They named it FORCEDENTRY. The files delivered to the phone carried the extension ".gif." They were not GIFs. Twenty-seven were Adobe PSD files; four were PDFs containing JBIG2-encoded streams.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>While analyzing the phone of a Saudi activist infected with Pegasus, Citizen Lab recovered a zero-day zero-click exploit against iMessage. They named it FORCEDENTRY. The files delivered to the phone carried the extension ".gif." They were not GIFs. Twenty-seven were Adobe PSD files; four were PDFs containing JBIG2-encoded streams.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
-  <p>The misdirection mattered. iMessage handed any ".gif" file to an image-processing component that guessed the real format by content, ignoring the extension. That single design shortcut suddenly exposed more than twenty image codecs — hundreds of thousands of lines of code — to remote, zero-click attack.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
+  <p>The misdirection mattered. iMessage handed any ".gif" file to an image-processing component that guessed the real format by content, ignoring the extension. That single design shortcut suddenly exposed more than twenty image codecs — hundreds of thousands of lines of code — to remote, zero-click attack.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></p>
 
-  <p>Inside the "GIF" was a JBIG2-compressed PDF whose decoder had an integer overflow. Project Zero described what NSO did with it: over 70,000 segment commands were used to define logical bit operations — AND, OR, XOR, XNOR — and assemble a complete, tiny computer architecture with registers and a 64-bit adder, running entirely inside a single image-decompression pass. They called the exploit "one of the most technically sophisticated" they had ever seen, with capabilities "rivaling those previously thought to be accessible to only a handful of nation states."<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
+  <p>Inside the "GIF" was a JBIG2-compressed PDF whose decoder had an integer overflow. Project Zero described what NSO did with it: over 70,000 segment commands were used to define logical bit operations — AND, OR, XOR, XNOR — and assemble a complete, tiny computer architecture with registers and a 64-bit adder, running entirely inside a single image-decompression pass. They called the exploit "one of the most technically sophisticated" they had ever seen, with capabilities "rivaling those previously thought to be accessible to only a handful of nation states."<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></p>
 
-  <p>FORCEDENTRY was patched as CVE-2021-30860 on September 13, 2021 — the day Citizen Lab went public — in iOS 14.8, which also covered macOS and watchOS. It had been in use since at least February 2021. The processing that FORCEDENTRY abused ran outside the BlastDoor sandbox, which is why the sandbox did not stop it.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
+  <p>FORCEDENTRY was patched as CVE-2021-30860 on September 13, 2021 — the day Citizen Lab went public — in iOS 14.8, which also covered macOS and watchOS. It had been in use since at least February 2021. The processing that FORCEDENTRY abused ran outside the BlastDoor sandbox, which is why the sandbox did not stop it.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></p>
 
   <h2>2022: three new chains — the entry points multiply</h2>
 
-  <p>In 2022, NSO Group's customers deployed at least three new zero-click chains against iOS 15 and iOS 16. Citizen Lab documented them after finding infections among members of Mexico's civil society, including two named human rights defenders at Centro PRODH, the legal-aid organization that represents victims of military abuses. Matching forensic indicators across a broader global pool of victims let Citizen Lab attribute the chains to NSO Group's Pegasus with high confidence, and publish the findings in April 2023 as "Triple Threat."<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a></p>
+  <p>In 2022, NSO Group's customers deployed at least three new zero-click chains against iOS 15 and iOS 16. Citizen Lab documented them after finding infections among members of Mexico's civil society, including two named human rights defenders at Centro PRODH, the legal-aid organization that represents victims of military abuses. Matching forensic indicators across a broader global pool of victims let Citizen Lab attribute the chains to NSO Group's Pegasus with high confidence, and publish the findings in April 2023 as "Triple Threat."<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a></p>
 
-  <p>The order of discovery ran backwards from the order of deployment. LATENTIMAGE — the earliest, identified last — hit a single device in January 2022; Citizen Lab named it for how few traces it leaves. FINDMYPWN was deployed from June 2022 as a zero-day against iOS 15.5 and 15.6. PWNYOURHOME followed from October 2022, deployed as a zero-day against iOS 16.0.3.<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a></p>
+  <p>The order of discovery ran backwards from the order of deployment. LATENTIMAGE — the earliest, identified last — hit a single device in January 2022; Citizen Lab named it for how few traces it leaves. FINDMYPWN was deployed from June 2022 as a zero-day against iOS 15.5 and 15.6. PWNYOURHOME followed from October 2022, deployed as a zero-day against iOS 16.0.3.<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a></p>
 
-  <p>FINDMYPWN and PWNYOURHOME changed the geometry of the race. Each was a two-step chain: FINDMYPWN began inside Find My — the fmfd process — and moved to iMessage; PWNYOURHOME began inside HomeKit — the homed daemon — and moved to iMessage, and it appeared to work even on phones whose owners had never configured a Home in HomeKit. Citizen Lab described them as the first zero-click exploits it had observed using two separate remote attack surfaces on the iPhone. The iMessage door was no longer the only entrance.<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a></p>
+  <p>FINDMYPWN and PWNYOURHOME changed the geometry of the race. Each was a two-step chain: FINDMYPWN began inside Find My — the fmfd process — and moved to iMessage; PWNYOURHOME began inside HomeKit — the homed daemon — and moved to iMessage, and it appeared to work even on phones whose owners had never configured a Home in HomeKit. Citizen Lab described them as the first zero-click exploits it had observed using two separate remote attack surfaces on the iPhone. The iMessage door was no longer the only entrance.<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a></p>
 
-  <p>The mitigations arrived in both directions of the race. After Citizen Lab shared forensic artifacts, Apple hardened HomeKit in iOS 16.3.1. iOS 16's Lockdown Mode — new in September 2022 — surfaced real-time warnings when PWNYOURHOME exploitation was attempted, and Citizen Lab saw no successful compromise of any device with Lockdown Mode enabled. NSO adapted as well: the 2022 Pegasus versions scrubbed their own log data from infected phones more thoroughly, in an apparent effort to erase the very traces researchers rely on. It slowed detection. It did not stop it.<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a></p>
+  <p>The mitigations arrived in both directions of the race. After Citizen Lab shared forensic artifacts, Apple hardened HomeKit in iOS 16.3.1. iOS 16's Lockdown Mode — new in September 2022 — surfaced real-time warnings when PWNYOURHOME exploitation was attempted, and Citizen Lab saw no successful compromise of any device with Lockdown Mode enabled. NSO adapted as well: the 2022 Pegasus versions scrubbed their own log data from infected phones more thoroughly, in an apparent effort to erase the very traces researchers rely on. It slowed detection. It did not stop it.<a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer" aria-label="Source CL22 — citizenlab.ca">CL22</a></p>
 
   <h2>2023: BLASTPASS — the boarding pass that hacked the phone</h2>
 
-  <p>In September 2023, while checking the device of an individual employed by a Washington DC-based civil-society organization, Citizen Lab found a new actively exploited zero-click chain. It was capable of compromising iPhones running the latest iOS 16.6 with no interaction from the victim. They named it BLASTPASS.<a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL23</a></p>
+  <p>In September 2023, while checking the device of an individual employed by a Washington DC-based civil-society organization, Citizen Lab found a new actively exploited zero-click chain. It was capable of compromising iPhones running the latest iOS 16.6 with no interaction from the victim. They named it BLASTPASS.<a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL23 — citizenlab.ca">CL23</a></p>
 
-  <p>The delivery vector was a PassKit attachment — the file format used for boarding passes and wallet tickets — sent over iMessage, containing a maliciously crafted image. The image was a WebP file exploiting a heap overflow in the WebP decoder bundled inside Apple's ImageIO — the same WebP flaw tracked separately as CVE-2023-4863.<a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL23</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a></p>
+  <p>The delivery vector was a PassKit attachment — the file format used for boarding passes and wallet tickets — sent over iMessage, containing a maliciously crafted image. The image was a WebP file exploiting a heap overflow in the WebP decoder bundled inside Apple's ImageIO — the same WebP flaw tracked separately as CVE-2023-4863.<a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL23 — citizenlab.ca">CL23</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ25 — projectzero.google">PZ25</a></p>
 
-  <p>Project Zero's later analysis reconstructed the mechanics: a 5.5MB WebP file carrying a malformed Huffman tree that overwrote a nearby allocation, a heap groom of roughly half a million allocations churning through nearly a gigabyte of memory, and forged CoreFoundation objects to turn the corruption into code execution. The pattern echoed FORCEDENTRY — a compression-format bug, an oversized payload, a carefully groomed heap — rebuilt for the new defenses.<a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a></p>
+  <p>Project Zero's later analysis reconstructed the mechanics: a 5.5MB WebP file carrying a malformed Huffman tree that overwrote a nearby allocation, a heap groom of roughly half a million allocations churning through nearly a gigabyte of memory, and forged CoreFoundation objects to turn the corruption into code execution. The pattern echoed FORCEDENTRY — a compression-format bug, an oversized payload, a carefully groomed heap — rebuilt for the new defenses.<a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ25 — projectzero.google">PZ25</a></p>
 
-  <p>Apple shipped an emergency patch on the same day Citizen Lab published — iOS 16.6.1 — covering two CVEs: CVE-2023-41064 in ImageIO (the WebP flaw) and CVE-2023-41061 in Wallet. Apple's security team and Citizen Lab confirmed that Lockdown Mode blocked the attack.<a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL23</a></p>
+  <p>Apple shipped an emergency patch on the same day Citizen Lab published — iOS 16.6.1 — covering two CVEs: CVE-2023-41064 in ImageIO (the WebP flaw) and CVE-2023-41061 in Wallet. Apple's security team and Citizen Lab confirmed that Lockdown Mode blocked the attack.<a class="source-ref" href="https://citizenlab.ca/2023/09/blastpass-nso-group-iphone-zero-click-zero-day-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL23 — citizenlab.ca">CL23</a></p>
 
   <h2>The race does not stop at the patch</h2>
 
-  <p>Amnesty Security Lab later found BLASTPASS payloads delivered to the phone of Indian journalist Anand Mangnale of OCCRP in August 2023, after a series of HomeKit service crashes — an apparent fingerprinting phase before the exploit was sent over iMessage. The same Pegasus operator's account was then observed probing the phone of Siddharth Varadarajan, founding editor of The Wire.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer">ASL</a></p>
+  <p>Amnesty Security Lab later found BLASTPASS payloads delivered to the phone of Indian journalist Anand Mangnale of OCCRP in August 2023, after a series of HomeKit service crashes — an apparent fingerprinting phase before the exploit was sent over iMessage. The same Pegasus operator's account was then observed probing the phone of Siddharth Varadarajan, founding editor of The Wire.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL — securitylab.amnesty.org">ASL</a></p>
 
-  <p>Project Zero's BLASTPASS writeup ended with a further note: crash logs received in late 2024 showed devices targeted in November 2023 — two months after the patch — via a separate parsing path that reached the WebP bug outside the BlastDoor sandbox. The exploit outlived its own disclosure window.<a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a></p>
+  <p>Project Zero's BLASTPASS writeup ended with a further note: crash logs received in late 2024 showed devices targeted in November 2023 — two months after the patch — via a separate parsing path that reached the WebP bug outside the BlastDoor sandbox. The exploit outlived its own disclosure window.<a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ25 — projectzero.google">PZ25</a></p>
 
   <h2>2026: NSO's own documents confirm the factory</h2>
 
-  <p>In July 2026, Amnesty Security Lab published its most complete analysis of Pegasus to date — built in part on internal NSO Group material disclosed during the long-running WhatsApp v. NSO Group lawsuit. The documents confirm a catalogue of infection vectors developed over years: "Heaven," the first zero-click Android vector via WhatsApp; "Eden" and "Erised"; "Diablo" against iOS 11; "Dragonfly" against iOS 12 over iMessage; and the iOS 13 and iOS 14 chains later named KISMET and FORCEDENTRY.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer">ASL26</a></p>
+  <p>In July 2026, Amnesty Security Lab published its most complete analysis of Pegasus to date — built in part on internal NSO Group material disclosed during the long-running WhatsApp v. NSO Group lawsuit. The documents confirm a catalogue of infection vectors developed over years: "Heaven," the first zero-click Android vector via WhatsApp; "Eden" and "Erised"; "Diablo" against iOS 11; "Dragonfly" against iOS 12 over iMessage; and the iOS 13 and iOS 14 chains later named KISMET and FORCEDENTRY.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL26 — securitylab.amnesty.org">ASL26</a></p>
 
-  <p>NSO's own material frames the arms race as routine business. A dedicated "White Services" department registered anonymized accounts and infrastructure; a Network Operation Center monitored customer systems for failures and security alerts; and the set of supported infection vectors was, in the documents' own description, "constantly evolving as new vectors get developed by NSO Group and exploits get patched by device vendors."<a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer">ASL26</a></p>
+  <p>NSO's own material frames the arms race as routine business. A dedicated "White Services" department registered anonymized accounts and infrastructure; a Network Operation Center monitored customer systems for failures and security alerts; and the set of supported infection vectors was, in the documents' own description, "constantly evolving as new vectors get developed by NSO Group and exploits get patched by device vendors."<a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL26 — securitylab.amnesty.org">ASL26</a></p>
 
   <blockquote>
     "We assess this to be one of the most technically sophisticated exploits we've ever seen, further demonstrating that the capabilities NSO provides rival those previously thought to be accessible to only a handful of nation states."
-    <cite>— Google Project Zero, December 2021, on FORCEDENTRY<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></cite>
+    <cite>— Google Project Zero, December 2021, on FORCEDENTRY<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></cite>
   </blockquote>
 
-  <p>The pattern is structural, not incidental. Again and again, Apple closes one vector while NSO develops or deploys another. Each new sandbox has been treated as a design constraint for the next exploit. The phone in your pocket is not a platform for spyware to occasionally use — it is the battlefield the product is built around.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer">ASL26</a></p>
+  <p>The pattern is structural, not incidental. Again and again, Apple closes one vector while NSO develops or deploys another. Each new sandbox has been treated as a design constraint for the next exploit. The phone in your pocket is not a platform for spyware to occasionally use — it is the battlefield the product is built around.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2026/07/inside-pegasus-the-evolution-of-the-worlds-most-notorious-spyware/" target="_blank" rel="noopener noreferrer" aria-label="Source ASL26 — securitylab.amnesty.org">ASL26</a></p>
 
-  <p>This is what an arms race looks like when one side is a company selling access, and the other side is everyone else's phone.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
+  <p>This is what an arms race looks like when one side is a company selling access, and the other side is everyone else's phone.<a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer" aria-label="Source PZ — projectzero.google">PZ</a></p>
 
   <div class="sim-note">
     NOTE — PRESENTATION: The classified exploit-analysis interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and forensic findings are sourced from public records cited throughout this page.
@@ -825,57 +809,64 @@
   <h2>Documented NSO zero-click chains</h2>
   <p>Public, open-access claims only. Each row names the exploit, the vector, and the vulnerability researchers tied to its disclosure.</p>
 
-  <div class="comparison-table">
-    <div class="comparison-row comparison-header">
-      <span class="col-country">Exploit</span>
-      <span class="col-status">Vector</span>
-      <span class="col-score">Key fact</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">WhatsApp call (CVE-2019-3568)</span>
-      <span class="col-status score-red">WhatsApp calling</span>
-      <span class="col-score">1,400+ users targeted in two weeks; patched May 2019</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">KISMET (2020)</span>
-      <span class="col-status score-red">iMessage, zero-day vs iOS 13.5.1</span>
-      <span class="col-score">36 Al Jazeera phones hacked; blocked by BlastDoor in iOS 14</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">FORCEDENTRY (CVE-2021-30860)</span>
-      <span class="col-status score-red">iMessage via "fake GIF" → JBIG2</span>
-      <span class="col-score">Bypassed BlastDoor; in use since at least Feb 2021</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">LATENTIMAGE (Jan 2022)</span>
-      <span class="col-status score-yellow">iOS 15.1.1; possible Find My involvement</span>
-      <span class="col-score">Traces on a single device; distinct chain</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">FINDMYPWN (Jun 2022)</span>
-      <span class="col-status score-red">Find My → iMessage</span>
-      <span class="col-score">Zero-day vs iOS 15.5/15.6; two-step chain</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">PWNYOURHOME (Oct 2022)</span>
-      <span class="col-status score-yellow">HomeKit → iMessage</span>
-      <span class="col-score">Zero-day vs iOS 16.0.3; blocked by Lockdown Mode</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">BLASTPASS (CVE-2023-41064 + CVE-2023-41061)</span>
-      <span class="col-status score-yellow">PassKit → ImageIO / WebP (CVE-2023-4863)</span>
-      <span class="col-score">iOS 16.6, no interaction; blocked by Lockdown Mode</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">BLASTPASS re-use (Nov 2023)</span>
-      <span class="col-status score-yellow">WebP reached outside BlastDoor sandbox</span>
-      <span class="col-score">Devices targeted 2 months after the patch</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Vector catalogue (2018-2021)</span>
-      <span class="col-status score-red">Heaven, Eden, Erised, Diablo, Dragonfly</span>
-      <span class="col-score">Confirmed from NSO's own docs in 2026</span>
-    </div>
+  <div class="comparison-table" tabindex="0" role="region" aria-label="Scrollable table: Documented NSO zero-click chains">
+    <table>
+      <caption class="sr-only">Documented NSO zero-click chains</caption>
+      <thead>
+      <tr>
+        <th scope="col" class="col-country">Exploit</th>
+        <th scope="col" class="col-status">Vector</th>
+        <th scope="col" class="col-score">Key fact</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row" class="col-country">WhatsApp call (CVE-2019-3568)</th>
+        <td class="col-status score-red">WhatsApp calling</td>
+        <td class="col-score">1,400+ users targeted in two weeks; patched May 2019</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">KISMET (2020)</th>
+        <td class="col-status score-red">iMessage, zero-day vs iOS 13.5.1</td>
+        <td class="col-score">36 Al Jazeera phones hacked; blocked by BlastDoor in iOS 14</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">FORCEDENTRY (CVE-2021-30860)</th>
+        <td class="col-status score-red">iMessage via "fake GIF" → JBIG2</td>
+        <td class="col-score">Bypassed BlastDoor; in use since at least Feb 2021</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">LATENTIMAGE (Jan 2022)</th>
+        <td class="col-status score-yellow">iOS 15.1.1; possible Find My involvement</td>
+        <td class="col-score">Traces on a single device; distinct chain</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">FINDMYPWN (Jun 2022)</th>
+        <td class="col-status score-red">Find My → iMessage</td>
+        <td class="col-score">Zero-day vs iOS 15.5/15.6; two-step chain</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">PWNYOURHOME (Oct 2022)</th>
+        <td class="col-status score-yellow">HomeKit → iMessage</td>
+        <td class="col-score">Zero-day vs iOS 16.0.3; blocked by Lockdown Mode</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">BLASTPASS (CVE-2023-41064 + CVE-2023-41061)</th>
+        <td class="col-status score-yellow">PassKit → ImageIO / WebP (CVE-2023-4863)</td>
+        <td class="col-score">iOS 16.6, no interaction; blocked by Lockdown Mode</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">BLASTPASS re-use (Nov 2023)</th>
+        <td class="col-status score-yellow">WebP reached outside BlastDoor sandbox</td>
+        <td class="col-score">Devices targeted 2 months after the patch</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Vector catalogue (2018-2021)</th>
+        <td class="col-status score-red">Heaven, Eden, Erised, Diablo, Dragonfly</td>
+        <td class="col-score">Confirmed from NSO's own docs in 2026</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
   <p class="data-sources">

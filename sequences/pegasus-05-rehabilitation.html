@@ -574,31 +574,18 @@
   .comparison-table {
     border: 1px solid var(--border);
     border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .comparison-row {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-    gap: 1rem;
-  }
-
-  .comparison-row:last-child { border-bottom: none; }
-
-  .comparison-header {
-    background: var(--surface);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    overflow-x: auto;
   }
 
   .col-country { flex: 2; font-weight: 600; }
   .col-score { flex: 1; text-align: left; font-family: var(--mono); font-size: 0.85rem; }
   .col-status { flex: 1.5; font-family: var(--mono); font-size: 0.8rem; }
+
+  .comparison-table table { width: 100%; min-width: 640px; border-collapse: collapse; text-align: left; }
+  .comparison-table th, .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .comparison-table thead th { background: var(--surface); font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+  .comparison-table tbody th { text-align: left; }
+  .comparison-table tbody tr:last-child > * { border-bottom: 0; }
 
   .score-green { color: #27ae60; }
   .score-yellow { color: #f39c12; }
@@ -671,9 +658,6 @@
   @media (max-width: 600px) {
     .content { padding: 1rem 1.25rem; }
     .essay, .data-section { padding: 3rem 1.5rem; }
-    .comparison-row { flex-wrap: wrap; gap: 0.5rem; }
-    .col-country { flex: 1 1 100%; }
-    .col-status, .col-score { flex: 1; text-align: left; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -709,7 +693,7 @@
   </div>
 </div>
 
-<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior:'smooth'})">
+<button class="scroll-hint hidden" id="scrollHint" onclick="document.getElementById('essay').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'})">
   &darr; Continue reading
 </button>
 <!-- ========== ESSAY ========== -->
@@ -728,76 +712,76 @@
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
-    <p><strong>WHO:</strong> NSO Group — the Israeli spyware maker behind Pegasus — and the chain of owners, lobbyists, and political appointees who tried to rescue it: from its three founders to US private equity, a Hollywood producer, and a former US ambassador.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
-    <p><strong>WHAT:</strong> A multi-year rehabilitation effort: getting off the US Entity List, surviving lawsuits, and rebranding under American ownership — while Pegasus remained operational and researchers and platforms kept documenting new targeting cases and abuse allegations.<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer">BIS</a><a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
-    <p><strong>WHEN:</strong> November 2021 — Entity List. March 2023 — Executive Order 14093. December 2024 — liability ruling. May 2025 — a $167M+ jury verdict, the lobbying push, and a White House rebuff. October 2025 — acquisition by US investors. November 2025 — damages reduced, permanent injunction entered, and a former US ambassador as chairman. June 2026 — a contempt motion over alleged new targeting. July 2026 — a co-founder's diplomatic passport exposed.<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer">BIS</a><a class="source-ref" href="https://www.federalregister.gov/documents/2023/03/30/2023-06730/prohibition-on-use-by-the-united-states-government-of-commercial-spyware-that-poses-risks-to" target="_blank" rel="noopener noreferrer">FR</a><a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer">AI</a><a class="source-ref" href="https://www.washingtonpost.com/national-security/2025/05/20/nso-group-pegasus-trump-eo/" target="_blank" rel="noopener noreferrer">WAPO</a><a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer">CT</a><a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer">OCCRP</a></p>
-    <p><strong>WHERE:</strong> Israel — headquarters and export-regulation context. Washington DC — sanctions, executive policy, lobbying, and the rehabilitation push. California — the WhatsApp litigation. Panama — the 2013 diplomatic-passport record.<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer">OCCRP</a><a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer">CT</a></p>
-    <p><strong>WHY:</strong> Sanctions and lawsuits threatened the business itself. Rehabilitation was the survival strategy — new ownership, new faces, and the promise of change, aimed at reopening the one door NSO had spent years trying to enter: the United States.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
-    <p><strong>HOW:</strong> A lobbying firm tied to the administration, an ownership transfer that restructured the company, and a politically connected appointment at the top — while, in parallel, new NSO-linked targeting allegations kept arriving in court.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a><a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer">CL</a></p>
+    <p><strong>WHO:</strong> NSO Group — the Israeli spyware maker behind Pegasus — and the chain of owners, lobbyists, and political appointees who tried to rescue it: from its three founders to US private equity, a Hollywood producer, and a former US ambassador.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
+    <p><strong>WHAT:</strong> A multi-year rehabilitation effort: getting off the US Entity List, surviving lawsuits, and rebranding under American ownership — while Pegasus remained operational and researchers and platforms kept documenting new targeting cases and abuse allegations.<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer" aria-label="Source BIS — www.bis.gov">BIS</a><a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
+    <p><strong>WHEN:</strong> November 2021 — Entity List. March 2023 — Executive Order 14093. December 2024 — liability ruling. May 2025 — a $167M+ jury verdict, the lobbying push, and a White House rebuff. October 2025 — acquisition by US investors. November 2025 — damages reduced, permanent injunction entered, and a former US ambassador as chairman. June 2026 — a contempt motion over alleged new targeting. July 2026 — a co-founder's diplomatic passport exposed.<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer" aria-label="Source BIS — www.bis.gov">BIS</a><a class="source-ref" href="https://www.federalregister.gov/documents/2023/03/30/2023-06730/prohibition-on-use-by-the-united-states-government-of-commercial-spyware-that-poses-risks-to" target="_blank" rel="noopener noreferrer" aria-label="Source FR — www.federalregister.gov">FR</a><a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a><a class="source-ref" href="https://www.washingtonpost.com/national-security/2025/05/20/nso-group-pegasus-trump-eo/" target="_blank" rel="noopener noreferrer" aria-label="Source WAPO — www.washingtonpost.com">WAPO</a><a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer" aria-label="Source CT — www.courtlistener.com">CT</a><a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer" aria-label="Source OCCRP — www.occrp.org">OCCRP</a></p>
+    <p><strong>WHERE:</strong> Israel — headquarters and export-regulation context. Washington DC — sanctions, executive policy, lobbying, and the rehabilitation push. California — the WhatsApp litigation. Panama — the 2013 diplomatic-passport record.<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer" aria-label="Source OCCRP — www.occrp.org">OCCRP</a><a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer" aria-label="Source CT — www.courtlistener.com">CT</a></p>
+    <p><strong>WHY:</strong> Sanctions and lawsuits threatened the business itself. Rehabilitation was the survival strategy — new ownership, new faces, and the promise of change, aimed at reopening the one door NSO had spent years trying to enter: the United States.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
+    <p><strong>HOW:</strong> A lobbying firm tied to the administration, an ownership transfer that restructured the company, and a politically connected appointment at the top — while, in parallel, new NSO-linked targeting allegations kept arriving in court.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a><a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
   </div>
 
   <h2>The sanction</h2>
 
-  <p>In November 2021, the US Commerce Department's Bureau of Industry and Security added NSO Group to the Entity List — alongside Candiru, a fellow Israeli spyware maker. The stated reason was direct: NSO had "developed and supplied spyware to foreign governments that used these tools to maliciously target government officials, journalists, businesspeople, activists, academics, and embassy workers."<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer">BIS</a></p>
+  <p>In November 2021, the US Commerce Department's Bureau of Industry and Security added NSO Group to the Entity List — alongside Candiru, a fellow Israeli spyware maker. The stated reason was direct: NSO had "developed and supplied spyware to foreign governments that used these tools to maliciously target government officials, journalists, businesspeople, activists, academics, and embassy workers."<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer" aria-label="Source BIS — www.bis.gov">BIS</a></p>
 
-  <p>The listing carried real teeth. American companies could no longer sell to NSO without a license, and the review policy was a presumption of denial. For a company whose survival depended on US technology, the measure was designed to be painful.<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer">BIS</a></p>
+  <p>The listing carried real teeth. American companies could no longer sell to NSO without a license, and the review policy was a presumption of denial. For a company whose survival depended on US technology, the measure was designed to be painful.<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer" aria-label="Source BIS — www.bis.gov">BIS</a></p>
 
   <h2>The second wall: Executive Order 14093</h2>
 
-  <p>In March 2023, President Biden signed Executive Order 14093, which prohibits US government agencies from the operational use of commercial spyware that poses significant counterintelligence or security risks — or significant risks of improper use by a foreign government. It was a separate mechanism from the Entity List, aimed at a different door. The Entity List governed trade: American companies could not sell to NSO without a license, and licenses were presumptively denied. The executive order governed procurement: the US government itself was barred from operating the tools. Between them, the two policies closed both sides of the American market.<a class="source-ref" href="https://www.federalregister.gov/documents/2023/03/30/2023-06730/prohibition-on-use-by-the-united-states-government-of-commercial-spyware-that-poses-risks-to" target="_blank" rel="noopener noreferrer">FR</a></p>
+  <p>In March 2023, President Biden signed Executive Order 14093, which prohibits US government agencies from the operational use of commercial spyware that poses significant counterintelligence or security risks — or significant risks of improper use by a foreign government. It was a separate mechanism from the Entity List, aimed at a different door. The Entity List governed trade: American companies could not sell to NSO without a license, and licenses were presumptively denied. The executive order governed procurement: the US government itself was barred from operating the tools. Between them, the two policies closed both sides of the American market.<a class="source-ref" href="https://www.federalregister.gov/documents/2023/03/30/2023-06730/prohibition-on-use-by-the-united-states-government-of-commercial-spyware-that-poses-risks-to" target="_blank" rel="noopener noreferrer" aria-label="Source FR — www.federalregister.gov">FR</a></p>
 
   <h2>The lawsuit that would not go away</h2>
 
-  <p>NSO was fighting on a second front. In October 2019, WhatsApp and its parent company Meta had sued NSO in a US federal court in California, alleging the company had used WhatsApp's servers to target more than 1,400 users' devices with Pegasus. The case would drag on for years.<a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer">AI</a></p>
+  <p>NSO was fighting on a second front. In October 2019, WhatsApp and its parent company Meta had sued NSO in a US federal court in California, alleging the company had used WhatsApp's servers to target more than 1,400 users' devices with Pegasus. The case would drag on for years.<a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
 
-  <p>In December 2024, a judge ruled NSO Group liable for having unlawfully targeted WhatsApp's users and infrastructure. On May 6, 2025, a jury returned a unanimous verdict of $167,698,719 in damages — $444,719 in compensatory damages and $167,254,000 in punitive damages. Amnesty International called the verdict a "momentous win in the fight against spyware abuse."<a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer">AI</a><a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer">CT</a></p>
+  <p>In December 2024, a judge ruled NSO Group liable for having unlawfully targeted WhatsApp's users and infrastructure. On May 6, 2025, a jury returned a unanimous verdict of $167,698,719 in damages — $444,719 in compensatory damages and $167,254,000 in punitive damages. Amnesty International called the verdict a "momentous win in the fight against spyware abuse."<a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a><a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer" aria-label="Source CT — www.courtlistener.com">CT</a></p>
 
-  <p>The headline number did not survive contact with the court. On October 17, 2025, the district court granted WhatsApp's motion for a permanent injunction and remitted the punitive damages to $4,002,471 — a reduction WhatsApp accepted — and final judgment was entered on November 12, 2025, for about $4.4 million. The injunction remained the more important prize: NSO was barred from using WhatsApp as an attack vector. NSO appealed to the Ninth Circuit and moved to stay the injunction; the stay was denied, and the appeal remained pending into 2026.<a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer">CT</a></p>
+  <p>The headline number did not survive contact with the court. On October 17, 2025, the district court granted WhatsApp's motion for a permanent injunction and remitted the punitive damages to $4,002,471 — a reduction WhatsApp accepted — and final judgment was entered on November 12, 2025, for about $4.4 million. The injunction remained the more important prize: NSO was barred from using WhatsApp as an attack vector. NSO appealed to the Ninth Circuit and moved to stay the injunction; the stay was denied, and the appeal remained pending into 2026.<a class="source-ref" href="https://www.courtlistener.com/docket/16395340/whatsapp-inc-v-nso-group-technologies-limited/" target="_blank" rel="noopener noreferrer" aria-label="Source CT — www.courtlistener.com">CT</a></p>
 
-  <p>The litigation also produced an uncomfortable fact for the company's own narrative. Legal documents revealed, for the first time, that NSO Group itself — not its government customers — was the entity that "installs and extracts" the data from targeted devices. That does not, by itself, establish that NSO personnel personally reviewed every victim's data. But it left the "we only sell the tool" defense on the record as incomplete: NSO-controlled systems sat inside the technical process.<a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer">AI</a></p>
+  <p>The litigation also produced an uncomfortable fact for the company's own narrative. Legal documents revealed, for the first time, that NSO Group itself — not its government customers — was the entity that "installs and extracts" the data from targeted devices. That does not, by itself, establish that NSO personnel personally reviewed every victim's data. But it left the "we only sell the tool" defense on the record as incomplete: NSO-controlled systems sat inside the technical process.<a class="source-ref" href="https://www.amnesty.org/en/latest/news/2025/05/ruling-against-nso-group-in-whatsapp-case-a-momentous-win/" target="_blank" rel="noopener noreferrer" aria-label="Source AI — www.amnesty.org">AI</a></p>
 
   <h2>The lobbying push</h2>
 
-  <p>Sanctions had to be lifted, and that required Washington. NSO Group spent years trying to get off the US blacklist — as recently as May 2025, with the help of a lobbying firm tied to the Trump administration. WIRED documented the shift in detail: new registrations under the Lobbying Disclosure Act, a roster of lobbyists with direct ties to the administration, and an effort aimed at the executive branch that now controlled the Entity List decision. In May 2025, The Washington Post described the push in unusually direct terms: a "rehabilitation tour."<a class="source-ref" href="https://www.wired.com/story/nso-group-the-vogel-group-lobbying-trump-administration/" target="_blank" rel="noopener noreferrer">WRD</a><a class="source-ref" href="https://www.washingtonpost.com/national-security/2025/05/20/nso-group-pegasus-trump-eo/" target="_blank" rel="noopener noreferrer">WAPO</a></p>
+  <p>Sanctions had to be lifted, and that required Washington. NSO Group spent years trying to get off the US blacklist — as recently as May 2025, with the help of a lobbying firm tied to the Trump administration. WIRED documented the shift in detail: new registrations under the Lobbying Disclosure Act, a roster of lobbyists with direct ties to the administration, and an effort aimed at the executive branch that now controlled the Entity List decision. In May 2025, The Washington Post described the push in unusually direct terms: a "rehabilitation tour."<a class="source-ref" href="https://www.wired.com/story/nso-group-the-vogel-group-lobbying-trump-administration/" target="_blank" rel="noopener noreferrer" aria-label="Source WRD — www.wired.com">WRD</a><a class="source-ref" href="https://www.washingtonpost.com/national-security/2025/05/20/nso-group-pegasus-trump-eo/" target="_blank" rel="noopener noreferrer" aria-label="Source WAPO — www.washingtonpost.com">WAPO</a></p>
 
-  <p>The tour was not met with a welcome. That same month, The Washington Post reported that the administration rebuffed the effort: officials had no plans to remove NSO from the Entity List, and no plans to rescind the commercial-spyware executive order for the company's benefit. A planned White House meeting was reportedly cancelled once its purpose became clear. The rehabilitation was an active effort. It was not an accomplished fact.<a class="source-ref" href="https://www.washingtonpost.com/national-security/2025/05/20/nso-group-pegasus-trump-eo/" target="_blank" rel="noopener noreferrer">WAPO</a></p>
+  <p>The tour was not met with a welcome. That same month, The Washington Post reported that the administration rebuffed the effort: officials had no plans to remove NSO from the Entity List, and no plans to rescind the commercial-spyware executive order for the company's benefit. A planned White House meeting was reportedly cancelled once its purpose became clear. The rehabilitation was an active effort. It was not an accomplished fact.<a class="source-ref" href="https://www.washingtonpost.com/national-security/2025/05/20/nso-group-pegasus-trump-eo/" target="_blank" rel="noopener noreferrer" aria-label="Source WAPO — www.washingtonpost.com">WAPO</a></p>
 
-  <p>The lobbying track ran in parallel with a more structural one: changing who owned the company.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
+  <p>The lobbying track ran in parallel with a more structural one: changing who owned the company.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
 
   <h2>The ownership shuffle</h2>
 
-  <p>NSO Group's ownership had never been stable. Founded by Niv Karmi, Shalev Hulio, and Omri Lavie, it was acquired by the US private equity firm Francisco Partners in 2014. Lavie and Hulio took control back in 2019 with help from the European firm Novalpina. In 2021, management of the fund was taken over by Berkeley Research Group. In 2023, Lavie emerged again as majority owner.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
+  <p>NSO Group's ownership had never been stable. Founded by Niv Karmi, Shalev Hulio, and Omri Lavie, it was acquired by the US private equity firm Francisco Partners in 2014. Lavie and Hulio took control back in 2019 with help from the European firm Novalpina. In 2021, management of the fund was taken over by Berkeley Research Group. In 2023, Lavie emerged again as majority owner.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
 
-  <p>In October 2025, the cycle turned again. NSO confirmed to TechCrunch that a group of American investors — led, according to Calcalist, by Hollywood producer Robert Simonds — had taken controlling ownership. The deal was valued in the tens of millions of dollars. Calcalist reported that its terms were expected to include the divestment of NSO's roughly $500 million in debt, and that the deal would mark the complete departure of the founding team: Lavie's involvement would end, and co-founder Shalev Hulio had already left the company. American ownership arrived with the Israeli founders out — and, per NSO's own statement, without moving the company out of Israeli regulatory control.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a><a class="source-ref" href="https://www.calcalistech.com/ctechnews/article/s1jgvmitgx" target="_blank" rel="noopener noreferrer">CAL</a></p>
+  <p>In October 2025, the cycle turned again. NSO confirmed to TechCrunch that a group of American investors — led, according to Calcalist, by Hollywood producer Robert Simonds — had taken controlling ownership. The deal was valued in the tens of millions of dollars. Calcalist reported that its terms were expected to include the divestment of NSO's roughly $500 million in debt, and that the deal would mark the complete departure of the founding team: Lavie's involvement would end, and co-founder Shalev Hulio had already left the company. American ownership arrived with the Israeli founders out — and, per NSO's own statement, without moving the company out of Israeli regulatory control.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a><a class="source-ref" href="https://www.calcalistech.com/ctechnews/article/s1jgvmitgx" target="_blank" rel="noopener noreferrer" aria-label="Source CAL — www.calcalistech.com">CAL</a></p>
 
-  <p>The company's spokesperson insisted nothing had really moved: "This investment does not mean that the company is moving out of Israeli regulatory or operational control." Headquarters and core operations, he said, remain in Israel, supervised by the Israeli Ministry of Defense.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
+  <p>The company's spokesperson insisted nothing had really moved: "This investment does not mean that the company is moving out of Israeli regulatory or operational control." Headquarters and core operations, he said, remain in Israel, supervised by the Israeli Ministry of Defense.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
 
   <h2>The new face</h2>
 
-  <p>A month later, in November 2025, NSO announced an executive chairman: David Friedman, the former US Ambassador to Israel under the Trump administration. NSO filings, as reported by the Times of Israel, stated that "it is reasonably foreseeable that a law enforcement or intelligence agency of the United States will use Pegasus." The appointment was reputational and political positioning — a former ambassador's presence at the top, aimed at Washington. It was not, by itself, US government endorsement, and it changed no US policy.<a class="source-ref" href="https://www.timesofisrael.com/seeking-to-get-off-us-blacklist-spyware-firm-nso-taps-ex-envoy-friedman-as-chairman/" target="_blank" rel="noopener noreferrer">TOI</a></p>
+  <p>A month later, in November 2025, NSO announced an executive chairman: David Friedman, the former US Ambassador to Israel under the Trump administration. NSO filings, as reported by the Times of Israel, stated that "it is reasonably foreseeable that a law enforcement or intelligence agency of the United States will use Pegasus." The appointment was reputational and political positioning — a former ambassador's presence at the top, aimed at Washington. It was not, by itself, US government endorsement, and it changed no US policy.<a class="source-ref" href="https://www.timesofisrael.com/seeking-to-get-off-us-blacklist-spyware-firm-nso-taps-ex-envoy-friedman-as-chairman/" target="_blank" rel="noopener noreferrer" aria-label="Source TOI — www.timesofisrael.com">TOI</a></p>
 
-  <p>For researchers who had tracked NSO for years, the acquisition was a warning, not a reset. Citizen Lab's John Scott-Railton, who has documented Pegasus abuse for a decade, put it bluntly: "NSO is a company with a long history of going against American interests and supporting the hacking of American officials. In what world can such a person be trusted to properly oversee a company like NSO Group?"<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
+  <p>For researchers who had tracked NSO for years, the acquisition was a warning, not a reset. Citizen Lab's John Scott-Railton, who has documented Pegasus abuse for a decade, put it bluntly: "NSO is a company with a long history of going against American interests and supporting the hacking of American officials. In what world can such a person be trusted to properly oversee a company like NSO Group?"<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
 
   <h2>The allegations returned</h2>
 
-  <p>In June 2026, Meta's WhatsApp said it would ask a US court to hold NSO Group in contempt. WhatsApp alleged that NSO-linked operatives had mounted new targeting attempts — social-engineering messages designed to trick users into clicking malicious links that led off WhatsApp, resembling previously reported NSO-linked phishing campaigns — in violation of the permanent injunction from the case NSO had just lost. WhatsApp said it had also removed test accounts and groups it tied to NSO, and asked the court to hold the company in contempt. The allegation is part of ongoing litigation; a contempt finding, if any, belongs to the court.<a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>In June 2026, Meta's WhatsApp said it would ask a US court to hold NSO Group in contempt. WhatsApp alleged that NSO-linked operatives had mounted new targeting attempts — social-engineering messages designed to trick users into clicking malicious links that led off WhatsApp, resembling previously reported NSO-linked phishing campaigns — in violation of the permanent injunction from the case NSO had just lost. WhatsApp said it had also removed test accounts and groups it tied to NSO, and asked the court to hold the company in contempt. The allegation is part of ongoing litigation; a contempt finding, if any, belongs to the court.<a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
-  <p>Citizen Lab's Scott-Railton observed: "NSO Group is behaving just like the dictators they service — treating US courts as something to bypass, and hope that nobody notices." To The New York Times, he added that NSO was "doing an amazing job making the argument that they should stay sanctioned and face more consequences."<a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer">CL</a></p>
+  <p>Citizen Lab's Scott-Railton observed: "NSO Group is behaving just like the dictators they service — treating US courts as something to bypass, and hope that nobody notices." To The New York Times, he added that NSO was "doing an amazing job making the argument that they should stay sanctioned and face more consequences."<a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a></p>
 
   <h2>The state behind the company</h2>
 
-  <p>In July 2026, OCCRP and partners published records showing that NSO co-founder Shalev Hulio traveled to Panama in December 2013 on an Israeli diplomatic passport, telling Panamanian immigration he would be staying at the Israeli embassy. NSO had sold Pegasus to Panama the year before, with Hulio signing the contract. He denied the finding; the Israeli ministries did not respond.<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer">OCCRP</a></p>
+  <p>In July 2026, OCCRP and partners published records showing that NSO co-founder Shalev Hulio traveled to Panama in December 2013 on an Israeli diplomatic passport, telling Panamanian immigration he would be staying at the Israeli embassy. NSO had sold Pegasus to Panama the year before, with Hulio signing the contract. He denied the finding; the Israeli ministries did not respond.<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer" aria-label="Source OCCRP — www.occrp.org">OCCRP</a></p>
 
   <blockquote>
     "The separation between the government and NSO is a smokescreen."
-    <cite>— Eitay Mack, Israeli lawyer and human rights activist, on NSO's claimed independence from the Israeli state<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer">OCCRP</a></cite>
+    <cite>— Eitay Mack, Israeli lawyer and human rights activist, on NSO's claimed independence from the Israeli state<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer" aria-label="Source OCCRP — www.occrp.org">OCCRP</a></cite>
   </blockquote>
 
-  <p>The diplomatic passport record did not change NSO's ownership. But it added new evidence to a question the rehabilitation tour had carefully avoided: a company that sold spyware to autocratic governments had long claimed it operated independently of its own government. OCCRP framed the record in exactly those terms — it "raises questions" about the firm's claims of independence. Questions, not proof: the record did not by itself establish that NSO was an arm of the Israeli state.<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer">OCCRP</a></p>
+  <p>The diplomatic passport record did not change NSO's ownership. But it added new evidence to a question the rehabilitation tour had carefully avoided: a company that sold spyware to autocratic governments had long claimed it operated independently of its own government. OCCRP framed the record in exactly those terms — it "raises questions" about the firm's claims of independence. Questions, not proof: the record did not by itself establish that NSO was an arm of the Israeli state.<a class="source-ref" href="https://www.occrp.org/en/project/the-pegasus-project/co-founder-of-controversial-spyware-firm-had-israeli-diplomatic-passport" target="_blank" rel="noopener noreferrer" aria-label="Source OCCRP — www.occrp.org">OCCRP</a></p>
 
-  <p>Put the pieces together and the strategy is visible. Sanctioned, NSO lobbied. Sued, new targeting allegations followed. Unmasked, NSO found new owners. The ownership changed; the blacklist did not. As of mid-2026, the company remains on the US Entity List, Executive Order 14093 stands, and the permanent injunction is in force — while the contempt motion remains before the court.<a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
+  <p>Put the pieces together and the strategy is visible. Sanctioned, NSO lobbied. Sued, new targeting allegations followed. Unmasked, NSO found new owners. The ownership changed; the blacklist did not. As of mid-2026, the company remains on the US Entity List, Executive Order 14093 stands, and the permanent injunction is in force — while the contempt motion remains before the court.<a class="source-ref" href="https://citizenlab.ca/whatsapp-accuses-nso-of-fresh-pegasus-targeting/" target="_blank" rel="noopener noreferrer" aria-label="Source CL — citizenlab.ca">CL</a><a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
 
-  <p>A change in ownership is evidence of restructuring. It is not, by itself, evidence of reform. This is what rehabilitation looks like when it is aimed at the market instead of the behavior.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer">TC</a></p>
+  <p>A change in ownership is evidence of restructuring. It is not, by itself, evidence of reform. This is what rehabilitation looks like when it is aimed at the market instead of the behavior.<a class="source-ref" href="https://techcrunch.com/2025/10/10/spyware-maker-nso-group-confirms-acquisition-by-us-investors/" target="_blank" rel="noopener noreferrer" aria-label="Source TC — techcrunch.com">TC</a></p>
 
   <div class="sim-note">
     NOTE — PRESENTATION: The classified corporate-intelligence interface at the top of this page is an editorial reconstruction — a presentation device, not a leaked government document. The underlying events, quotations, and court records are sourced from public documents cited throughout this page.
@@ -812,67 +796,74 @@
   <h2>The road from sanction to ownership</h2>
   <p>Public, open-access claims only. Each row marks a documented milestone in NSO Group's rehabilitation effort.</p>
 
-  <div class="comparison-table">
-    <div class="comparison-row comparison-header">
-      <span class="col-country">Date</span>
-      <span class="col-status">Milestone</span>
-      <span class="col-score">What it meant</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Nov 2021</span>
-      <span class="col-status score-red">US Entity List</span>
-      <span class="col-score">Trade restrictions; presumption of denial for US exports</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Mar 2023</span>
-      <span class="col-status score-yellow">Executive Order 14093</span>
-      <span class="col-score">Separate curb on US government operational use of risky commercial spyware</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Dec 2024</span>
-      <span class="col-status score-red">Liability ruling</span>
-      <span class="col-score">Judge: NSO unlawfully targeted WhatsApp users and infrastructure</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">May 2025</span>
-      <span class="col-status score-red">$167M+ jury verdict</span>
-      <span class="col-score">Unanimous verdict: $167.7M ($167.25M punitive + $444,719 compensatory)</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">May 2025</span>
-      <span class="col-status score-yellow">The rehabilitation tour</span>
-      <span class="col-score">WaPo: lobbying push to leave the blacklist, via a Trump-tied firm</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">May 2025</span>
-      <span class="col-status score-red">White House rebuff</span>
-      <span class="col-score">No plan to delist or rescind EO 14093; meeting reportedly cancelled</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Oct 2025</span>
-      <span class="col-status score-yellow">US acquisition</span>
-      <span class="col-score">American investors take controlling ownership; ~$500M debt divestment expected</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Nov 2025</span>
-      <span class="col-status score-yellow">Final judgment</span>
-      <span class="col-score">Damages reduced to ~$4.4M; permanent injunction entered; NSO appeals</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Nov 2025</span>
-      <span class="col-status score-yellow">New chairman</span>
-      <span class="col-score">David Friedman, ex-US ambassador to Israel, appointed executive chairman</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Jun 2026</span>
-      <span class="col-status score-red">Contempt motion</span>
-      <span class="col-score">WhatsApp alleges new NSO-linked targeting attempts violated the injunction</span>
-    </div>
-    <div class="comparison-row">
-      <span class="col-country">Jul 2026</span>
-      <span class="col-status score-red">Diplomatic passport</span>
-      <span class="col-score">OCCRP: co-founder Shalev Hulio entered Panama in 2013 on a diplomatic passport</span>
-    </div>
+  <div class="comparison-table" tabindex="0" role="region" aria-label="Scrollable table: The road from sanction to ownership">
+    <table>
+      <caption class="sr-only">The road from sanction to ownership</caption>
+      <thead>
+      <tr>
+        <th scope="col" class="col-country">Date</th>
+        <th scope="col" class="col-status">Milestone</th>
+        <th scope="col" class="col-score">What it meant</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row" class="col-country">Nov 2021</th>
+        <td class="col-status score-red">US Entity List</td>
+        <td class="col-score">Trade restrictions; presumption of denial for US exports</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Mar 2023</th>
+        <td class="col-status score-yellow">Executive Order 14093</td>
+        <td class="col-score">Separate curb on US government operational use of risky commercial spyware</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Dec 2024</th>
+        <td class="col-status score-red">Liability ruling</td>
+        <td class="col-score">Judge: NSO unlawfully targeted WhatsApp users and infrastructure</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">May 2025</th>
+        <td class="col-status score-red">$167M+ jury verdict</td>
+        <td class="col-score">Unanimous verdict: $167.7M ($167.25M punitive + $444,719 compensatory)</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">May 2025</th>
+        <td class="col-status score-yellow">The rehabilitation tour</td>
+        <td class="col-score">WaPo: lobbying push to leave the blacklist, via a Trump-tied firm</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">May 2025</th>
+        <td class="col-status score-red">White House rebuff</td>
+        <td class="col-score">No plan to delist or rescind EO 14093; meeting reportedly cancelled</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Oct 2025</th>
+        <td class="col-status score-yellow">US acquisition</td>
+        <td class="col-score">American investors take controlling ownership; ~$500M debt divestment expected</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Nov 2025</th>
+        <td class="col-status score-yellow">Final judgment</td>
+        <td class="col-score">Damages reduced to ~$4.4M; permanent injunction entered; NSO appeals</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Nov 2025</th>
+        <td class="col-status score-yellow">New chairman</td>
+        <td class="col-score">David Friedman, ex-US ambassador to Israel, appointed executive chairman</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Jun 2026</th>
+        <td class="col-status score-red">Contempt motion</td>
+        <td class="col-score">WhatsApp alleges new NSO-linked targeting attempts violated the injunction</td>
+      </tr>
+      <tr>
+        <th scope="row" class="col-country">Jul 2026</th>
+        <td class="col-status score-red">Diplomatic passport</td>
+        <td class="col-score">OCCRP: co-founder Shalev Hulio entered Panama in 2013 on a diplomatic passport</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
   <p class="data-sources">
