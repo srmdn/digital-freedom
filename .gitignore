@@ -14,6 +14,8 @@ Thumbs.db
 __pycache__/
 
 # Private docs (local only)
+/AGENTS.md
+/research/
 docs/PRODUCTION.md
 HANDOFF.md
 .local/

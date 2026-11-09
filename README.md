@@ -30,15 +30,14 @@ Episodes contain cases. Each case is one self-contained sequence file.
 
 This is a living archive. New sequences are added as the story develops.
 
-## Roadmap
+## Current priorities
 
-1. Foundation hardening — audit existing sequences, standardize evidence discipline, improve source provenance
-2. Information architecture — episode and case navigation, publication and review metadata
-3. Editorial expansion — Episodes III–V (see above)
-4. Interactive improvements — richer terminal interaction only where useful; accessibility
-5. Community — public editorial methodology, contribution standards, corrections policy
+- Review existing cases and source references, including dated claims and correction needs.
+- Check navigation, accessibility, and presentation across devices.
+- Keep editorial and contributor guidance current and consistent with the site.
+- Consider future episodes on encryption, mass surveillance, and data brokers as research and capacity allow.
 
-Deployment stays on GitHub Pages; the project has no paid-hosting migration planned.
+The roadmap is flexible; planned episodes are not publication commitments.
 
 ## Editorial discipline
 
