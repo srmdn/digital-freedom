@@ -303,7 +303,7 @@
     transition: opacity 0.5s;
   }
 
-  .start-btn.hidden { opacity: 0; pointer-events: none; }
+  .start-btn.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .start-btn button {
     background: #f4efe1;
@@ -329,6 +329,9 @@
     font-family: 'Cutive Mono', monospace;
     letter-spacing: 0.05em;
   }
+
+  .start-btn p a { color: #5a4a30; text-decoration: underline; }
+  .start-btn p a:hover { color: #1a1a1a; }
 
   .watermark {
     position: absolute;
@@ -385,7 +388,7 @@
     z-index: 10;
   }
 
-  .essay h2 {
+  .essay h1 {
     font-family: var(--serif);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
@@ -394,7 +397,7 @@
     color: #e8e8e8;
   }
 
-  .essay h3 {
+  .essay h2 {
     font-family: var(--serif);
     font-size: 1.4rem;
     font-weight: 600;
@@ -709,7 +712,8 @@
   <div class="progress-bar" id="progress"></div>
   <div class="start-btn" id="startBtn">
     <button onclick="startSequence()">DECLASSIFY</button>
-    <p>Press to release document &mdash; or hit Enter</p>
+    <p>Press to release document</p>
+    <p><a href="#essay">Skip intro — read the article</a></p>
     <noscript><p style="margin-top:24px; max-width:420px">JavaScript is disabled, so the interactive intro cannot play. The full article below is readable without it.</p></noscript>
   </div>
 </div>
@@ -730,7 +734,7 @@
   <p class="pub-meta">Episode II / Pegasus / Case 03 of 05<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
 
   <p class="section-label">Episode II — Pegasus, Case III</p>
-  <h2>They said it was not mass surveillance. Then 50,000 numbers leaked.</h2>
+  <h1>They said it was not mass surveillance. Then 50,000 numbers leaked.</h1>
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
@@ -742,7 +746,7 @@
     <p><strong>HOW:</strong> Forbidden Stories and partner newsrooms analyzed the leak. Amnesty Security Lab conducted forensic examinations, published a methodology report, released an open-source tool, and disclosed more than 700 Pegasus-related domains.<a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
   </div>
 
-  <h3>What leaked</h3>
+  <h2>What leaked</h2>
 
   <p>The Pegasus Project did not begin with a court filing or a company disclosure. It began with leaked records: more than 50,000 phone numbers selected for surveillance by NSO clients, spanning more than 50 countries and dating back to 2016.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
 
@@ -750,7 +754,7 @@
 
   <p>What made the records explosive was not only their size, but their consistency with later forensic findings. The leak showed a selection layer that looked industrial rather than exceptional: a queue, not a one-off target package.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
 
-  <h3>Selection is not infection</h3>
+  <h2>Selection is not infection</h2>
 
   <p>Presence on the list did not prove a successful Pegasus compromise. Some selected numbers may never have been infected. Some may have been unreachable. Some may have been associated with failed attempts. That caution is essential if the story is going to remain factual.<a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer">GDN</a></p>
 
@@ -758,7 +762,7 @@
 
   <p>The methodology release mattered almost as much as the findings. Amnesty published indicators and more than 700 Pegasus-related domains, making the investigation reproducible instead of rhetorical.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">ASL</a></p>
 
-  <h3>Who appeared on the list</h3>
+  <h2>Who appeared on the list</h2>
 
   <p>Amnesty said the records included at least 180 journalists in 20 countries. Its reporting cited specific examples: the Mexican journalist Cecilio Pineda Birto, more than 40 Azerbaijani journalists, at least 40 Indian journalists, and staff linked to the Associated Press, CNN, The New York Times, Reuters, and the Financial Times.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
 
@@ -766,7 +770,7 @@
 
   <p>This is where the marketing line around Pegasus began to collapse. A tool sold as precise and exceptional kept reappearing around reporters, dissidents, lawyers, and political actors whose relevance was democratic, not criminal.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a></p>
 
-  <h3>The scale broke the sales pitch</h3>
+  <h2>The scale broke the sales pitch</h2>
 
   <p>One number in the reporting became impossible to ignore: more than 10,000 phone numbers were selected over two years by one Pegasus client in Morocco alone. Even if selection and infection are kept separate, that is not the profile of rare, surgical use.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
 
@@ -774,7 +778,7 @@
 
   <p>The 50K list was damaging precisely because it shifted the argument. The question was no longer only what Pegasus could do once installed. The question became how many people were being queued for possible surveillance before the public ever heard their names.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://www.theguardian.com/world/2021/jul/18/revealed-leak-uncovers-global-abuse-of-cyber-surveillance-weapon-nso-group-pegasus" target="_blank" rel="noopener noreferrer">GDN</a></p>
 
-  <h3>Before the exploit, there is the list</h3>
+  <h2>Before the exploit, there is the list</h2>
 
   <p>Exploit chains make headlines because they are technical, cinematic, and easy to dramatize. The 50K list exposed something more administrative and therefore more unsettling: surveillance as process. Numbers were gathered, sorted, selected, and queued long before a forensic report could confirm what happened next.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a></p>
 
@@ -1014,9 +1018,6 @@ async function startSequence() {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !isRunning) {
-    startSequence();
-  }
   if (e.key === 'Escape' && isRunning) {
     skipRequested = true;
   }

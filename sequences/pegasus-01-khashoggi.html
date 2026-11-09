@@ -313,7 +313,7 @@
     transition: opacity 0.5s;
   }
 
-  .start-btn.hidden { opacity: 0; pointer-events: none; }
+  .start-btn.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .start-btn button {
     background: #f4efe1;
@@ -339,6 +339,9 @@
     font-family: 'Cutive Mono', monospace;
     letter-spacing: 0.05em;
   }
+
+  .start-btn p a { color: #5a4a30; text-decoration: underline; }
+  .start-btn p a:hover { color: #1a1a1a; }
 
   .watermark {
     position: absolute;
@@ -395,7 +398,7 @@
     z-index: 10;
   }
 
-  .essay h2 {
+  .essay h1 {
     font-family: var(--serif);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
@@ -404,7 +407,7 @@
     color: #e8e8e8;
   }
 
-  .essay h3 {
+  .essay h2 {
     font-family: var(--serif);
     font-size: 1.4rem;
     font-weight: 600;
@@ -719,7 +722,8 @@
   <div class="progress-bar" id="progress"></div>
   <div class="start-btn" id="startBtn">
     <button onclick="startSequence()">DECLASSIFY</button>
-    <p>Press to release document &mdash; or hit Enter</p>
+    <p>Press to release document</p>
+    <p><a href="#essay">Skip intro — read the article</a></p>
     <noscript><p style="margin-top:24px; max-width:420px">JavaScript is disabled, so the interactive intro cannot play. The full article below is readable without it.</p></noscript>
   </div>
 </div>
@@ -740,7 +744,7 @@
   <p class="pub-meta">Episode II / Pegasus / Case 01 of 05<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
 
   <p class="section-label">Episode II — Pegasus, Case I</p>
-  <h2>A journalist walked into a consulate. The phones around him had already been targeted.</h2>
+  <h1>A journalist walked into a consulate. The phones around him had already been targeted.</h1>
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
@@ -752,7 +756,7 @@
     <p><strong>HOW:</strong> NSO Group's Pegasus gave government clients covert access to phones through exploit chains and phishing infrastructure. The leaked Pegasus Project data and forensic analysis connected spyware activity to Khashoggi's circle.</p>
   </div>
 
-  <h3>What is Pegasus?</h3>
+  <h2>What is Pegasus?</h2>
 
   <p>Pegasus is military-grade spyware developed by NSO Group, an Israeli cyber-intelligence firm founded in 2010 by veterans of Unit 8200 — Israel's equivalent of the NSA. Once installed on a phone, Pegasus grants the operator complete access: messages (including WhatsApp, Signal, and Telegram), photos, passwords, GPS location, the microphone, the camera, and every keystroke — with no visible indication to the target.</p>
 
@@ -760,7 +764,7 @@
 
   <p>NSO Group sells Pegasus exclusively to government agencies. A single license costs millions. But the company has repeatedly sold to regimes with documented records of targeting journalists, activists, and political opponents — Saudi Arabia, UAE, India, Hungary, Morocco, Mexico, Azerbaijan, and others.<a class="source-ref" href="https://forbiddenstories.org/about-the-pegasus-project/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://projectzero.google/2021/12/a-deep-dive-into-nso-zero-click.html" target="_blank" rel="noopener noreferrer">PZ</a></p>
 
-  <h3>The Khashoggi case</h3>
+  <h2>The Khashoggi case</h2>
 
   <p>Jamal Khashoggi was a Saudi journalist, a columnist for The Washington Post, and a US permanent resident. He was one of the most prominent critics of Crown Prince Mohammed bin Salman. On October 2, 2018, at 13:14 local time, he entered the Saudi consulate in Istanbul to obtain divorce paperwork. His fiancée Hatice Cengiz waited outside. He never emerged.</p>
 
@@ -777,7 +781,7 @@
 
   <p class="evidence-legend">Reporting: <a class="source-ref" href="https://www.washingtonpost.com/investigations/interactive/2021/nso-spyware-pegasus-cellphones/" target="_blank" rel="noopener noreferrer">WaPo</a><a class="source-ref" href="https://forbiddenstories.org/pegasus-the-new-global-weapon-for-silencing-journalists/" target="_blank" rel="noopener noreferrer">FS</a><a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a></p>
 
-  <h3>The global scale</h3>
+  <h2>The global scale</h2>
 
   <p>Khashoggi was not an isolated target. In July 2021, The Pegasus Project — an investigation coordinated by Forbidden Stories and Amnesty International involving 80+ journalists from 17 media organizations — obtained a leaked database of 50,000+ phone numbers selected as persons of interest by NSO clients across more than 50 countries.</p>
 
@@ -785,7 +789,7 @@
 
   <p>Amnesty International's Security Lab examined 67 phones and confirmed 23 successful Pegasus infections with 14 additional signs of attempted penetration; the remaining 30 tests were inconclusive, often because handsets had been replaced.<a class="source-ref" href="https://www.amnesty.org/en/latest/press-release/2021/07/the-pegasus-project/" target="_blank" rel="noopener noreferrer">AI</a><a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer">CL</a></p>
 
-  <h3>The arms race</h3>
+  <h2>The arms race</h2>
 
   <p>Apple and NSO Group have been in a continuous arms race since at least 2018. Each time Apple patches a vulnerability, NSO finds a new one:</p>
 
@@ -796,7 +800,7 @@
 
   <p>Multiple documented exploit chains in four years — KISMET (2020), FORCEDENTRY (2021), BLASTPASS (2023) — each answered by a patch, each followed by the next chain. The phone in your pocket is a battlefield.<a class="source-ref" href="https://citizenlab.ca/research/forcedentry-nso-group-imessage-zero-click-exploit-captured-in-the-wild/" target="_blank" rel="noopener noreferrer">CL</a><a class="source-ref" href="https://citizenlab.ca/research/nso-groups-pegasus-spyware-returns-in-2022/" target="_blank" rel="noopener noreferrer">CL22</a><a class="source-ref" href="https://projectzero.google/2025/03/blasting-past-webp.html" target="_blank" rel="noopener noreferrer">PZ25</a><a class="source-ref" href="https://securitylab.amnesty.org/latest/2023/12/pegasus-zero-click-exploit-threatens-journalists-in-india/" target="_blank" rel="noopener noreferrer">ASL</a></p>
 
-  <h3>The company that kept selling</h3>
+  <h2>The company that kept selling</h2>
 
   <p>In November 2021, the US Commerce Department placed NSO Group on the Entity List — banning American companies from selling technology to the firm. The stated reason: "Developed and supplied spyware to foreign governments that used these tools to maliciously target government officials, journalists, businesspeople, activists, academics, and embassy workers."<a class="source-ref" href="https://www.bis.gov/press-release/commerce-adds-nso-group-other-foreign-companies-entity-list-malicious-cyber-activities" target="_blank" rel="noopener noreferrer">BIS</a></p>
 
@@ -1124,9 +1128,6 @@ async function startSequence() {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !isRunning) {
-    startSequence();
-  }
   if (e.key === 'Escape' && isRunning) {
     skipRequested = true;
   }

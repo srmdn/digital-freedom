@@ -303,7 +303,7 @@
     transition: opacity 0.5s;
   }
 
-  .start-btn.hidden { opacity: 0; pointer-events: none; }
+  .start-btn.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .start-btn button {
     background: #f4efe1;
@@ -329,6 +329,9 @@
     font-family: 'Cutive Mono', monospace;
     letter-spacing: 0.05em;
   }
+
+  .start-btn p a { color: #5a4a30; text-decoration: underline; }
+  .start-btn p a:hover { color: #1a1a1a; }
 
   .watermark {
     position: absolute;
@@ -385,7 +388,7 @@
     z-index: 10;
   }
 
-  .essay h2 {
+  .essay h1 {
     font-family: var(--serif);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
@@ -394,7 +397,7 @@
     color: #e8e8e8;
   }
 
-  .essay h3 {
+  .essay h2 {
     font-family: var(--serif);
     font-size: 1.4rem;
     font-weight: 600;
@@ -709,7 +712,8 @@
   <div class="progress-bar" id="progress"></div>
   <div class="start-btn" id="startBtn">
     <button onclick="startSequence()">DECLASSIFY</button>
-    <p>Press to release document &mdash; or hit Enter</p>
+    <p>Press to release document</p>
+    <p><a href="#essay">Skip intro — read the article</a></p>
     <noscript><p style="margin-top:24px; max-width:420px">JavaScript is disabled, so the interactive intro cannot play. The full article below is readable without it.</p></noscript>
   </div>
 </div>
@@ -730,7 +734,7 @@
   <p class="pub-meta">Episode II / Pegasus / Case 02 of 05<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
 
   <p class="section-label">Episode II — Pegasus, Case II</p>
-  <h2>A prime minister was infected. Then the investigation hit silence.</h2>
+  <h1>A prime minister was infected. Then the investigation hit silence.</h1>
 
   <div class="five-w">
     <p class="five-w-title">5W+1H — Case Summary</p>
@@ -742,7 +746,7 @@
     <p><strong>HOW:</strong> NSO Group provided Pegasus to government clients. The Spanish government publicly confirmed the ministerial infections but has not identified the operator. Citizen Lab documented the Catalan cases through forensic analysis and exploit traces.</p>
   </div>
 
-  <h3>A breach at the highest level</h3>
+  <h2>A breach at the highest level</h2>
 
   <p>In May 2022, the Spanish government made an announcement that had no precedent in European history: the phone of a sitting prime minister had been infected with commercial spyware. Pedro Sánchez, head of the government of Spain — a NATO ally, an EU member state, the fifth-largest economy in the bloc — had been carrying a compromised device. So had his Defence Minister, Margarita Robles.<a class="source-ref" href="https://citizenlab.ca/spyware-litigation-tracker-legal-challenges-and-formal-complaints-related-to-mercenary-spyware/" target="_blank" rel="noopener noreferrer">CL</a></p>
 
@@ -750,7 +754,7 @@
 
   <p>The shock in Brussels was immediate. If the prime minister of Spain was not safe, no European leader was. The episode exposed a fault line that had been widening for years: commercial spyware built by private firms was now capable of penetrating the devices of the most heavily protected officials on the continent, and the legal frameworks meant to constrain its use had not kept pace.</p>
 
-  <h3>The Catalan connection</h3>
+  <h2>The Catalan connection</h2>
 
   <p>The Sánchez case cannot be separated from Catalonia. Alongside the prime minister and defence minister disclosures, Citizen Lab documented at least 65 Catalan figures targeted or infected with Pegasus and Candiru, including elected officials, lawyers, activists, and family members.<a class="source-ref" href="https://citizenlab.ca/research/catalangate-extensive-mercenary-spyware-operation-against-catalans-using-pegasus-candiru/" target="_blank" rel="noopener noreferrer">CL</a></p>
 
@@ -758,7 +762,7 @@
 
   <p>Within Spain the scandal cut deeper still. Citizen Lab did not conclusively attribute the Catalan operation to a specific entity, but said strong circumstantial evidence suggested a nexus with Spanish authorities. For Sánchez and Robles, attribution remained officially unresolved, even as Spanish courts repeatedly hit the same wall: Israel would not provide the information needed to identify the operator.</p>
 
-  <h3>Israel blocked the investigation</h3>
+  <h2>Israel blocked the investigation</h2>
 
   <p>Spain's attempt to investigate the infections ran into a wall almost immediately. Israel — whose Ministry of Defense regulates NSO Group's export licenses — refused to cooperate with the Spanish inquiry. By July 2023, the investigation was shelved, with officials citing, in reported terms, the complete lack of cooperation from Israeli authorities.</p>
 
@@ -766,7 +770,7 @@
 
   <p>What the PEGA Committee made clear was that Spain was not an outlier. It was a data point in a continental pattern: spyware acquired for legitimate security purposes, deployed against the very people the state is supposed to protect.</p>
 
-  <h3>The Barcelona proceedings</h3>
+  <h2>The Barcelona proceedings</h2>
 
   <p>In 2025, the case took a turn no previous Pegasus investigation had reached in Spain. Three NSO-linked executives — Shalev Hulio, Omri Lavie, and Yuval Somekh — were placed under formal criminal investigation by a Barcelona court over the alleged spying on lawyer Andreu Van den Eynde. It was a rare move from investigating companies to investigating named individuals behind them.<a class="source-ref" href="https://elpais.com/espana/catalunya/2025-03-03/imputados-tres-directivos-de-la-empresa-propietaria-de-pegasus-por-espionaje-al-abogado-del-proces-andreu-van-den-eynde.html" target="_blank" rel="noopener noreferrer">EPais</a></p>
 
@@ -774,7 +778,7 @@
 
   <p>The significance was not lost on anyone. For over a decade, NSO Group had operated in a gray zone — selling military-grade surveillance tools to governments while insisting its products were used only against terrorists and criminals. The Barcelona proceedings punctured that defense by naming executives, not only corporate entities, in a criminal investigation.</p>
 
-  <h3>The question no one answers</h3>
+  <h2>The question no one answers</h2>
 
   <p>If the prime minister of Spain — protected by one of Europe's largest intelligence services, carrying a device managed by government security staff — could be infected, then the premise that any official, anywhere, can secure their communications collapses. The Sánchez case demonstrated that the technical capacity of commercial spyware now exceeds the defensive capacity of most states.</p>
 
@@ -1033,9 +1037,6 @@ async function startSequence() {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !isRunning) {
-    startSequence();
-  }
   if (e.key === 'Escape' && isRunning) {
     skipRequested = true;
   }

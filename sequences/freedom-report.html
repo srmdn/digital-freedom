@@ -209,7 +209,7 @@
     transition: opacity 0.5s;
   }
 
-  .start-overlay.hidden { opacity: 0; pointer-events: none; }
+  .start-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .start-overlay button {
     background: #238636;
@@ -266,7 +266,7 @@
     z-index: 10;
   }
 
-  .essay h2 {
+  .essay h1 {
     font-family: var(--serif);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
@@ -275,7 +275,7 @@
     color: #e8e8e8;
   }
 
-  .essay h3 {
+  .essay h2 {
     font-family: var(--serif);
     font-size: 1.4rem;
     font-weight: 600;
@@ -567,7 +567,7 @@
   <p class="pub-meta">Episode I / State of Digital Freedom<br><span>Last reviewed: 2026-08-17 · Evidence current through: 2026-08-17</span></p>
 
   <p class="section-label">Episode I — State of Digital Freedom</p>
-  <h2>The ship has already hit the iceberg</h2>
+  <h1>The ship has already hit the iceberg</h1>
 
   <p>On June 14, 2026, Pavel Durov stood on the Oslo Freedom Forum stage and said something most people in the room didn't want to hear: <em>"Our ship has already hit the iceberg."</em> Not "might hit." Not "is approaching." Already hit.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=149s" target="_blank" rel="noopener noreferrer">02:29</a></p>
 
@@ -575,7 +575,7 @@
 
   <p>This sequence uses Durov's speech as a hook — not as its authority. The speech raises the questions. The evidence that follows stands on its own sourcing.</p>
 
-  <h3>The pretext is always children</h3>
+  <h2>The pretext is always children</h2>
 
   <p>Durov's most pointed observation wasn't about authoritarian regimes. It was about the West. "They used protection of children as a pretext — in fact, they wanted more control over political speech."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=540s" target="_blank" rel="noopener noreferrer">09:09</a> That framing is Durov's rhetoric, and it stays attributed to him. The underlying policy disputes are a matter of public record.</p>
 
@@ -588,7 +588,7 @@
     <cite>— Benjamin Franklin, echoed by Durov at Oslo<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=794s" target="_blank" rel="noopener noreferrer">13:14</a></cite>
   </blockquote>
 
-  <h3>The enforcement trap</h3>
+  <h2>The enforcement trap</h2>
 
   <p>What Durov called "selective enforcement of laws" is the mechanism he described at greatest length. The pattern, as he told it: flood an industry with contradictory regulations so compliance becomes impossible, then choose who to persecute based on political loyalty. Those who cooperate get ignored. Those who resist get hit with the full weight of the law. This is his account — a description of the speech, not a proven system.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1094s" target="_blank" rel="noopener noreferrer">18:14</a></p>
 
@@ -596,7 +596,7 @@
 
   <p>Durov also claimed the US Congress has published emails documenting European Commission pressure on Facebook, Instagram, TikTok, and YouTube to silence political narratives during the pandemic — narratives that, he said, turned out to be "at least partially true, and in any case worthy of public debate." That is his characterization of congressional material, presented as such.<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1236s" target="_blank" rel="noopener noreferrer">20:36</a></p>
 
-  <h3>There is no second West</h3>
+  <h2>There is no second West</h2>
 
   <p>Durov closed with a warning that most people missed: "There is no second West. There is no backup civilization."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1743s" target="_blank" rel="noopener noreferrer">29:03</a> For decades, dissidents from authoritarian countries could flee west. But if the current trajectory continues, he said, "they will have a hard time trying to understand whether they have already left their repressive homeland or they're just entering another open-air prison."<a class="source-ref" href="https://www.youtube.com/watch?v=1Yq_5aDdJ24&t=1710s" target="_blank" rel="noopener noreferrer">28:30</a></p>
 
@@ -763,7 +763,6 @@ async function startTerminal() {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !running && !startBtn.classList.contains('hidden')) startTerminal();
   if (e.key === 'Escape' && running) skipRequested = true;
 });
 </script>
