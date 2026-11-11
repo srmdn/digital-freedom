@@ -13,9 +13,16 @@
 <meta property="og:title" content="Digital Freedom">
 <meta property="og:description" content="Editorial archive documenting digital freedom, privacy erosion, surveillance, and spyware through terminal-style narratives and sourced reporting.">
 <meta property="og:url" content="https://srmdn.github.io/digital-freedom/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://srmdn.github.io/digital-freedom/assets/og/homepage.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dark editorial card reading: The erosion of digital freedom, documented one case at a time. Five case files, no trackers, no analytics.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Digital Freedom">
 <meta name="twitter:description" content="Editorial archive documenting digital freedom, privacy erosion, surveillance, and spyware through terminal-style narratives and sourced reporting.">
+<meta name="twitter:image" content="https://srmdn.github.io/digital-freedom/assets/og/homepage.png">
+<meta name="twitter:image:alt" content="Dark editorial card reading: The erosion of digital freedom, documented one case at a time. Five case files, no trackers, no analytics.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/fonts.css">
 <style>
@@ -23,13 +30,15 @@
 
   :root {
     --bg: #0c0c0c;
-    --surface: #141414;
-    --border: #222;
-    --text: #d0d0d0;
-    --text-dim: #888;
-    --text-muted: #555;
+    --surface: #121212;
+    --surface-2: #161616;
+    --line: #242424;
+    --line-soft: #1c1c1c;
+    --text: #d8d8d8;
+    --text-dim: #9a9a9a;
+    --text-muted: #7f7f7f;
     --accent: #c0392b;
-    --accent-glow: rgba(192, 57, 43, 0.15);
+    --accent-text: #e05b4b;
     --mono: 'JetBrains Mono', 'Courier New', monospace;
     --serif: 'Source Serif 4', Georgia, serif;
     --sans: 'Source Sans 3', -apple-system, sans-serif;
@@ -46,374 +55,333 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text-muted); transition: color 0.2s, border-color 0.2s; }
-  a:hover { color: #fff; border-color: #fff; }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 520px;
+    pointer-events: none;
+    background: radial-gradient(60% 100% at 12% 0%, rgba(192, 57, 43, 0.09), transparent 70%);
+    z-index: 0;
+  }
+
+  a { color: var(--text); text-decoration: none; }
   a:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-text);
     outline-offset: 4px;
-    border-bottom-color: transparent;
+    border-radius: 2px;
   }
 
   .skip-link {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
+    position: absolute; left: 1rem; top: 1rem;
     transform: translateY(-200%);
     padding: 0.65rem 0.9rem;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    z-index: 100;
+    background: var(--accent); color: #fff;
+    font-family: var(--mono); font-size: 0.8rem;
+    z-index: 100; border-radius: 3px;
   }
-
-  .skip-link:focus {
-    transform: translateY(0);
-  }
+  .skip-link:focus { transform: translateY(0); }
 
   .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
   }
 
-  /* Hero */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
 
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
+  /* ── Top bar ───────────────────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    border-bottom: 1px solid var(--line-soft);
+    background: rgba(12, 12, 12, 0.92);
+    backdrop-filter: blur(8px);
   }
-
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; height: 64px;
   }
+  .wordmark {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-family: var(--mono); font-size: 0.72rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: #ebebeb;
+  }
+  .wordmark::before {
+    content: ""; width: 9px; height: 9px; background: var(--accent);
+    display: inline-block; flex-shrink: 0;
+  }
+  .nav { display: flex; align-items: center; gap: 1.75rem; }
+  .nav a {
+    font-family: var(--mono); font-size: 0.72rem;
+    letter-spacing: 0.08em; color: var(--text-dim);
+    transition: color 0.15s;
+  }
+  .nav a:hover { color: #fff; }
+  .nav .nav-cta { color: var(--accent-text); }
 
+  /* ── Hero ──────────────────────────────────────────────── */
+  .hero { padding: 6rem 0 5rem; min-height: 74vh; display: flex; align-items: center; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.25fr 0.75fr;
+    gap: 4.5rem; align-items: center; width: 100%;
+  }
+  .rule { width: 44px; height: 2px; background: var(--accent); margin-bottom: 1.6rem; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-family: var(--serif); font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+    font-weight: 700; line-height: 1.08; letter-spacing: -0.025em;
+    color: #f0f0f0; margin-bottom: 1.4rem; text-wrap: balance;
+  }
   .hero-lead {
-    font-size: 1.25rem;
-    color: var(--text-dim);
-    max-width: 560px;
-    line-height: 1.6;
+    font-size: 1.15rem; line-height: 1.65; color: var(--text-dim);
+    max-width: 34ch; margin-bottom: 2.2rem;
+  }
+  .cta-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.8rem 1.5rem; background: var(--accent); color: #fff;
+    font-family: var(--sans); font-size: 0.92rem; font-weight: 600;
+    border-radius: 3px; transition: background 0.15s;
+  }
+  .btn:hover { background: #d9483a; }
+  .link-quiet {
+    font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim);
+    border-bottom: 1px solid var(--line); padding-bottom: 2px;
+  }
+  .link-quiet:hover { color: #fff; border-color: var(--text-dim); }
+
+  .status {
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #141414, #101010);
+    border-radius: 4px; overflow: hidden;
+  }
+  .status-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: 0.66rem;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .status-head .live { display: flex; align-items: center; gap: 0.45rem; color: var(--accent-text); }
+  .status-head .live::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-text);
+  }
+  .status-body { padding: 0.4rem 1.2rem 0.6rem; }
+  .status-row {
+    display: flex; align-items: baseline; gap: 0.75rem;
+    padding: 0.62rem 0; border-bottom: 1px dotted #262626;
+    font-family: var(--mono); font-size: 0.78rem;
+  }
+  .status-row:last-child { border-bottom: none; }
+  .status-row dt {
+    flex: 1; color: var(--text-muted);
+    border-bottom: 1px dotted #2b2b2b;
+  }
+  .status-row dd { color: #e6e6e6; }
+  .status-row dd.zero { color: var(--accent-text); }
+  .status-foot {
+    padding: 0.85rem 1.2rem; border-top: 1px solid var(--line);
+    font-family: var(--mono); font-size: 0.66rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
   }
 
-  .hero-cta {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    flex-wrap: wrap;
+  .scroll-cue {
+    margin-top: 4.5rem; display: flex; align-items: center; gap: 0.7rem;
+    font-family: var(--mono); font-size: 0.66rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .scroll-cue span { display: inline-block; animation: nudge 2.4s ease-in-out infinite; }
+  @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+  /* ── Section shell ─────────────────────────────────────── */
+  section { padding: 5.5rem 0; border-top: 1px solid var(--line-soft); scroll-margin-top: 80px; }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; }
+  .sec-label {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.7rem;
+  }
+  h2 {
+    font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; color: #ececec;
+  }
+  .sec-note { font-size: 0.9rem; color: var(--text-dim); max-width: 42ch; }
+  .sec-head .meta {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
   }
 
-  .btn-primary {
-    display: inline-block;
-    padding: 0.75rem 1.75rem;
-    background: var(--accent);
-    color: #fff;
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .btn-primary:hover { background: #e74c3c; border-color: transparent; color: #fff; }
-
-  .btn-link {
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    border-bottom: none;
-  }
-
-  .btn-link:hover { color: #fff; }
-
-  /* Sections */
-  section {
-    padding: 5rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  section h2 {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-  }
-
-  section p {
-    margin-bottom: 1.25rem;
-    max-width: 600px;
-  }
-
-  .divider {
-    border: none;
-    height: 1px;
-    background: var(--border);
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  /* Philosophy pull-quote */
-  .pull-quote {
-    padding: 5rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .pull-quote blockquote {
-    font-family: var(--serif);
-    font-size: clamp(1.3rem, 3vw, 1.75rem);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.5;
+  /* ── About + quote ─────────────────────────────────────── */
+  .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: start; }
+  .about-copy p { font-size: 1rem; color: var(--text-dim); max-width: 58ch; }
+  .about-copy p + p { margin-top: 1.1rem; }
+  .pull {
+    border-left: 2px solid var(--accent); padding-left: 1.6rem;
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.5;
     color: #e8e8e8;
-    border-left: 3px solid var(--accent);
-    padding-left: 2rem;
-    max-width: 650px;
+  }
+  .pull cite {
+    display: block; margin-top: 1rem;
+    font-family: var(--mono); font-style: normal;
+    font-size: 0.68rem; letter-spacing: 0.06em;
+    text-transform: none; color: var(--text-muted);
   }
 
-  .pull-quote blockquote cite {
-    display: block;
-    font-style: normal;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    margin-top: 1rem;
-    letter-spacing: 0.02em;
+  /* ── Start here ────────────────────────────────────────── */
+  .paths {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line-soft); border: 1px solid var(--line-soft);
   }
-
-  /* Episodes */
-  .episode {
-    margin-top: 2.5rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.75rem 2rem 1.25rem;
-    background: var(--surface);
+  .path {
+    background: var(--bg); padding: 1.8rem 1.6rem 1.9rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: background 0.15s;
   }
-
-  .episode-planned {
-    background: transparent;
-    opacity: 0.85;
+  .path:hover { background: var(--surface); }
+  .path-num {
+    font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-muted);
+    display: flex; justify-content: space-between;
   }
+  .path:hover .path-num .arrow { color: var(--accent-text); }
+  .path h3 { font-family: var(--serif); font-size: 1.22rem; font-weight: 700; color: #e8e8e8; }
+  .path p { font-size: 0.88rem; line-height: 1.6; color: var(--text-dim); flex: 1; }
+  .path .tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 
+  /* ── Archive rows ──────────────────────────────────────── */
   .episode-head {
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
+    display: flex; align-items: baseline; gap: 1rem;
+    padding: 2.2rem 0 0.9rem; flex-wrap: wrap;
+  }
+  .ep-num {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent-text); white-space: nowrap;
+  }
+  .ep-title { font-family: var(--serif); font-size: 1.3rem; font-weight: 700; color: #e8e8e8; }
+  .ep-meta {
+    margin-left: auto; font-family: var(--mono); font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
   }
 
-  .episode-num {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    white-space: nowrap;
+  .case {
+    display: grid; grid-template-columns: 3.2rem 1fr auto 1.5rem;
+    gap: 1.2rem; align-items: baseline;
+    padding: 1.3rem 0.4rem; border-top: 1px solid var(--line);
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+  .case:hover { background: var(--surface); box-shadow: inset 2px 0 0 var(--accent); }
+  .case-num { font-family: var(--mono); font-size: 0.74rem; color: var(--text-muted); }
+  .case-main { min-width: 0; display: block; }
+  .case-title {
+    display: block; font-family: var(--serif); font-size: 1.22rem;
+    font-weight: 700; line-height: 1.3; color: #e8e8e8; margin-bottom: 0.25rem;
+  }
+  .case:hover .case-title { color: #fff; }
+  .case-desc { display: block; font-size: 0.87rem; line-height: 1.55; color: var(--text-dim); max-width: 68ch; }
+  .case-meta {
+    font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+  }
+  .case-arrow { font-family: var(--mono); color: var(--text-muted); justify-self: end; }
+  .case:hover .case-arrow { color: var(--accent-text); }
+  .case.is-planned { opacity: 0.55; }
+  .case.is-planned:hover { background: transparent; box-shadow: none; }
+
+  /* ── Snapshot ──────────────────────────────────────────── */
+  .snapshot-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3.5rem; align-items: start; }
+  .snapshot-copy p { font-size: 0.95rem; color: var(--text-dim); max-width: 40ch; }
+  .snapshot-copy p + p { margin-top: 0.9rem; }
+  .stats { margin-top: 2rem; border-left: 2px solid var(--accent); padding-left: 1.1rem; }
+  .stat .n { font-family: var(--serif); font-size: 2.6rem; font-weight: 700; color: #ececec; line-height: 1; }
+  .stat .n small { font-family: var(--sans); font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+  .stat .l { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.45rem; }
+
+  .snapshot-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  .snapshot-table thead th {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); text-align: right;
+    padding: 0 0 0.75rem; border-bottom: 1px solid var(--line);
+  }
+  .snapshot-table thead th:first-child { text-align: left; }
+  .snapshot-table tbody th,
+  .snapshot-table tbody td { padding: 0.78rem 0; border-bottom: 1px solid var(--line-soft); }
+  .snapshot-table tbody th { font-weight: 600; text-align: left; color: #dedede; font-size: 0.9rem; }
+  .snapshot-table tbody td { text-align: right; font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); }
+  .snapshot-table tbody tr:last-child th,
+  .snapshot-table tbody tr:last-child td { border-bottom: none; }
+  .g { color: #4aa96c; } .y { color: #d9a441; } .r { color: var(--accent-text); }
+  .table-note { margin-top: 1rem; font-size: 0.78rem; line-height: 1.6; color: var(--text-muted); }
+  .table-note a { color: var(--text-dim); border-bottom: 1px solid var(--line); }
+  .table-note a:hover { color: #fff; }
+
+  /* ── Footer ────────────────────────────────────────────── */
+  footer { border-top: 1px solid var(--line); padding: 3rem 0 3.5rem; }
+  .foot-grid { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; align-items: flex-start; }
+  .foot-brand { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #dedede; }
+  .foot-brand p {
+    margin-top: 0.6rem; font-family: var(--sans); font-size: 0.8rem;
+    letter-spacing: 0; text-transform: none; color: var(--text-muted);
+    max-width: 34ch; line-height: 1.6;
+  }
+  .foot-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .foot-links a, .foot-note { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; color: var(--text-muted); }
+  .foot-links a:hover { color: #fff; }
+  .foot-note { line-height: 1.9; text-align: right; }
+  .foot-note strong { color: var(--text-dim); font-weight: 400; }
+
+  /* ── Responsive ────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero { padding: 4rem 0 3.5rem; min-height: 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-lead { max-width: 52ch; }
+    .scroll-cue { margin-top: 2.5rem; }
+    .paths { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .snapshot-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .sec-head { flex-direction: column; gap: 0.6rem; }
+    .sec-head .meta { display: none; }
   }
 
-  .episode h3 {
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: #e8e8e8;
+  @media (max-width: 620px) {
+    .wrap { padding: 0 1.25rem; }
+    .nav { gap: 1.1rem; }
+    .nav a:not(.nav-cta):not([href="#archive"]) { display: none; }
+    .hero { padding-top: 3rem; }
+    section { padding: 3.5rem 0; }
+    .case { grid-template-columns: 2rem 1fr 1rem; gap: 0.8rem; }
+    .case-meta { display: none; }
+    .ep-meta { margin-left: 0; flex-basis: 100%; }
+    .foot-note { text-align: left; }
+
+    .snapshot-table thead { display: none; }
+    .snapshot-table tbody tr {
+      display: grid; grid-template-columns: 1fr auto auto;
+      gap: 0.4rem 1rem; align-items: end;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--line-soft);
+    }
+    .snapshot-table tbody th,
+    .snapshot-table tbody td { border: none; padding: 0; }
+    .snapshot-table tbody th { grid-column: 1; font-size: 0.95rem; }
+    .snapshot-table tbody td { font-size: 0.78rem; }
+    .snapshot-table tbody td::before {
+      content: attr(data-label); display: block;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: 0.15rem;
+    }
   }
 
-  .episode-meta {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-left: auto;
-    white-space: nowrap;
-  }
-
-  .episode-planned .episode-meta { color: var(--text-muted); }
-
-  .case-list {
-    list-style: none;
-  }
-
-  .case-item {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.55rem 0;
-    border-top: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
-
-  .case-num {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    min-width: 2.2rem;
-    flex-shrink: 0;
-  }
-
-  .case-name {
-    font-family: var(--sans);
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
-  .case-name a { border-bottom: 1px solid transparent; }
-  .case-name a:hover { border-bottom-color: var(--accent); }
-
-  .case-desc {
-    color: var(--text-dim);
-    font-size: 0.82rem;
-    flex-basis: 100%;
-    margin-left: 3.2rem;
-    line-height: 1.5;
-  }
-
-  /* Comparison table */
-  .comparison-table-wrap {
-    margin-top: 2rem;
-    overflow-x: auto;
-  }
-
-  .comparison-table {
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    border-collapse: collapse;
-    overflow: hidden;
-  }
-
-  .comparison-table th,
-  .comparison-table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .comparison-table thead th {
-    background: var(--surface);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .comparison-table tbody tr:last-child th,
-  .comparison-table tbody tr:last-child td { border-bottom: none; }
-
-  .col-country {
-    font-weight: 600;
-    text-align: left;
-    width: 40%;
-  }
-
-  .col-score {
-    text-align: right;
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    width: 20%;
-  }
-
-  .score-green { color: #27ae60; }
-  .score-yellow { color: #f39c12; }
-  .score-red { color: #e74c3c; }
-
-  .comparison-note {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-family: var(--mono);
-    line-height: 1.6;
-  }
-
-  .comparison-sources {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .comparison-sources a {
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    border-bottom: 1px solid var(--text-muted);
-  }
-
-  /* Footer */
-  footer {
-    padding: 3rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  footer p {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
-
-  footer a {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    border-bottom: none;
-  }
-
-  footer a:hover { color: #fff; }
-
-  @media (max-width: 600px) {
-    .hero { padding: 3rem 1.5rem; }
-    section { padding: 3rem 1.5rem; }
-    .episode { padding: 1.5rem 1.25rem 1rem; }
-    .episode-meta { margin-left: 0; flex-basis: 100%; }
-    .case-desc { margin-left: 0; }
-    .comparison-table th,
-    .comparison-table td { min-width: 110px; }
-    .col-country { min-width: 160px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
 </head>
@@ -421,187 +389,301 @@
 
 <a href="#main" class="skip-link">Skip to content</a>
 
-<main id="main">
-<header class="hero">
-  <p class="hero-eyebrow">Digital Freedom Project</p>
-  <h1>A long-term editorial series<br>on the erosion of digital freedom.</h1>
-  <p class="hero-lead">One sequence at a time. Each story is a standalone terminal-style narrative — data, quotes, documented events. No voiceover. No talking heads. Just facts that land.</p>
-  <div class="hero-cta">
-    <a href="sequences/freedom-report.html" class="btn-primary">Read first sequence</a>
-    <a href="https://github.com/srmdn/digital-freedom" class="btn-link">src on GitHub →</a>
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="wordmark" href="index.html">Digital Freedom</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#archive">Archive</a>
+      <a href="#about">About</a>
+      <a href="#snapshot">Data</a>
+      <a class="nav-cta" href="https://github.com/srmdn/digital-freedom">GitHub →</a>
+    </nav>
   </div>
-</header>
-
-<hr class="divider">
-
-<section id="about">
-  <p class="section-label">About</p>
-  <h2>Why this exists</h2>
-  <p>Digital freedom is being negotiated in real time. Encryption backdoors. Mass surveillance. Data brokers selling behavioral profiles. Each concession is small, incremental, and rarely debated in public.</p>
-  <p>This project documents it. Not as opinion pieces or hot takes, but as sourced narratives that stand on their own. Every claim backed by public records. Every quote verified. The format is secondary to the facts.</p>
-</section>
-
-<hr class="divider">
-
-<div class="pull-quote">
-  <blockquote>"In encryption, in open source, in self-hosted infrastructure, in the choice of what tools we trust with our data."<cite>— Pavel Durov, Oslo Freedom Forum, June 2026</cite></blockquote>
 </div>
 
-<hr class="divider">
+<main id="main">
 
-<section id="vision">
-  <p class="section-label">Vision</p>
-  <h2>A living archive, not a finished product</h2>
-  <p>Digital freedom is an ongoing story. As new disclosures surface, new laws pass, new tools emerge — new sequences will be added. Think of it as a living archive that grows with the subject.</p>
-  <p>Current roadmap: Episode III — Encryption Wars. Episode IV — Mass Surveillance / Snowden. Episode V — Data Brokers. The scope will expand as the story does.</p>
-</section>
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="rule" aria-hidden="true"></div>
+          <p class="eyebrow">Digital Freedom Project</p>
+          <h1>A long-term editorial series on the erosion of digital freedom.</h1>
+          <p class="hero-lead">One sequence at a time. Each story is a standalone terminal-style narrative — data, quotes, documented events. No voiceover. No talking heads. Just facts that land.</p>
+          <div class="cta-row">
+            <a href="sequences/freedom-report.html" class="btn">Start with Episode I <span aria-hidden="true">→</span></a>
+            <a href="#archive" class="link-quiet">Browse the archive</a>
+          </div>
+          <div class="scroll-cue"><span aria-hidden="true">↓</span> Continue</div>
+        </div>
 
-<hr class="divider">
-
-<section id="comparison">
-  <p class="section-label">Global snapshot</p>
-  <h2>Three lenses on digital and information freedom</h2>
-  <p>Different methodologies. Different scopes. Similar warning signs.</p>
-  <div class="comparison-table-wrap">
-    <table class="comparison-table">
-      <caption class="sr-only">Comparison of internet freedom scores from Freedom House Freedom on the Net 2025 and press freedom scores from Reporters Without Borders 2026 across six countries. Higher scores mean freer in both.</caption>
-      <thead>
-        <tr>
-          <th scope="col" class="col-country">Country</th>
-          <th scope="col" class="col-score">FH Internet</th>
-          <th scope="col" class="col-score">RSF Press</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row" class="col-country">Norway</th>
-          <td class="col-score score-green">Not covered</td>
-          <td class="col-score score-green">92.72</td>
-        </tr>
-        <tr>
-          <th scope="row" class="col-country">United States</th>
-          <td class="col-score score-yellow">73/100</td>
-          <td class="col-score score-yellow">62.61</td>
-        </tr>
-        <tr>
-          <th scope="row" class="col-country">Indonesia</th>
-          <td class="col-score score-yellow">48/100</td>
-          <td class="col-score score-yellow">43.02</td>
-        </tr>
-        <tr>
-          <th scope="row" class="col-country">India</th>
-          <td class="col-score score-yellow">51/100</td>
-          <td class="col-score score-red">31.96</td>
-        </tr>
-        <tr>
-          <th scope="row" class="col-country">Russia</th>
-          <td class="col-score score-red">17/100</td>
-          <td class="col-score score-red">23.15</td>
-        </tr>
-        <tr>
-          <th scope="row" class="col-country">China</th>
-          <td class="col-score score-red">9/100</td>
-          <td class="col-score score-red">13.85</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="comparison-note">Freedom House — Freedom on the Net 2025 (72 countries, 0-100, higher = freer). Reporters Without Borders — World Press Freedom Index 2026 (180 countries, 0-100, higher = freer). V-Dem — Digital Society Project v8 (March 2026): a 35-indicator expert survey rather than a single headline score. Scores are original scales, never normalized equivalents. Accessed 2026-08-17.</p>
-  <p class="comparison-sources">
-    Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank" rel="noopener noreferrer">Freedom House — Freedom on the Net</a> · <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer">Reporters Without Borders — Press Freedom Index</a> · <a href="https://digitalsocietyproject.org/data/" target="_blank" rel="noopener noreferrer">V-Dem / Digital Society Project</a>
-  </p>
-</section>
-
-<hr class="divider">
-
-<section id="episodes">
-  <p class="section-label">Episodes</p>
-  <h2>The archive</h2>
-  <p>Episodes contain cases. Each case is a single self-contained HTML file — open it, initialize the terminal, read at your own pace. Shorter cases move fast. Larger ones take longer.</p>
-
-  <div class="episode" id="episode-i">
-    <div class="episode-head">
-      <span class="episode-num">Episode I</span>
-      <h3>State of Digital Freedom</h3>
-      <span class="episode-meta">1 sequence · Published</span>
+        <aside class="status" aria-label="Archive status">
+          <div class="status-head">
+            <span>Archive status</span>
+            <span class="live">Public record</span>
+          </div>
+          <dl class="status-body">
+            <div class="status-row"><dt>cases published</dt><dd>05</dd></div>
+            <div class="status-row"><dt>episodes</dt><dd>02</dd></div>
+            <div class="status-row"><dt>planned</dt><dd>03</dd></div>
+            <div class="status-row"><dt>third-party scripts</dt><dd class="zero">00</dd></div>
+            <div class="status-row"><dt>analytics</dt><dd class="zero">none</dd></div>
+          </dl>
+          <div class="status-foot">Static HTML · self-hosted fonts</div>
+        </aside>
+      </div>
     </div>
-    <ul class="case-list">
-      <li class="case-item">
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="sec-label">About</p>
+          <h2>Why this exists</h2>
+        </div>
+        <p class="sec-note">Each concession is small, incremental, and rarely debated in public. This archive keeps the record.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>Digital freedom is being negotiated in real time. Encryption backdoors. Mass surveillance. Data brokers selling behavioral profiles. Each concession is small, incremental, and rarely debated in public.</p>
+          <p>This project documents it. Not as opinion pieces or hot takes, but as sourced narratives that stand on their own. Every claim backed by public records. Every quote verified. The format is secondary to the facts.</p>
+        </div>
+        <blockquote class="pull">
+          "In encryption, in open source, in self-hosted infrastructure, in the choice of what tools we trust with our data."
+          <cite>— Pavel Durov, Oslo Freedom Forum, June 2026</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="start">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="sec-label">Start here</p>
+          <h2>Three ways into the archive</h2>
+        </div>
+        <span class="meta">New reader / returning reader</span>
+      </div>
+      <div class="paths">
+        <a class="path" href="sequences/freedom-report.html">
+          <span class="path-num"><span>01 — Opening thesis</span><span class="arrow" aria-hidden="true">→</span></span>
+          <h3>The Ship Has Already Hit the Iceberg</h3>
+          <p>One speech as a hook, then the independently sourced state of digital freedom.</p>
+          <span class="tag">Episode I · long read</span>
+        </a>
+        <a class="path" href="#archive">
+          <span class="path-num"><span>02 — Case files</span><span class="arrow" aria-hidden="true">→</span></span>
+          <h3>Pegasus</h3>
+          <p>Five cases on the spyware that changed the rules — from Khashoggi to the 50K list.</p>
+          <span class="tag">Episode II · 5 cases</span>
+        </a>
+        <a class="path" href="https://github.com/srmdn/digital-freedom/blob/master/EDITORIAL.md" target="_blank" rel="noopener noreferrer">
+          <span class="path-num"><span>03 — Method</span><span class="arrow" aria-hidden="true">→</span></span>
+          <h3>How this is sourced</h3>
+          <p>Public records, verified quotes, and a source badge on every factual claim.</p>
+          <span class="tag">Editorial standard</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="archive">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="sec-label">Archive</p>
+          <h2>Episodes &amp; case files</h2>
+        </div>
+        <p class="sec-note">A living archive, not a finished product. Each case is one self-contained file — open it, initialize the terminal, read at your own pace. The scope will expand as the story does.</p>
+      </div>
+
+      <div class="episode-head">
+        <span class="ep-num">Episode I</span>
+        <h3 class="ep-title">State of Digital Freedom</h3>
+        <span class="ep-meta">1 sequence · published</span>
+      </div>
+      <a class="case" href="sequences/freedom-report.html">
         <span class="case-num">SEQ</span>
-        <span class="case-name"><a href="sequences/freedom-report.html">Freedom Report — The Ship Has Already Hit the Iceberg</a></span>
-        <span class="case-desc">The opening thesis: one speech as a hook, then the independently sourced state of digital freedom.</span>
-      </li>
-    </ul>
-  </div>
+        <span class="case-main">
+          <h4 class="case-title">The Ship Has Already Hit the Iceberg</h4>
+          <span class="case-desc">The opening thesis: one speech as a hook, then the independently sourced state of digital freedom.</span>
+        </span>
+        <span class="case-meta">Report</span>
+        <span class="case-arrow" aria-hidden="true">→</span>
+      </a>
 
-  <div class="episode" id="episode-ii">
-    <div class="episode-head">
-      <span class="episode-num">Episode II</span>
-      <h3>Pegasus</h3>
-      <span class="episode-meta">5 cases published · Living archive</span>
-    </div>
-    <ul class="case-list">
-      <li class="case-item">
+      <div class="episode-head">
+        <span class="ep-num">Episode II</span>
+        <h3 class="ep-title">Pegasus</h3>
+        <span class="ep-meta">5 cases · living archive</span>
+      </div>
+      <a class="case" href="sequences/pegasus-01-khashoggi.html">
         <span class="case-num">01</span>
-        <span class="case-name"><a href="sequences/pegasus-01-khashoggi.html">Khashoggi</a></span>
-        <span class="case-desc">The journalist, the consulate, and the phones around him that were already on a list.</span>
-      </li>
-      <li class="case-item">
+        <span class="case-main">
+          <h4 class="case-title">Khashoggi</h4>
+          <span class="case-desc">The journalist, the consulate, and the phones around him that were already on a list.</span>
+        </span>
+        <span class="case-meta">Case file</span>
+        <span class="case-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="case" href="sequences/pegasus-02-sanchez.html">
         <span class="case-num">02</span>
-        <span class="case-name"><a href="sequences/pegasus-02-sanchez.html">Sánchez</a></span>
-        <span class="case-desc">The prime minister of Spain was infected. The investigation hit silence.</span>
-      </li>
-      <li class="case-item">
+        <span class="case-main">
+          <h4 class="case-title">Sánchez</h4>
+          <span class="case-desc">The prime minister of Spain was infected. The investigation hit silence.</span>
+        </span>
+        <span class="case-meta">Case file</span>
+        <span class="case-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="case" href="sequences/pegasus-03-50k-list.html">
         <span class="case-num">03</span>
-        <span class="case-name"><a href="sequences/pegasus-03-50k-list.html">The 50K List</a></span>
-        <span class="case-desc">The leak did not prove 50,000 hacks. It exposed the global watchlist behind Pegasus.</span>
-      </li>
-      <li class="case-item">
+        <span class="case-main">
+          <h4 class="case-title">The 50K List</h4>
+          <span class="case-desc">The leak did not prove 50,000 hacks. It exposed the global watchlist behind Pegasus.</span>
+        </span>
+        <span class="case-meta">Case file</span>
+        <span class="case-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="case" href="sequences/pegasus-04-zero-click.html">
         <span class="case-num">04</span>
-        <span class="case-name"><a href="sequences/pegasus-04-zero-click.html">Zero-Click Arms Race</a></span>
-        <span class="case-desc">KISMET, FORCEDENTRY, BLASTPASS — the exploit chains, the patches, and the race that never stops.</span>
-      </li>
-      <li class="case-item">
+        <span class="case-main">
+          <h4 class="case-title">Zero-Click Arms Race</h4>
+          <span class="case-desc">KISMET, FORCEDENTRY, BLASTPASS — the exploit chains, the patches, and the race that never stops.</span>
+        </span>
+        <span class="case-meta">Case file</span>
+        <span class="case-arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="case" href="sequences/pegasus-05-rehabilitation.html">
         <span class="case-num">05</span>
-        <span class="case-name"><a href="sequences/pegasus-05-rehabilitation.html">The Rehabilitation Tour</a></span>
-        <span class="case-desc">Sanctioned, sued, bought by American investors — the rehabilitation that changed everything but the product.</span>
-      </li>
-    </ul>
-  </div>
+        <span class="case-main">
+          <h4 class="case-title">The Rehabilitation Tour</h4>
+          <span class="case-desc">Sanctioned, sued, bought by American investors — the rehabilitation that changed everything but the product.</span>
+        </span>
+        <span class="case-meta">Case file</span>
+        <span class="case-arrow" aria-hidden="true">→</span>
+      </a>
 
-  <div class="episode episode-planned" id="episode-iii">
-    <div class="episode-head">
-      <span class="episode-num">Episode III</span>
-      <h3>Encryption Wars</h3>
-      <span class="episode-meta">Planned</span>
+      <div class="episode-head">
+        <span class="ep-num">Planned</span>
+        <h3 class="ep-title">Next episodes</h3>
+        <span class="ep-meta">Not publication commitments</span>
+      </div>
+      <div class="case is-planned">
+        <span class="case-num">III</span>
+        <span class="case-main">
+          <h4 class="case-title">Encryption Wars</h4>
+          <span class="case-desc">Five Eyes, EU chat control, and the backdoor debate.</span>
+        </span>
+        <span class="case-meta">Planned</span>
+        <span class="case-arrow" aria-hidden="true">·</span>
+      </div>
+      <div class="case is-planned">
+        <span class="case-num">IV</span>
+        <span class="case-main">
+          <h4 class="case-title">Mass Surveillance / Snowden</h4>
+          <span class="case-desc">Key disclosures, impact, and aftermath.</span>
+        </span>
+        <span class="case-meta">Planned</span>
+        <span class="case-arrow" aria-hidden="true">·</span>
+      </div>
+      <div class="case is-planned">
+        <span class="case-num">V</span>
+        <span class="case-main">
+          <h4 class="case-title">Data Brokers</h4>
+          <span class="case-desc">Who sells your data, how it is aggregated, and the opt-out illusion.</span>
+        </span>
+        <span class="case-meta">Planned</span>
+        <span class="case-arrow" aria-hidden="true">·</span>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="episode episode-planned" id="episode-iv">
-    <div class="episode-head">
-      <span class="episode-num">Episode IV</span>
-      <h3>Mass Surveillance / Snowden</h3>
-      <span class="episode-meta">Planned</span>
+  <section id="snapshot">
+    <div class="wrap">
+      <div class="snapshot-grid">
+        <div class="snapshot-copy">
+          <p class="sec-label">Global snapshot</p>
+          <h2>Three lenses on digital and information freedom</h2>
+          <p style="margin-top:1.2rem;">Different methodologies. Different scopes. Similar warning signs.</p>
+          <div class="stats">
+            <div class="stat">
+              <div class="n">09<small>/100</small></div>
+              <div class="l">China · Freedom on the Net 2025</div>
+            </div>
+          </div>
+          <p class="table-note" style="margin-top:2rem;">Scores are on their original scales, never normalized equivalents. Full table and sources below.</p>
+        </div>
+
+        <div>
+          <table class="snapshot-table">
+            <caption class="sr-only">Comparison of internet freedom scores from Freedom House Freedom on the Net 2025 and press freedom scores from Reporters Without Borders 2026 across six countries. Higher scores mean freer in both.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Country</th>
+                <th scope="col">FH Internet</th>
+                <th scope="col">RSF Press</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Norway</th>
+                <td data-label="FH Internet" class="g">Not covered</td>
+                <td data-label="RSF Press" class="g">92.72</td>
+              </tr>
+              <tr>
+                <th scope="row">United States</th>
+                <td data-label="FH Internet" class="y">73/100</td>
+                <td data-label="RSF Press" class="y">62.61</td>
+              </tr>
+              <tr>
+                <th scope="row">Indonesia</th>
+                <td data-label="FH Internet" class="y">48/100</td>
+                <td data-label="RSF Press" class="y">43.02</td>
+              </tr>
+              <tr>
+                <th scope="row">India</th>
+                <td data-label="FH Internet" class="y">51/100</td>
+                <td data-label="RSF Press" class="r">31.96</td>
+              </tr>
+              <tr>
+                <th scope="row">Russia</th>
+                <td data-label="FH Internet" class="r">17/100</td>
+                <td data-label="RSF Press" class="r">23.15</td>
+              </tr>
+              <tr>
+                <th scope="row">China</th>
+                <td data-label="FH Internet" class="r">9/100</td>
+                <td data-label="RSF Press" class="r">13.85</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-note">Freedom House — Freedom on the Net 2025 (72 countries, 0-100, higher = freer). Reporters Without Borders — World Press Freedom Index 2026 (180 countries, 0-100, higher = freer). V-Dem — Digital Society Project v8 (March 2026): a 35-indicator expert survey rather than a single headline score. Scores are original scales, never normalized equivalents. Accessed 2026-08-17.</p>
+          <p class="table-note">Sources: <a href="https://freedomhouse.org/report/freedom-net" target="_blank" rel="noopener noreferrer">Freedom House — Freedom on the Net</a> · <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer">Reporters Without Borders — Press Freedom Index</a> · <a href="https://digitalsocietyproject.org/data/" target="_blank" rel="noopener noreferrer">V-Dem / Digital Society Project</a></p>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="episode episode-planned" id="episode-v">
-    <div class="episode-head">
-      <span class="episode-num">Episode V</span>
-      <h3>Data Brokers</h3>
-      <span class="episode-meta">Planned</span>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<footer>
-  <p><a href="disclaimer.html">Disclaimer</a> · <a href="privacy.html">Privacy</a> · No analytics · MIT License</p>
-  <a href="https://github.com/srmdn/digital-freedom">srmdn/digital-freedom</a>
-</footer>
+  </section>
 
 </main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      Digital Freedom
+      <p>A long-term editorial archive on privacy erosion, surveillance, and the technologies that shape both.</p>
+    </div>
+    <div class="foot-links">
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="https://github.com/srmdn/digital-freedom/blob/master/EDITORIAL.md" target="_blank" rel="noopener noreferrer">Editorial standard</a>
+      <a href="https://github.com/srmdn/digital-freedom">GitHub</a>
+    </div>
+    <p class="foot-note"><strong>No analytics · No trackers</strong><br>Self-hosted fonts · MIT License</p>
+  </div>
+</footer>
 
 </body>
 </html>
